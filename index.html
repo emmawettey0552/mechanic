@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>4x4 & Pickup Mechanic</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Poppins', sans-serif; margin: 0; background: #0f172a; color: #f1f5f9; }
+    header { background: #020617; padding: 15px; display: flex; justify-content: space-between; align-items: center; }
+    header h1 { color: #38bdf8; }
+    nav a { margin: 0 10px; color: #f1f5f9; text-decoration: none; }
+    .hero { padding: 60px; text-align: center; background: linear-gradient(to right, #020617, #0f172a); }
+    .hero h2 { font-size: 2.5rem; }
+    .profile { text-align: center; padding: 40px; }
+    .profile img { width: 150px; height: 150px; border-radius: 50%; }
+    .services { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px,1fr)); gap: 20px; padding: 40px; }
+    .card { background: #1e293b; padding: 20px; border-radius: 10px; }
+    .slideshow { position: relative; max-width: 800px; margin: auto; }
+    .slides { display: none; width: 100%; border-radius: 10px; }
+    .contact { padding: 40px; text-align: center; }
+    footer { background: #020617; text-align: center; padding: 20px; }
+
+    .overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.9);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      text-align: center;
+    }
+    .overlay-content {
+      background: #3e70c0;
+      padding: 40px;
+      border-radius: 15px;
+    }
+    .overlay h1 { color: #38bdf8; font-size: 2.5rem; }
+    .overlay p { margin-top: 10px; font-size: 1.2rem; }
+    .close-btn {
+      margin-top: 20px;
+      padding: 10px 20px;
+      border: none;
+      background: #38bdf8;
+      color: #000;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Audio -->
+<audio id="engineSound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_115b9b8c9b.mp3?filename=car-engine-start-6268.mp3"></audio>
+<audio id="voiceMessage" src="https://cdn.pixabay.com/download/audio/2023/03/01/audio_3b6f7b92b2.mp3?filename=welcome-voice-14279.mp3"></audio>
+
+<!-- Surprise Overlay -->
+<div class="overlay" id="surpriseOverlay">
+  <div class="overlay-content">
+    <h1>🎉 Surprise!</h1>
+    <p>Welcome to Uncle Oboye's Workshop 🚗🔧</p>
+    <button class="close-btn" onclick="closeOverlay(); playAllSounds();">Enter Website</button>
+  </div>
+</div>
+
+<header>
+  <h1>Oboye Auto Mechanic</h1>
+  <nav>
+    <a href="#">Home</a>
+    <a href="#services">Services</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <h2>Expert in Pickup Trucks & 4x4 Vehicles</h2>
+  <p>Repair • Maintenance • Diagnostics • Mobile Services</p>
+</section>
+
+<section class="profile">
+  <img src="profile.jpg" alt="Mechanic">
+  <h2>Uncle Oboye</h2>
+  <p>Specialist in 4x4, pickup trucks, and private vehicles. Over 10 years experience working with engines, suspension, and off-road performance upgrades.</p>
+</section>
+
+<section id="services" class="services">
+  <div class="card"><h3>Engine Repair</h3><p>Full engine diagnostics and repairs.</p></div>
+  <div class="card"><h3>4x4 Services</h3><p>Off-road tuning, suspension upgrades.</p></div>
+  <div class="card"><h3>Pickup Maintenance</h3><p>Servicing for all pickup brands.</p></div>
+  <div class="card"><h3>Mobile Mechanic</h3><p>We come to your location anytime.</p></div>
+</section>
+
+<section id="gallery" class="slideshow">
+  <img class="slides" src="sen.jpg">
+  <img class="slides" src="sen.jpg">
+  <img class="slides" src="sen.jpg">
+</section>
+
+<section class="contact" id="contact">
+  <h2>Contact</h2>
+  <p>Phone: +233 XXX XXX XXX</p>
+  <p>Email: mechanic@email.com</p>
+</section>
+
+<footer>
+  <p>© 2026 Oboye Auto Mechanic</p>
+</footer>
+
+<script>
+// Slideshow
+let slideIndex = 0;
+showSlides();
+function showSlides() {
+  let slides = document.getElementsByClassName("slides");
+  for (let i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";
+  }
+  slideIndex++;
+  if (slideIndex > slides.length) { slideIndex = 1 }
+  slides[slideIndex-1].style.display = "block";
+  setTimeout(showSlides, 3000);
+}
+
+// Sounds
+function playAllSounds() {
+  let engine = document.getElementById("engineSound");
+  let voice = document.getElementById("voiceMessage");
+
+  engine.volume = 0.5;
+  voice.volume = 1.0;
+
+  engine.play().catch(()=>{});
+  setTimeout(() => {
+    voice.play().catch(()=>{});
+  }, 1500); // voice plays after engine
+}
+
+function closeOverlay() {
+  document.getElementById("surpriseOverlay").style.display = "none";
+}
+
+// Auto close after 1 min
+setTimeout(closeOverlay, 60000);
+</script>
+
+</body>
+</html>
