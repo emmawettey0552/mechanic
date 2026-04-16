@@ -1,72 +1,206 @@
-<!DOCTYPE html>
+  <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>4x4 & Pickup Mechanic</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-  <style>
-    body { font-family: 'Poppins', sans-serif; margin: 0; background: #0f172a; color: #f1f5f9; }
-    header { background: #020617; padding: 15px; display: flex; justify-content: space-between; align-items: center; }
-    header h1 { color: #38bdf8; }
-    nav a { margin: 0 10px; color: #f1f5f9; text-decoration: none; }
-    .hero { padding: 60px; text-align: center; background: linear-gradient(to right, #020617, #0f172a); }
-    .hero h2 { font-size: 2.5rem; }
-    .profile { text-align: center; padding: 40px; }
-    .profile img { width: 150px; height: 150px; border-radius: 50%; }
-    .services { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px,1fr)); gap: 20px; padding: 40px; }
-    .card { background: #1e293b; padding: 20px; border-radius: 10px; }
-    .slideshow { position: relative; max-width: 800px; margin: auto; }
-    .slides { display: none; width: 100%; border-radius: 10px; }
-    .contact { padding: 40px; text-align: center; }
-    footer { background: #020617; text-align: center; padding: 20px; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Oboye Auto Mechanic</title>
 
-    .overlay {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,0.9);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 9999;
-      text-align: center;
-    }
-    .overlay-content {
-      background: #3e70c0;
-      padding: 40px;
-      border-radius: 15px;
-    }
-    .overlay h1 { color: #38bdf8; font-size: 2.5rem; }
-    .overlay p { margin-top: 10px; font-size: 1.2rem; }
-    .close-btn {
-      margin-top: 20px;
-      padding: 10px 20px;
-      border: none;
-      background: #38bdf8;
-      color: #000;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-  </style>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #020617, #0f172a);
+  color: #f1f5f9;
+}
+
+/* HEADER */
+header {
+  position: sticky;
+  top: 0;
+  background: rgba(2,6,23,0.9);
+  backdrop-filter: blur(10px);
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000;
+}
+
+header h1 {
+  color: #38bdf8;
+  font-size: 1.3rem;
+}
+
+nav a {
+  margin-left: 15px;
+  color: #cbd5f5;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+/* HERO */
+.hero {
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.hero h2 {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.hero p {
+  margin-top: 10px;
+  color: #94a3b8;
+}
+
+/* PROFILE */
+.profile {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.profile img {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  border: 4px solid #38bdf8;
+}
+
+.profile h2 {
+  margin-top: 15px;
+}
+
+.profile p {
+  margin-top: 10px;
+  color: #94a3b8;
+}
+
+/* SERVICES */
+.services {
+  padding: 20px;
+  display: grid;
+  gap: 15px;
+}
+
+.card {
+  background: rgba(255,255,255,0.05);
+  padding: 20px;
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  background: rgba(56,189,248,0.15);
+}
+
+.card h3 {
+  color: #38bdf8;
+}
+
+/* GALLERY */
+.slideshow {
+  padding: 20px;
+}
+
+.slides {
+  display: none;
+  width: 100%;
+  border-radius: 15px;
+}
+
+/* CONTACT */
+.contact {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.contact p {
+  margin-top: 10px;
+}
+
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 20px;
+  background: #020617;
+  font-size: 0.9rem;
+}
+
+/* OVERLAY */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.95);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.overlay-content {
+  background: linear-gradient(135deg, #1e293b, #0f172a);
+  padding: 30px;
+  border-radius: 15px;
+  text-align: center;
+}
+
+.close-btn {
+  margin-top: 20px;
+  padding: 12px 25px;
+  border: none;
+  background: #38bdf8;
+  color: #000;
+  border-radius: 10px;
+  font-weight: bold;
+}
+
+/* ANIMATION */
+.fade-in {
+  animation: fade 1s ease-in;
+}
+
+@keyframes fade {
+  from {opacity: 0; transform: translateY(20px);}
+  to {opacity: 1; transform: translateY(0);}
+}
+</style>
 </head>
+
 <body>
 
-<!-- Audio -->
-<audio id="engineSound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_115b9b8c9b.mp3?filename=car-engine-start-6268.mp3"></audio>
-<audio id="voiceMessage" src="https://cdn.pixabay.com/download/audio/2023/03/01/audio_3b6f7b92b2.mp3?filename=welcome-voice-14279.mp3"></audio>
+<!-- AUDIO -->
+<audio id="engineSound" preload="auto">
+<source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_115b9b8c9b.mp3">
+</audio>
 
-<!-- Surprise Overlay -->
-<div class="overlay" id="surpriseOverlay">
+<audio id="voiceMessage" preload="auto">
+<source src="https://cdn.pixabay.com/download/audio/2023/03/01/audio_3b6f7b92b2.mp3">
+</audio>
+
+<!-- OVERLAY -->
+<div class="overlay" id="overlay">
   <div class="overlay-content">
-    <h1>🎉 Surprise!</h1>
-    <p>Welcome to Uncle Oboye's Workshop 🚗🔧</p>
-    <button class="close-btn" onclick="closeOverlay(); playAllSounds();">Enter Website</button>
+    <h1>🎉 Welcome</h1>
+    <p>Uncle Oboye's Workshop</p>
+    <button class="close-btn" onclick="startSite()">Enter</button>
   </div>
 </div>
 
 <header>
-  <h1>Oboye Auto Mechanic</h1>
+  <h1>Oboye Auto</h1>
   <nav>
     <a href="#">Home</a>
     <a href="#services">Services</a>
@@ -75,34 +209,34 @@
   </nav>
 </header>
 
-<section class="hero">
-  <h2>Expert in Pickup Trucks & 4x4 Vehicles</h2>
-  <p>Repair • Maintenance • Diagnostics • Mobile Services</p>
+<section class="hero fade-in">
+  <h2>4x4 & Pickup Specialist</h2>
+  <p>Reliable • Fast • Professional</p>
 </section>
 
-<section class="profile">
-  <img src="sen.jpg" alt="Mechanic">
+<section class="profile fade-in">
+  <img src="sen.jpg">
   <h2>Uncle Oboye</h2>
-  <p>Specialist in 4x4, pickup trucks, and private vehicles. Over 10 years experience working with engines, suspension, and off-road performance upgrades.</p>
+  <p>10+ years experience in repairs and maintenance</p>
 </section>
 
-<section id="services" class="services">
-  <div class="card"><h3>Engine Repair</h3><p>Full engine diagnostics and repairs.</p></div>
-  <div class="card"><h3>4x4 Services</h3><p>Off-road tuning, suspension upgrades.</p></div>
-  <div class="card"><h3>Pickup Maintenance</h3><p>Servicing for all pickup brands.</p></div>
-  <div class="card"><h3>Mobile Mechanic</h3><p>We come to your location anytime.</p></div>
+<section id="services" class="services fade-in">
+  <div class="card"><h3>Engine Repair</h3></div>
+  <div class="card"><h3>4x4 Upgrade</h3></div>
+  <div class="card"><h3>Pickup Service</h3></div>
+  <div class="card"><h3>Mobile Mechanic</h3></div>
 </section>
 
-<section id="gallery" class="slideshow">
+<section id="gallery" class="slideshow fade-in">
   <img class="slides" src="sen.jpg">
   <img class="slides" src="sen.jpg">
   <img class="slides" src="sen.jpg">
 </section>
 
-<section class="contact" id="contact">
+<section id="contact" class="contact fade-in">
   <h2>Contact</h2>
-  <p>Phone: +233 000 000 000</p>
-  <p>Email: mechanic@gmail.com</p>
+  <p>📞 +233 000 000 000</p>
+  <p>📧 mechanic@gmail.com</p>
 </section>
 
 <footer>
@@ -110,41 +244,34 @@
 </footer>
 
 <script>
-// Slideshow
-let slideIndex = 0;
-showSlides();
+// SLIDESHOW
+let i = 0;
 function showSlides() {
   let slides = document.getElementsByClassName("slides");
-  for (let i = 0; i < slides.length; i++) {
-    slides[i].style.display = "none";
+  for (let x = 0; x < slides.length; x++) {
+    slides[x].style.display = "none";
   }
-  slideIndex++;
-  if (slideIndex > slides.length) { slideIndex = 1 }
-  slides[slideIndex-1].style.display = "block";
+  i++;
+  if (i > slides.length) { i = 1 }
+  slides[i-1].style.display = "block";
   setTimeout(showSlides, 3000);
 }
+showSlides();
 
-// Sounds
-function playAllSounds() {
+// AUDIO START
+function startSite() {
+  document.getElementById("overlay").style.display = "none";
+
   let engine = document.getElementById("engineSound");
   let voice = document.getElementById("voiceMessage");
 
-  engine.volume = 0.5;
-  voice.volume = 1.0;
-
-  engine.play().catch(()=>{});
-  setTimeout(() => {
-    voice.play().catch(()=>{});
-  }, 1500); // voice plays after engine
+  engine.play().then(() => {
+    setTimeout(() => {
+      voice.play();
+    }, 1500);
+  });
 }
-
-function closeOverlay() {
-  document.getElementById("surpriseOverlay").style.display = "none";
-}
-
-// Auto close after 1 min
-setTimeout(closeOverlay, 60000);
 </script>
 
 </body>
-</html>
+  </html>
