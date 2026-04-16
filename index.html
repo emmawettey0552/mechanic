@@ -278,12 +278,36 @@ let spoken = false;
 function speakWebsite() {
   if (spoken) return;
 
-  const text = `
-  Welcome to Oboye Auto Mechanic.
-  We specialize in pickup trucks, four by four vehicles, diagnostics, suspension repair, and mobile mechanic services.
-  We provide fast, reliable, and affordable automotive services.
-  Contact us today for professional vehicle care.
-  `;
+  const text = `Welcome to Oboye Auto Mechanic Workshop.
+
+This is a professional automotive repair center specializing in pickup trucks, four by four vehicles, and general vehicle diagnostics and repair.
+
+At Oboye Auto Mechanic, we follow a complete and structured diagnostic process to ensure every vehicle is properly inspected before repair begins.
+
+Our diagnostic system includes:
+
+First, engine diagnostics. This involves scanning the engine control unit using modern diagnostic tools to detect faults in sensors, fuel systems, ignition systems, and engine performance.
+
+Second, mechanical inspection. This includes checking physical engine components such as belts, timing systems, oil pressure, cooling systems, and engine compression to identify hidden mechanical problems.
+
+Third, electrical diagnostics. We test vehicle wiring systems, battery health, alternator performance, fuses, and electronic control modules to ensure the electrical system is functioning properly.
+
+Fourth, suspension and steering diagnostics. We inspect shock absorbers, control arms, ball joints, wheel alignment, and steering stability to ensure safe driving performance.
+
+Fifth, transmission diagnostics. This involves checking gear shifting systems, clutch systems, and gearbox performance for both automatic and manual vehicles.
+
+After full diagnostics, we proceed with professional repair using standard automotive procedures.
+
+Our repair services include engine repair and rebuilding, suspension replacement, brake system repair, gearbox servicing, and full vehicle maintenance.
+
+We ensure every vehicle is tested after repair to confirm safety, performance, and reliability before it is returned to the customer.
+
+At Oboye Auto Mechanic, we believe in accuracy, professionalism, and long lasting vehicle performance.
+
+We are committed to keeping your vehicle safe, strong, and ready for the road at all times.
+
+Contact us today for expert automotive service and trusted mechanical care.
+    `;
 
   let speech = new SpeechSynthesisUtterance(text);
   speech.lang = "en-US";
