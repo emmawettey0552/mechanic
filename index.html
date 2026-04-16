@@ -5,95 +5,253 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Oboye Auto Mechanic</title>
 
+<!-- ICONS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<!-- FONT -->
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:'Poppins',sans-serif;background:#0f172a;color:#f1f5f9;}
-
-/* HEADER */
-header{
-  position:sticky;top:0;
-  background:#020617;
-  padding:15px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
-nav a{margin-left:15px;color:#f1f5f9;text-decoration:none;font-size:0.9rem;}
-
-/* HERO */
-.hero{text-align:center;padding:60px 20px;}
-.hero h2{font-size:2.2rem;color:#38bdf8;}
-.btn{
-  margin-top:20px;
-  display:inline-block;
-  padding:12px 20px;
-  background:#38bdf8;
-  color:#000;
-  border-radius:10px;
-  text-decoration:none;
-  font-weight:bold;
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-/* SECTIONS */
-section{padding:40px 20px;}
-h2{text-align:center;margin-bottom:20px;color:#38bdf8;}
+html, body {
+  width: 100%;
+  overflow-x: hidden;
+  font-family: 'Poppins', sans-serif;
+  background: #0f172a;
+  color: #f1f5f9;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* BODY SPACING FOR FIXED HEADER */
+body {
+  padding-top: 70px;
+}
+
+/* ================= HEADER (GLASS NAVBAR) ================= */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 20px;
+
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+header h1 {
+  font-size: 1.2rem;
+  color: #38bdf8;
+}
+
+/* MENU ICON */
+.menu-icon {
+  font-size: 26px;
+  cursor: pointer;
+  color: #38bdf8;
+}
+
+/* ================= SIDE MENU ================= */
+#sideMenu {
+  position: fixed;
+  top: 0;
+  right: -270px;
+  width: 270px;
+  height: 100%;
+  background: #020617;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  transition: 0.3s ease;
+  z-index: 2000;
+}
+
+#sideMenu.active {
+  right: 0;
+}
+
+#sideMenu a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 12px 0;
+  padding: 10px;
+  color: #f1f5f9;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: 0.3s;
+}
+
+#sideMenu a i {
+  color: #38bdf8;
+}
+
+#sideMenu a:hover {
+  background: rgba(56,189,248,0.15);
+  transform: translateX(5px);
+}
+
+/* CLOSE BUTTON */
+.close-btn {
+  align-self: flex-end;
+  font-size: 20px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  color: #fff;
+}
+
+/* OVERLAY */
+#overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  display: none;
+  z-index: 1500;
+}
+
+#overlay.active {
+  display: block;
+}
+
+/* ================= HERO ================= */
+.hero {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.hero h2 {
+  font-size: 2rem;
+  color: #38bdf8;
+}
+
+.hero p {
+  margin-top: 10px;
+  color: #94a3b8;
+}
+
+/* BUTTON */
+.btn {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 12px 18px;
+  background: #38bdf8;
+  color: #000;
+  border-radius: 10px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+/* ================= SECTIONS ================= */
+section {
+  padding: 40px 20px;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #38bdf8;
+}
 
 /* PROFILE */
-.profile{text-align:center;}
-.profile img{width:130px;height:130px;border-radius:50%;}
-
-/* GRID */
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:15px;
+.profile {
+  text-align: center;
 }
 
-.card{
-  background:#1e293b;
-  padding:20px;
-  border-radius:12px;
+.profile img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 3px solid #38bdf8;
+}
+
+/* GRID */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 15px;
+}
+
+.card {
+  background: #1e293b;
+  padding: 18px;
+  border-radius: 12px;
 }
 
 /* PRICING */
-.price{font-size:1.5rem;color:#38bdf8;margin-top:10px;}
+.price {
+  margin-top: 10px;
+  font-size: 1.3rem;
+  color: #38bdf8;
+}
 
-/* TESTIMONIAL */
-.testimonial{font-style:italic;}
-
-/* MAP */
-iframe{width:100%;border-radius:10px;}
+/* CONTACT */
+.contact {
+  text-align: center;
+}
 
 /* FOOTER */
-footer{text-align:center;padding:20px;background:#020617;}
+footer {
+  text-align: center;
+  padding: 20px;
+  background: #020617;
+}
 
-/* WHATSAPP BUTTON */
-.whatsapp{
-  position:fixed;
-  bottom:20px;
-  right:20px;
-  background:#25D366;
-  color:#fff;
-  padding:15px;
-  border-radius:50%;
-  text-decoration:none;
-  font-size:20px;
+/* WHATSAPP */
+.whatsapp {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #25D366;
+  color: white;
+  padding: 15px;
+  border-radius: 50%;
+  font-size: 20px;
+  text-decoration: none;
+  z-index: 3000;
 }
 </style>
 </head>
 
 <body>
 
+<!-- HEADER -->
 <header>
   <h1>Oboye Auto</h1>
-  <nav>
-    <a href="#">Home</a>
-    <a href="#about">About</a>
-    <a href="#services">Services</a>
-    <a href="#pricing">Pricing</a>
-    <a href="#contact">Contact</a>
+
+  <div class="menu-icon" onclick="openMenu()">☰</div>
+
+  <div id="overlay" onclick="closeMenu()"></div>
+
+  <nav id="sideMenu">
+    <div class="close-btn" onclick="closeMenu()">✖</div>
+
+    <a href="#"><i class="fas fa-home"></i> Home</a>
+    <a href="#about"><i class="fas fa-user"></i> About</a>
+    <a href="#services"><i class="fas fa-tools"></i> Services</a>
+    <a href="#pricing"><i class="fas fa-tags"></i> Pricing</a>
+    <a href="#contact"><i class="fas fa-phone"></i> Contact</a>
   </nav>
 </header>
 
@@ -108,27 +266,26 @@ footer{text-align:center;padding:20px;background:#020617;}
 <section class="profile">
   <img src="sen.jpg">
   <h2>Uncle Oboye</h2>
-  <p>Expert mechanic with over 10 years experience in pickups, 4x4 vehicles and private cars.</p>
+  <p>10+ years experience in vehicle repair and diagnostics.</p>
 </section>
 
 <!-- ABOUT -->
 <section id="about">
   <h2>About Us</h2>
-  <p style="text-align:center;max-width:600px;margin:auto;">
-    Oboye Auto Mechanic is dedicated to providing reliable and affordable vehicle repair services.
-    We specialize in pickup trucks, 4x4 vehicles, and engine diagnostics. Our mission is to keep
-    your vehicle running smoothly with honesty and professionalism.
+  <p style="text-align:center;max-width:650px;margin:auto;color:#94a3b8;">
+    We provide professional automotive repair services specializing in 4x4 vehicles, pickups, and engine diagnostics.
+    Our goal is to deliver reliable, affordable, and fast service.
   </p>
 </section>
 
 <!-- SERVICES -->
 <section id="services">
-  <h2>Our Services</h2>
+  <h2>Services</h2>
   <div class="grid">
-    <div class="card"><h3>Engine Repair</h3><p>Complete diagnostics and engine fixes.</p></div>
-    <div class="card"><h3>4x4 Upgrade</h3><p>Off-road tuning and suspension upgrades.</p></div>
-    <div class="card"><h3>Pickup Service</h3><p>Maintenance for all pickup brands.</p></div>
-    <div class="card"><h3>Mobile Mechanic</h3><p>We come to your location.</p></div>
+    <div class="card">Engine Repair</div>
+    <div class="card">4x4 Suspension Upgrade</div>
+    <div class="card">Pickup Maintenance</div>
+    <div class="card">Mobile Mechanic</div>
   </div>
 </section>
 
@@ -137,73 +294,48 @@ footer{text-align:center;padding:20px;background:#020617;}
   <h2>Pricing</h2>
   <div class="grid">
     <div class="card">
-      <h3>Basic Service</h3>
-      <p>Oil change, inspection</p>
+      Basic Service
       <div class="price">GHS 150</div>
     </div>
+
     <div class="card">
-      <h3>Engine Diagnostics</h3>
-      <p>Full system check</p>
+      Diagnostics
       <div class="price">GHS 300</div>
     </div>
+
     <div class="card">
-      <h3>Full Repair</h3>
-      <p>Major repairs & parts</p>
+      Full Repair
       <div class="price">GHS 500+</div>
     </div>
   </div>
 </section>
 
-<!-- WHY CHOOSE US -->
-<section>
-  <h2>Why Choose Us</h2>
-  <div class="grid">
-    <div class="card">✔ Experienced Mechanic</div>
-    <div class="card">✔ Affordable Pricing</div>
-    <div class="card">✔ Fast Service</div>
-    <div class="card">✔ Trusted by Clients</div>
-  </div>
-</section>
-
-<!-- TESTIMONIALS -->
-<section>
-  <h2>Testimonials</h2>
-  <div class="grid">
-    <div class="card testimonial">"Best mechanic in town!"</div>
-    <div class="card testimonial">"Fixed my pickup perfectly."</div>
-    <div class="card testimonial">"Very reliable and affordable."</div>
-  </div>
-</section>
-
-<!-- GALLERY -->
-<section>
-  <h2>Gallery</h2>
-  <div class="grid">
-    <img src="sen.jpg">
-    <img src="sen.jpg">
-    <img src="sen.jpg">
-  </div>
-</section>
-
-<!-- MAP -->
-<section>
-  <h2>Our Location</h2>
-  <iframe src="https://maps.google.com/maps?q=accra&t=&z=13&ie=UTF8&iwloc=&output=embed"></iframe>
-</section>
-
 <!-- CONTACT -->
-<section id="contact">
+<section id="contact" class="contact">
   <h2>Contact</h2>
-  <p style="text-align:center;">📞 +233 000 000 000</p>
-  <p style="text-align:center;">📧 mechanic@gmail.com</p>
+  <p>📞 +233 000 000 000</p>
+  <p>📧 mechanic@gmail.com</p>
 </section>
 
 <footer>
-  <p>© 2026 Oboye Auto Mechanic</p>
+  © 2026 Oboye Auto Mechanic
 </footer>
 
 <!-- WHATSAPP -->
-<a href="https://wa.me/233000000000" class="whatsapp">💬</a>
+<a class="whatsapp" href="https://wa.me/233000000000">💬</a>
+
+<!-- SCRIPT -->
+<script>
+function openMenu() {
+  document.getElementById("sideMenu").classList.add("active");
+  document.getElementById("overlay").classList.add("active");
+}
+
+function closeMenu() {
+  document.getElementById("sideMenu").classList.remove("active");
+  document.getElementById("overlay").classList.remove("active");
+}
+</script>
 
 </body>
-      </html>
+    </html>
