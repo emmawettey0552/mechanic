@@ -12,7 +12,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
-/* RESET */
 * {
   margin: 0;
   padding: 0;
@@ -33,12 +32,12 @@ img {
   display: block;
 }
 
-/* BODY SPACING FOR FIXED HEADER */
+/* FIX NAV SPACE */
 body {
   padding-top: 70px;
 }
 
-/* ================= HEADER (GLASS NAVBAR) ================= */
+/* ================= GLASS NAVBAR ================= */
 header {
   position: fixed;
   top: 0;
@@ -55,27 +54,26 @@ header {
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
 
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
 }
 
 header h1 {
-  font-size: 1.2rem;
   color: #38bdf8;
+  font-size: 1.2rem;
 }
 
-/* MENU ICON */
 .menu-icon {
   font-size: 26px;
-  cursor: pointer;
   color: #38bdf8;
+  cursor: pointer;
 }
 
 /* ================= SIDE MENU ================= */
 #sideMenu {
   position: fixed;
   top: 0;
-  right: -270px;
-  width: 270px;
+  right: -280px;
+  width: 280px;
   height: 100%;
   background: #020617;
   padding: 20px;
@@ -95,9 +93,9 @@ header h1 {
   gap: 12px;
   margin: 12px 0;
   padding: 10px;
-  color: #f1f5f9;
-  text-decoration: none;
   border-radius: 8px;
+  text-decoration: none;
+  color: #f1f5f9;
   transition: 0.3s;
 }
 
@@ -110,13 +108,11 @@ header h1 {
   transform: translateX(5px);
 }
 
-/* CLOSE BUTTON */
 .close-btn {
   align-self: flex-end;
   font-size: 20px;
   cursor: pointer;
   margin-bottom: 20px;
-  color: #fff;
 }
 
 /* OVERLAY */
@@ -138,7 +134,7 @@ header h1 {
 /* ================= HERO ================= */
 .hero {
   text-align: center;
-  padding: 60px 20px;
+  padding: 50px 20px;
 }
 
 .hero h2 {
@@ -147,11 +143,10 @@ header h1 {
 }
 
 .hero p {
-  margin-top: 10px;
   color: #94a3b8;
+  margin-top: 10px;
 }
 
-/* BUTTON */
 .btn {
   display: inline-block;
   margin-top: 20px;
@@ -159,8 +154,42 @@ header h1 {
   background: #38bdf8;
   color: #000;
   border-radius: 10px;
-  font-weight: bold;
   text-decoration: none;
+  font-weight: bold;
+}
+
+/* ================= PROFILE ================= */
+.profile {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.profile-img {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid #38bdf8;
+  margin: auto;
+}
+
+.profile h2 {
+  margin-top: 15px;
+}
+
+.profile p {
+  color: #94a3b8;
+  margin-top: 10px;
+}
+
+.read-btn {
+  margin-top: 15px;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 10px;
+  background: #38bdf8;
+  font-weight: bold;
+  cursor: pointer;
 }
 
 /* ================= SECTIONS ================= */
@@ -170,23 +199,10 @@ section {
 
 h2 {
   text-align: center;
-  margin-bottom: 20px;
   color: #38bdf8;
+  margin-bottom: 20px;
 }
 
-/* PROFILE */
-.profile {
-  text-align: center;
-}
-
-.profile img {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  border: 3px solid #38bdf8;
-}
-
-/* GRID */
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -197,13 +213,6 @@ h2 {
   background: #1e293b;
   padding: 18px;
   border-radius: 12px;
-}
-
-/* PRICING */
-.price {
-  margin-top: 10px;
-  font-size: 1.3rem;
-  color: #38bdf8;
 }
 
 /* CONTACT */
@@ -228,7 +237,6 @@ footer {
   padding: 15px;
   border-radius: 50%;
   font-size: 20px;
-  text-decoration: none;
   z-index: 3000;
 }
 </style>
@@ -239,7 +247,6 @@ footer {
 <!-- HEADER -->
 <header>
   <h1>Oboye Auto</h1>
-
   <div class="menu-icon" onclick="openMenu()">☰</div>
 
   <div id="overlay" onclick="closeMenu()"></div>
@@ -259,22 +266,24 @@ footer {
 <section class="hero">
   <h2>4x4 & Pickup Specialist</h2>
   <p>Professional Auto Repair You Can Trust</p>
-  <a href="#contact" class="btn">Book Service</a>
+  <a class="btn" href="#contact">Book Service</a>
 </section>
 
 <!-- PROFILE -->
-<section class="profile">
-  <img src="sen.jpg">
+<section class="profile" id="profile">
+  <img src="sen.jpg" class="profile-img" alt="Profile">
   <h2>Uncle Oboye</h2>
-  <p>10+ years experience in vehicle repair and diagnostics.</p>
+  <p>10+ years experience in vehicle repair, diagnostics and 4x4 systems.</p>
+
+  <button class="read-btn" onclick="readWebsite()">🔊 Read Website</button>
 </section>
 
 <!-- ABOUT -->
 <section id="about">
   <h2>About Us</h2>
   <p style="text-align:center;max-width:650px;margin:auto;color:#94a3b8;">
-    We provide professional automotive repair services specializing in 4x4 vehicles, pickups, and engine diagnostics.
-    Our goal is to deliver reliable, affordable, and fast service.
+    We are a professional auto repair workshop specializing in pickups, 4x4 vehicles, and full diagnostics.
+    We deliver fast, reliable, and affordable services.
   </p>
 </section>
 
@@ -283,7 +292,7 @@ footer {
   <h2>Services</h2>
   <div class="grid">
     <div class="card">Engine Repair</div>
-    <div class="card">4x4 Suspension Upgrade</div>
+    <div class="card">4x4 Suspension</div>
     <div class="card">Pickup Maintenance</div>
     <div class="card">Mobile Mechanic</div>
   </div>
@@ -293,20 +302,9 @@ footer {
 <section id="pricing">
   <h2>Pricing</h2>
   <div class="grid">
-    <div class="card">
-      Basic Service
-      <div class="price">GHS 150</div>
-    </div>
-
-    <div class="card">
-      Diagnostics
-      <div class="price">GHS 300</div>
-    </div>
-
-    <div class="card">
-      Full Repair
-      <div class="price">GHS 500+</div>
-    </div>
+    <div class="card">Basic Service <br><b>GHS 150</b></div>
+    <div class="card">Diagnostics <br><b>GHS 300</b></div>
+    <div class="card">Full Repair <br><b>GHS 500+</b></div>
   </div>
 </section>
 
@@ -335,7 +333,24 @@ function closeMenu() {
   document.getElementById("sideMenu").classList.remove("active");
   document.getElementById("overlay").classList.remove("active");
 }
+
+/* TEXT TO SPEECH */
+function readWebsite() {
+  window.speechSynthesis.cancel();
+
+  let text =
+    "Welcome to Oboye Auto Mechanic. " +
+    "We specialize in pickup trucks, 4x4 vehicles, engine diagnostics, and mobile repairs. " +
+    "We offer affordable and reliable services.";
+
+  let speech = new SpeechSynthesisUtterance(text);
+  speech.rate = 1;
+  speech.pitch = 1;
+  speech.volume = 1;
+
+  window.speechSynthesis.speak(speech);
+}
 </script>
 
 </body>
-    </html>
+  </html>
