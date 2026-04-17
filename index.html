@@ -140,7 +140,6 @@ footer{
 </footer>
 
 <a class="whatsapp" href="https://wa.me/233590000008">💬</a>
-
 <script>
 
 /* MENU */
@@ -148,72 +147,77 @@ function openMenu(){
   document.getElementById("sideMenu").classList.add("active");
   document.getElementById("overlay").classList.add("active");
 }
+
 function closeMenu(){
   document.getElementById("sideMenu").classList.remove("active");
   document.getElementById("overlay").classList.remove("active");
 }
 
-/* ================= SPEECH SYSTEM ================= */
+/* ================= SPEECH ENGINE FIXED ================= */
 
 let voices = [];
-let initialized = false;
+let unlocked = false;
 
-/* LOAD VOICES */
+/* LOAD VOICES SAFELY */
 function loadVoices(){
   voices = speechSynthesis.getVoices();
 }
-
 speechSynthesis.onvoiceschanged = loadVoices;
 loadVoices();
 
-/* START SPEECH */
-function startSpeech(){
+/* CORE SPEECH */
+function speakText(){
 
-  // Force unlock audio (IMPORTANT for Android)
-  if(!initialized){
-    speechSynthesis.resume();
-    initialized = true;
+  const text = `
+  Welcome to Oboye Auto Mechanic Workshop.
+
+  We specialize in pickup trucks, four by four vehicles, engine diagnostics, suspension systems, and full automotive repair.
+
+  We provide professional, reliable, and affordable vehicle services.
+
+  Call us today for trusted mechanical care.
+  `;
+
+  let speech = new SpeechSynthesisUtterance(text);
+
+  // WAIT until voices are available
+  let selectedVoice =
+    voices.find(v => v.lang.includes("en")) ||
+    voices[0];
+
+  if(selectedVoice){
+    speech.voice = selectedVoice;
   }
-
-  const text = `Welcome to Oboye Auto Mechanic Workshop.
-We specialize in pickup trucks, four by four vehicles, diagnostics and professional auto repair.
-Call us today on 0590000008.`;
-
-  const speech = new SpeechSynthesisUtterance(text);
-
-  // Safe voice selection
-  let voice = voices.find(v => v.lang === "en-US") 
-           || voices.find(v => v.lang.includes("en")) 
-           || voices[0];
-
-  if(voice) speech.voice = voice;
 
   speech.rate = 0.9;
   speech.pitch = 1;
   speech.volume = 1;
 
-  speech.onstart = () => console.log("Speech started");
-  speech.onerror = (e) => {
-    console.log("Speech failed:", e);
-    alert("Voice not supported on this device. Try Chrome or enable Text-to-Speech in settings.");
-  };
-
   speechSynthesis.cancel();
   speechSynthesis.speak(speech);
 }
 
-/* STOP */
-function stopSpeech(){
-  speechSynthesis.cancel();
-}
-
-/* FORCE FIRST USER INTERACTION */
-document.body.addEventListener("click", function unlock(){
-  speechSynthesis.resume();
-  document.body.removeEventListener("click", unlock);
+/* AUTO START (ATTEMPT) */
+window.addEventListener("load", () => {
+  setTimeout(() => {
+    speakText();
+  }, 1200);
 });
 
-</script>
+/* STRONG MOBILE UNLOCK (IMPORTANT FIX) */
+function unlockAndSpeak(){
+  if(unlocked) return;
 
+  speechSynthesis.cancel();
+  speechSynthesis.resume();
+  speakText();
+
+  unlocked = true;
+}
+
+document.addEventListener("click", unlockAndSpeak);
+document.addEventListener("touchstart", unlockAndSpeak);
+
+</script>
 </body>
 </html>
