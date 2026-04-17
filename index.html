@@ -27,7 +27,7 @@ body {
   padding-top: 70px;
 }
 
-/* GLASS NAVBAR */
+/* NAVBAR */
 header {
   position: fixed;
   top: 0;
@@ -131,6 +131,17 @@ header h1 {
   margin-top: 10px;
 }
 
+.listen-btn {
+  margin-top:15px;
+  padding:10px 18px;
+  border:none;
+  border-radius:8px;
+  background:#38bdf8;
+  color:#000;
+  font-weight:600;
+  cursor:pointer;
+}
+
 /* PROFILE */
 .profile {
   text-align: center;
@@ -143,12 +154,6 @@ header h1 {
   border-radius: 50%;
   object-fit: cover;
   border: 4px solid #38bdf8;
-  margin: auto;
-}
-
-.profile p {
-  margin-top: 10px;
-  color: #94a3b8;
 }
 
 /* SECTIONS */
@@ -222,6 +227,9 @@ footer {
 <section class="hero">
   <h2>4x4 & Pickup Specialist</h2>
   <p>Professional Auto Repair You Can Trust</p>
+
+  <!-- LISTEN BUTTON -->
+  <button class="listen-btn" onclick="speakWebsite()">🔊 Listen to Message</button>
 </section>
 
 <section class="profile">
@@ -249,7 +257,7 @@ footer {
 
 <section id="contact" class="contact">
   <h2>Contact</h2>
-  <p>📞 +233 000 000 000</p>
+  <p>📞 +233 590 000 008</p>
   <p>📧 mechanic@gmail.com</p>
 </section>
 
@@ -257,7 +265,7 @@ footer {
   © 2026 Oboye Auto Mechanic
 </footer>
 
-<a class="whatsapp" href="https://wa.me/233000000000">💬</a>
+<a class="whatsapp" href="https://wa.me/233590000008">💬</a>
 
 <script>
 
@@ -272,7 +280,7 @@ function closeMenu() {
   document.getElementById("overlay").classList.remove("active");
 }
 
-/* ================= AUTO READER ================= */
+/* AUTO READER FIXED */
 let spoken = false;
 
 function speakWebsite() {
@@ -280,37 +288,23 @@ function speakWebsite() {
 
   const text = `Welcome to Oboye Auto Mechanic Workshop.
 
-This is a professional automotive repair center specializing in pickup trucks, four by four vehicles, and general vehicle diagnostics and repair.
+We specialize in pickup trucks, four by four vehicles, diagnostics, and professional auto repair.
 
-At Oboye Auto Mechanic, we follow a complete and structured diagnostic process to ensure every vehicle is properly inspected before repair begins.
+Our process includes engine diagnostics, mechanical inspection, electrical system testing, suspension analysis, and transmission diagnostics.
 
-Our diagnostic system includes:
+After inspection, we perform expert repairs including engine servicing, suspension repair, brake systems, and full vehicle maintenance.
 
-First, engine diagnostics. This involves scanning the engine control unit using modern diagnostic tools to detect faults in sensors, fuel systems, ignition systems, and engine performance.
+At Oboye Auto Mechanic, we ensure safety, performance, and long lasting results.
 
-Second, mechanical inspection. This includes checking physical engine components such as belts, timing systems, oil pressure, cooling systems, and engine compression to identify hidden mechanical problems.
+Call us today on 0590000008 for trusted mechanical service.
+`;
 
-Third, electrical diagnostics. We test vehicle wiring systems, battery health, alternator performance, fuses, and electronic control modules to ensure the electrical system is functioning properly.
+  const speech = new SpeechSynthesisUtterance(text);
 
-Fourth, suspension and steering diagnostics. We inspect shock absorbers, control arms, ball joints, wheel alignment, and steering stability to ensure safe driving performance.
+  const voices = window.speechSynthesis.getVoices();
+  const preferredVoice = voices.find(v => v.lang.includes("en"));
+  if (preferredVoice) speech.voice = preferredVoice;
 
-Fifth, transmission diagnostics. This involves checking gear shifting systems, clutch systems, and gearbox performance for both automatic and manual vehicles.
-
-After full diagnostics, we proceed with professional repair using standard automotive procedures.
-
-Our repair services include engine repair and rebuilding, suspension replacement, brake system repair, gearbox servicing, and full vehicle maintenance.
-
-We ensure every vehicle is tested after repair to confirm safety, performance, and reliability before it is returned to the customer.
-
-At Oboye Auto Mechanic, we believe in accuracy, professionalism, and long lasting vehicle performance.
-
-We are committed to keeping your vehicle safe, strong, and ready for the road at all times.
-
-Contact us today for expert automotive service and trusted mechanical care.Please call 0590000008
-    `;
-
-  let speech = new SpeechSynthesisUtterance(text);
-  speech.lang = "en-US";
   speech.rate = 0.9;
   speech.pitch = 1;
   speech.volume = 1;
@@ -321,18 +315,16 @@ Contact us today for expert automotive service and trusted mechanical care.Pleas
   spoken = true;
 }
 
-/* AUTO START */
-window.addEventListener("load", () => {
-  setTimeout(() => {
-    speakWebsite();
-  }, 1200);
-});
+/* USER INTERACTION REQUIRED */
+document.addEventListener("click", () => {
+  if (!spoken) speakWebsite();
+}, { once: true });
 
-/* FALLBACK FOR ALL DEVICES */
-document.addEventListener("click", speakWebsite);
-document.addEventListener("touchstart", speakWebsite);
+document.addEventListener("touchstart", () => {
+  if (!spoken) speakWebsite();
+}, { once: true });
 
 </script>
 
 </body>
-  </html>
+      </html>
