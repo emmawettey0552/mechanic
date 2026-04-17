@@ -14,84 +14,100 @@ body {
   scroll-behavior: smooth;
 }
 
-/* NAVBAR */
+/* ================= NAVBAR ================= */
 nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: #020617;
-  padding: 15px 20px;
   position: sticky;
   top: 0;
   z-index: 1000;
-  animation: slideDown 0.8s ease;
+  background: #020617;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 20px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.4);
 }
 
-nav h1 {
+.logo {
+  font-size: 18px;
+  font-weight: bold;
   color: #38bdf8;
 }
 
-nav ul {
+.nav-links {
   display: flex;
-  list-style: none;
-  gap: 15px;
+  gap: 10px;
+  flex-wrap: wrap;
 }
 
-nav ul li a {
+.nav-links a {
   color: white;
   text-decoration: none;
   padding: 8px 12px;
   border-radius: 6px;
   transition: 0.3s;
+  font-size: 14px;
 }
 
-nav ul li a:hover {
+.nav-links a:hover {
   background: #38bdf8;
   color: black;
-  transform: scale(1.05);
 }
 
-/* SECTIONS */
-section {
-  padding: 70px 20px;
-  text-align: center;
-  animation: fadeIn 1s ease;
-}
-
+/* ================= HERO ================= */
 .hero {
+  text-align: center;
+  padding: 60px 20px;
   background: linear-gradient(to right, #020617, #0f172a);
 }
 
-.hero h2 {
-  font-size: 40px;
-  animation: slideUp 1s ease;
+.hero h1 {
+  font-size: 36px;
 }
 
-/* CARDS */
+/* ================= SECTIONS ================= */
+section {
+  padding: 60px 20px;
+  text-align: center;
+}
+
+/* ================= SERVICES ================= */
 .card-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px,1fr));
-  gap: 20px;
-  margin-top: 20px;
+  gap: 15px;
 }
 
-.card, .client {
+.card {
   background: #1e293b;
   padding: 20px;
   border-radius: 10px;
-  transition: 0.4s;
 }
 
-.card:hover, .client:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+/* ================= GALLERY ================= */
+.gallery {
+  max-width: 700px;
+  margin: auto;
+  position: relative;
 }
 
-/* FORM */
+.gallery img {
+  width: 100%;
+  border-radius: 10px;
+  display: none;
+}
+
+/* ================= CLIENTS ================= */
+.client {
+  background: #1e293b;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+/* ================= BOOKING ================= */
 input, textarea {
   width: 90%;
   padding: 10px;
-  margin: 10px 0;
+  margin: 8px 0;
   border-radius: 6px;
   border: none;
 }
@@ -102,15 +118,9 @@ button {
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  transition: 0.3s;
 }
 
-button:hover {
-  background: #0ea5e9;
-  transform: scale(1.05);
-}
-
-/* FLOATING BUTTON */
+/* ================= FLOAT BUTTON ================= */
 .speech-btn {
   position: fixed;
   bottom: 20px;
@@ -120,107 +130,107 @@ button:hover {
   border-radius: 50px;
   cursor: pointer;
   font-weight: bold;
-  animation: pulse 1.5s infinite;
-}
-
-/* ANIMATIONS */
-@keyframes fadeIn {
-  from {opacity: 0;}
-  to {opacity: 1;}
-}
-
-@keyframes slideUp {
-  from {transform: translateY(40px); opacity: 0;}
-  to {transform: translateY(0); opacity: 1;}
-}
-
-@keyframes slideDown {
-  from {transform: translateY(-60px);}
-  to {transform: translateY(0);}
-}
-
-@keyframes pulse {
-  0% {transform: scale(1);}
-  50% {transform: scale(1.1);}
-  100% {transform: scale(1);}
 }
 </style>
 </head>
 
 <body>
 
-<!-- NAVBAR -->
+<!-- ================= NAVBAR ================= -->
 <nav>
-  <h1>Oboye Autoshop</h1>
-  <ul>
-    <li><a href="#home">Home</a></li>
-    <li><a href="#services">Services</a></li>
-    <li><a href="#clients">Clients</a></li>
-    <li><a href="#book">Book</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
+  <div class="logo">Oboye Autoshop</div>
+  <div class="nav-links">
+    <a href="#home">Home</a>
+    <a href="#services">Services</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#clients">Clients</a>
+    <a href="#book">Book</a>
+    <a href="#contact">Contact</a>
+  </div>
 </nav>
 
-<!-- HOME -->
+<!-- ================= HERO ================= -->
 <section id="home" class="hero">
-  <h2>Welcome to Oboye Autoshop</h2>
+  <h1>Oboye Autoshop</h1>
   <p>Professional 4x4 • Pickup • Engine Diagnostics • Mobile Repair</p>
 </section>
 
-<!-- SERVICES -->
+<!-- ================= SERVICES ================= -->
 <section id="services">
   <h2>Our Services</h2>
   <div class="card-container">
-    <div class="card">Engine Repair & Diagnostics</div>
-    <div class="card">4x4 Off-road Upgrade</div>
+    <div class="card">Engine Diagnostics</div>
+    <div class="card">4x4 Suspension Upgrade</div>
     <div class="card">Pickup Maintenance</div>
     <div class="card">Mobile Mechanic Service</div>
   </div>
 </section>
 
-<!-- CLIENTS -->
-<section id="clients">
-  <h2>Happy Clients</h2>
-  <div class="card-container">
-    <div class="client">🚗 Kofi Mensah - “Best engine repair in Accra!”</div>
-    <div class="client">🚙 Ama Serwaa - “My 4x4 is now perfect.”</div>
-    <div class="client">🚐 John Doe - “Fast mobile service, very reliable.”</div>
+<!-- ================= GALLERY ================= -->
+<section id="gallery">
+  <h2>Workshop Gallery</h2>
+
+  <div class="gallery">
+    <img class="slide" src="https://images.unsplash.com/photo-1600703064952-6a16b7f1a4b5">
+    <img class="slide" src="https://images.unsplash.com/photo-1619767886558-efdc259cde1a">
+    <img class="slide" src="https://images.unsplash.com/photo-1625047509168-1a7f0b5f3f21">
+    <img class="slide" src="https://images.unsplash.com/photo-1616422285623-13ff0162193c">
   </div>
 </section>
 
-<!-- BOOKING -->
+<!-- ================= CLIENTS ================= -->
+<section id="clients">
+  <h2>Happy Clients</h2>
+
+  <div class="card-container">
+    <div class="client">Kofi Mensah - “Best mechanic in Accra!”</div>
+    <div class="client">Ama Serwaa - “My 4x4 is perfect now.”</div>
+    <div class="client">John Doe - “Fast mobile service.”</div>
+  </div>
+</section>
+
+<!-- ================= BOOK ================= -->
 <section id="book">
-  <h2>Book a Repair</h2>
-  <form onsubmit="bookService(event)">
-    <input type="text" placeholder="Your Name" required><br>
-    <input type="tel" placeholder="Phone Number" required><br>
-    <textarea placeholder="Describe your car issue..." required></textarea><br>
-    <button type="submit">Send Request</button>
+  <h2>Book Repair</h2>
+  <form onsubmit="book(event)">
+    <input type="text" placeholder="Name" required><br>
+    <input type="tel" placeholder="Phone" required><br>
+    <textarea placeholder="Car problem..." required></textarea><br>
+    <button>Submit</button>
   </form>
 </section>
 
-<!-- CONTACT -->
+<!-- ================= CONTACT ================= -->
 <section id="contact">
   <h2>Contact</h2>
   <p>📞 +233 XXX XXX XXX</p>
-  <p>📧 oboyeautoshop@email.com</p>
   <p>📍 Accra, Ghana</p>
 </section>
 
-<!-- SPEECH BUTTON -->
-<div class="speech-btn" onclick="toggleSpeech()">
-  🔊 Read Site
-</div>
+<!-- ================= VOICE BUTTON ================= -->
+<div class="speech-btn" onclick="toggleSpeech()">🔊 Read</div>
 
 <script>
+
+/* ===== GALLERY SLIDESHOW ===== */
+let index = 0;
+const slides = document.getElementsByClassName("slide");
+
+function showSlides() {
+  for (let i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";
+  }
+  index++;
+  if (index > slides.length) index = 1;
+  slides[index - 1].style.display = "block";
+  setTimeout(showSlides, 3000);
+}
+showSlides();
+
+/* ===== AUTO READER ===== */
 let speaking = false;
 
-function speakAll() {
-  if (!('speechSynthesis' in window)) {
-    alert("Speech not supported");
-    return;
-  }
-
+function readSite() {
   speechSynthesis.cancel();
 
   let text = "";
@@ -235,20 +245,18 @@ function speakAll() {
   speechSynthesis.speak(msg);
 }
 
-function stopSpeech() {
-  speechSynthesis.cancel();
-}
-
 function toggleSpeech() {
   speaking = !speaking;
-  if (speaking) speakAll();
-  else stopSpeech();
+  if (speaking) readSite();
+  else speechSynthesis.cancel();
 }
 
-function bookService(e) {
+/* ===== BOOKING ===== */
+function book(e) {
   e.preventDefault();
-  alert("Request sent successfully. Oboye Autoshop will contact you soon!");
+  alert("Booking sent to Oboye Autoshop!");
 }
+
 </script>
 
 </body>
