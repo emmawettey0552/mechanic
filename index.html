@@ -3,294 +3,222 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Oboye Autoshop</title>
+<title>Oboye Autoshop | Modern Mechanics</title>
 
 <style>
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #0b1220;
-  color: white;
-  scroll-behavior: smooth;
+:root {
+  --neon-blue: #38bdf8;
+  --dark-bg: #020617;
+  --glass: rgba(30, 41, 59, 0.7);
 }
 
-/* ================= NAVBAR ================= */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background: #0b1220;
+  color: white;
+  overflow-x: hidden;
+}
+
+/* ================= MODERN NAVBAR ================= */
 nav {
   position: sticky;
   top: 0;
   z-index: 1000;
-  background: #020617;
+  background: var(--glass);
+  backdrop-filter: blur(15px);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px 18px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+  padding: 15px 20px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
 }
 
 .logo {
-  color: #38bdf8;
-  font-weight: bold;
-  font-size: 18px;
-}
-
-.nav-links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
+  color: var(--neon-blue);
+  font-weight: 900;
+  letter-spacing: 1px;
+  text-transform: uppercase;
 }
 
 .nav-links a {
   text-decoration: none;
-  color: white;
-  padding: 7px 10px;
-  border-radius: 6px;
+  color: #94a3b8;
+  padding: 8px 12px;
   font-size: 13px;
   transition: 0.3s;
 }
 
 .nav-links a:hover {
-  background: #38bdf8;
-  color: black;
+  color: var(--neon-blue);
 }
 
-/* ================= HERO ================= */
+/* ================= HERO WITH GLOW ================= */
 .hero {
   text-align: center;
-  padding: 70px 20px;
-  background: linear-gradient(to right, #020617, #0f172a);
+  padding: 100px 20px;
+  background: radial-gradient(circle at center, #1e293b 0%, #020617 100%);
+  border-bottom: 2px solid var(--neon-blue);
 }
 
 .hero h1 {
-  font-size: 40px;
+  font-size: clamp(32px, 8vw, 54px);
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  text-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
 }
 
-/* ================= SECTIONS ================= */
-section {
-  padding: 60px 20px;
-  text-align: center;
+/* ================= ANIMATION CLASSES ================= */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.9s ease-out;
 }
 
-/* ================= SERVICES ================= */
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ================= MODERN CARDS ================= */
 .cards {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px,1fr));
-  gap: 15px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  padding: 20px;
 }
 
 .card {
-  background: #1e293b;
-  padding: 20px;
-  border-radius: 10px;
+  background: var(--glass);
+  padding: 30px;
+  border-radius: 15px;
+  border: 1px solid rgba(255,255,255,0.05);
+  transition: 0.4s;
+  position: relative;
+  overflow: hidden;
+}
+
+.card:hover {
+  border-color: var(--neon-blue);
+  transform: translateY(-10px);
+  box-shadow: 0 10px 30px rgba(56, 189, 248, 0.2);
+}
+
+/* ================= BUTTONS ================= */
+button {
+  background: linear-gradient(135deg, #38bdf8, #0ea5e9);
+  color: #020617;
+  font-weight: bold;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(56, 189, 248, 0.5);
 }
 
 /* ================= GALLERY ================= */
-.gallery {
-  max-width: 700px;
-  margin: auto;
-  position: relative;
-}
-
 .gallery img {
   width: 100%;
-  border-radius: 10px;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 15px;
   display: none;
+  animation: fadeIn 0.5s;
 }
 
-/* NAV BUTTONS */
-.gallery-controls {
-  margin-top: 10px;
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
-.gallery-controls button {
-  padding: 10px 15px;
-  margin: 5px;
-  border: none;
-  border-radius: 6px;
-  background: #38bdf8;
-  cursor: pointer;
-}
-
-/* ================= CLIENTS ================= */
-.client {
-  background: #1e293b;
-  padding: 15px;
-  border-radius: 10px;
-}
-
-/* ================= BOOKING ================= */
-input, textarea {
-  width: 90%;
-  padding: 10px;
-  margin: 8px 0;
-  border-radius: 6px;
-  border: none;
-}
-
-button {
-  padding: 10px 20px;
-  background: #38bdf8;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-/* ================= FLOAT BUTTON ================= */
 .speech-btn {
   position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background: #38bdf8;
-  padding: 12px 15px;
-  border-radius: 50px;
-  cursor: pointer;
-  font-weight: bold;
+  bottom: 25px;
+  right: 25px;
+  z-index: 2000;
 }
 </style>
 </head>
-
 <body>
 
-<!-- ================= NAVBAR ================= -->
 <nav>
   <div class="logo">Oboye Autoshop</div>
-
   <div class="nav-links">
-    <a href="#home">Home</a>
     <a href="#services">Services</a>
-    <a href="#gallery">Gallery</a>
-    <a href="#clients">Clients</a>
     <a href="#book">Book</a>
     <a href="#contact">Contact</a>
   </div>
 </nav>
 
-<!-- ================= HERO ================= -->
 <section id="home" class="hero">
-  <h1>Oboye Autoshop</h1>
-  <p>Certified Mechanics • Engine Experts • 4x4 Specialists • Mobile Repairs</p>
+  <h1 class="reveal">Next-Gen Auto Care</h1>
+  <p class="reveal">Premium Diagnostics & Repair in Accra</p>
 </section>
 
-<!-- ================= SERVICES ================= -->
-<section id="services">
-  <h2>Our Professional Services</h2>
-
+<section id="services" class="reveal">
+  <h2 style="text-align: center; margin-bottom: 40px;">Specialized Services</h2>
   <div class="cards">
-    <div class="card">Full Engine Diagnostics & Repair</div>
-    <div class="card">4x4 Suspension & Off-road Tuning</div>
-    <div class="card">Pickup Truck Maintenance</div>
-    <div class="card">Electrical System Repair</div>
-    <div class="card">Computerized Vehicle Scanning</div>
-    <div class="card">Mobile Roadside Assistance</div>
+    <div class="card"><h3>Engine Rebuilds</h3><p>Complete overhauls with precision tools.</p></div>
+    <div class="card"><h3>4x4 Tuning</h3><p>Suspension and off-road optimization.</p></div>
+    <div class="card"><h3>Mobile Scanning</h3><p>We come to you with advanced diagnostics.</p></div>
   </div>
 </section>
 
-<!-- ================= GALLERY ================= -->
-<section id="gallery">
-  <h2>Workshop Gallery</h2>
-
-  <div class="gallery">
-    <img class="slide" src="https://images.unsplash.com/photo-1619642751034-765dfdf7c58e">
-    <img class="slide" src="https://images.unsplash.com/photo-1619642751034-765dfdf7c58e">
-    <img class="slide" src="https://images.unsplash.com/photo-1616422285623-13ff0162193c">
-    <img class="slide" src="https://images.unsplash.com/photo-1616422285623-13ff0162193c">
-  </div>
-
-  <div class="gallery-controls">
-    <button onclick="prevSlide()">⬅ Prev</button>
-    <button onclick="nextSlide()">Next ➡</button>
-  </div>
-</section>
-
-<!-- ================= CLIENTS ================= -->
-<section id="clients">
-  <h2>Customer Reviews</h2>
-
-  <div class="cards">
-    <div class="client">Kofi Mensah — “Very professional engine repair service.”</div>
-    <div class="client">Ama Serwaa — “My Toyota 4x4 feels brand new.”</div>
-    <div class="client">John Doe — “Fast mobile repair saved my trip.”</div>
-  </div>
-</section>
-
-<!-- ================= BOOKING ================= -->
-<section id="book">
-  <h2>Book a Service</h2>
-
+<section id="book" class="reveal" style="max-width: 600px; margin: auto; text-align: center;">
+  <h2>Reserve Your Slot</h2>
   <form onsubmit="book(event)">
-    <input type="text" placeholder="Full Name" required><br>
-    <input type="tel" placeholder="Phone Number" required><br>
-    <textarea placeholder="Describe your vehicle problem..." required></textarea><br>
-    <button>Submit Request</button>
+    <input type="text" placeholder="Name" style="width:100%; padding:12px; margin:10px 0; background:#1e293b; border:1px solid #334155; color:white; border-radius:8px;">
+    <button type="submit">Send Request</button>
   </form>
 </section>
 
-<!-- ================= CONTACT ================= -->
-<section id="contact">
-  <h2>Contact Oboye Autoshop</h2>
-  <p>📞 +233546330886</p>
-  <p>📍 Accra, Ghana</p>
-  <p>📧 oboyeautoshop@email.com</p>
-</section>
-
-<!-- ================= VOICE ================= -->
-<div class="speech-btn" onclick="toggleSpeech()">🔊 Read</div>
+<div class="speech-btn" onclick="toggleSpeech()">
+  <button id="voice-txt">🔊 Read Page</button>
+</div>
 
 <script>
-
-/* ================= MANUAL GALLERY CONTROL ================= */
-let index = 0;
-const slides = document.getElementsByClassName("slide");
-
-function showSlide(i) {
-  for (let s of slides) s.style.display = "none";
-  slides[i].style.display = "block";
-}
-
-function nextSlide() {
-  index++;
-  if (index >= slides.length) index = 0;
-  showSlide(index);
-}
-
-function prevSlide() {
-  index--;
-  if (index < 0) index = slides.length - 1;
-  showSlide(index);
-}
-
-// start first image
-showSlide(index);
-
-/* ================= AUTO READER ================= */
-let speaking = false;
-
-function readSite() {
-  speechSynthesis.cancel();
-
-  let text = "";
-  document.querySelectorAll("section").forEach(sec => {
-    text += sec.innerText + ". ";
+/* SCROLL REVEAL LOGIC */
+const reveal = () => {
+  const reveals = document.querySelectorAll(".reveal");
+  reveals.forEach(el => {
+    let windowHeight = window.innerHeight;
+    let revealTop = el.getBoundingClientRect().top;
+    if (revealTop < windowHeight - 100) {
+      el.classList.add("active");
+    }
   });
+};
 
-  let msg = new SpeechSynthesisUtterance(text);
-  msg.rate = 1;
-  msg.pitch = 1;
+window.addEventListener("scroll", reveal);
+window.onload = reveal;
 
-  speechSynthesis.speak(msg);
-}
-
+/* VOICE LOGIC */
+let speaking = false;
 function toggleSpeech() {
-  speaking = !speaking;
-  if (speaking) readSite();
-  else speechSynthesis.cancel();
+  const btn = document.getElementById("voice-txt");
+  if (!speaking) {
+    let text = document.body.innerText;
+    let msg = new SpeechSynthesisUtterance(text);
+    msg.onend = () => { speaking = false; btn.innerText = "🔊 Read Page"; };
+    speechSynthesis.speak(msg);
+    btn.innerText = "🚫 Stop";
+    speaking = true;
+  } else {
+    speechSynthesis.cancel();
+    btn.innerText = "🔊 Read Page";
+    speaking = false;
+  }
 }
 
-/* ================= BOOKING ================= */
 function book(e) {
   e.preventDefault();
-  alert("Request sent to Oboye Autoshop. We will contact you soon!");
+  alert("Booking received!");
 }
-
 </script>
 
 </body>
