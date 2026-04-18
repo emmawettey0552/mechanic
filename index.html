@@ -1,236 +1,186 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Oboye Autoshop</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Oboye Autoshop</title><style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial, sans-serif;}
+body{background:#0b0f1a;color:#fff;overflow-x:hidden;}
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-
-<style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial;}
-
-body{
-  background:#0b1220;
-  color:white;
-  overflow-x:hidden;
+/* PRELOADER */
+#preloader{
+position:fixed;
+width:100%;height:100%;
+background:#0b0f1a;
+display:flex;
+justify-content:center;
+align-items:center;
+z-index:9999;
+flex-direction:column;
 }
-
-/* ================= 3D BACKGROUND ================= */
-#hero3d{
-  position:absolute;
-  top:0;
-  left:0;
-  width:100%;
-  height:100vh;
-  z-index:-1;
+.loader{
+width:60px;height:60px;
+border:6px solid #333;
+border-top:6px solid #00ffcc;
+border-radius:50%;
+animation:spin 1s linear infinite;
 }
+@keyframes spin{100%{transform:rotate(360deg);}}
+
+/* HEADER */
+header{
+padding:20px;
+background:#11182b;
+display:flex;
+justify-content:space-between;
+align-items:center;
+position:sticky;
+top:0;
+z-index:1000;
+}
+nav a{
+margin:0 10px;
+color:#fff;
+text-decoration:none;
+}
+nav a:hover{color:#00ffcc;}
 
 /* HERO */
 .hero{
-  position:relative;
-  height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  flex-direction:column;
-  text-align:center;
-  background:rgba(0,0,0,0.4);
-  backdrop-filter:blur(2px);
+height:90vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+background:linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1503376780353-7e6692767b70') center/cover;
+animation:fadeIn 2s ease;
 }
+.hero h1{font-size:50px;}
+.hero p{margin-top:10px;font-size:18px;color:#ccc;}
 
-.hero h1{
-  font-size:42px;
-  animation:float 3s infinite ease-in-out;
-}
+@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
 
-.hero p{opacity:0.8;margin-top:10px;}
-
-@keyframes float{
-  0%,100%{transform:translateY(0);}
-  50%{transform:translateY(-10px);}
-}
-
-/* NAV */
-nav{
-  position:fixed;
-  top:0;
-  width:100%;
-  z-index:1000;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:15px;
-  background:rgba(0,0,0,0.6);
-  backdrop-filter:blur(10px);
-}
-
-.logo{color:#38bdf8;font-weight:bold;}
-
-.nav-links{
-  display:flex;
-  gap:15px;
-}
-
-.nav-links a{
-  color:white;
-  text-decoration:none;
-}
-
-.menu{display:none;cursor:pointer;}
-
-@media(max-width:768px){
-  .menu{display:block;}
-  .nav-links{
-    display:none;
-    position:absolute;
-    top:60px;
-    right:0;
-    flex-direction:column;
-    background:#111827;
-    padding:10px;
-  }
-  .nav-links.show{display:flex;}
+button{
+padding:10px 15px;
+margin-top:15px;
+border:none;
+cursor:pointer;
+background:#00ffcc;
+color:#000;
+border-radius:5px;
 }
 
 /* SECTIONS */
-section{
-  padding:70px 20px;
-  text-align:center;
-}
-
-/* CARDS */
+.section{padding:50px;text-align:center;}
 .cards{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:15px;
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:20px;
 }
-
 .card{
-  background:#1f2937;
-  padding:20px;
-  border-radius:12px;
-  transition:.3s;
+background:#11182b;
+padding:20px;
+border-radius:10px;
+width:250px;
+transition:0.3s;
+}
+.card:hover{transform:scale(1.05);}
+
+/* AUTO PANEL */
+.panel{
+background:#11182b;
+padding:20px;
+border-radius:10px;
+margin-top:20px;
 }
 
-.card:hover{
-  transform:scale(1.05);
-  background:#2563eb;
+/* FLOAT BUTTONS */
+.float-btn{
+position:fixed;
+bottom:20px;
+right:20px;
+display:flex;
+flex-direction:column;
+gap:10px;
 }
+.float-btn button{border-radius:50px;}
 
-/* GALLERY */
-.gallery img{
-  width:100%;
-  display:none;
-  border-radius:10px;
-}
-
-button{
-  padding:10px;
-  margin-top:10px;
-  border:none;
-  background:#38bdf8;
-  border-radius:8px;
-}
-
-/* FLOAT */
-.float{
-  position:fixed;
-  right:20px;
-  padding:12px;
-  border-radius:50px;
-  text-decoration:none;
-}
-
-.whatsapp{bottom:80px;background:#25D366;}
-.call{bottom:20px;background:#38bdf8;}
-</style>
-</head>
-
-<body>
-
-<!-- 3D ENGINE BACKGROUND -->
-<div id="hero3d"></div>
-
-<!-- NAV -->
+</style></head>
+<body><!-- PRELOADER --><div id="preloader">
+<div class="loader"></div>
+<p>Loading Oboye Autoshop...</p>
+</div><!-- HEADER --><header>
+<h2>Oboye Autoshop</h2>
 <nav>
-  <div class="logo">Oboye Autoshop</div>
-  <div class="menu" onclick="toggleMenu()">☰</div>
-  <div class="nav-links" id="navLinks">
-    <a href="#home">Home</a>
-    <a href="#about">About</a>
-    <a href="#services">Services</a>
-    <a href="#gallery">Gallery</a>
-    <a href="#contact">Contact</a>
-  </div>
+<a href="#home">Home</a>
+<a href="#about">About</a>
+<a href="#projects">Projects</a>
+<a href="#contact">Contact</a>
 </nav>
+</header><!-- HERO --><section class="hero" id="home">
+<h1>Welcome to Oboye Autoshop</h1>
+<p>Your trusted car repair & diagnostics center</p>
+<button onclick="speakText('Welcome to Oboye Autoshop, your trusted mechanic service center')">🔊 Listen</button>
+</section><!-- ABOUT --><section class="section" id="about">
+<h2>About Us</h2>
+<p>We provide high-quality automobile repair, diagnostics, engine tuning and mechanical services.</p>
+</section><!-- PROJECTS --><section class="section" id="projects">
+<h2>Our Projects</h2>
+<div class="cards">
+<div class="card">Engine Repair</div>
+<div class="card">Car Diagnostics</div>
+<div class="card">Oil Change Service</div>
+<div class="card">Electrical Fixing</div>
+</div>
+</section><!-- PANEL --><section class="section">
+<h2>Project Panel</h2>
+<div class="panel" id="panelText">
+We recently completed a full engine overhaul for Toyota Corolla and BMW diagnostics upgrade.
+</div>
+</section><!-- CONTACT --><section class="section" id="contact">
+<h2>Contact Us</h2>
+<p>Call or WhatsApp: +233 000 000 000</p>
+</section><!-- FLOAT BUTTONS --><div class="float-btn">
+<button onclick="toggleSound()">🔔 Sound</button>
+<button onclick="readPage()">🔊 Read</button>
+</div><script>
+// PRELOADER
+window.addEventListener("load",()=>{
+document.getElementById("preloader").style.display="none";
+});
 
-<!-- HERO -->
-<section class="hero" id="home">
-  <h1>Oboye Autoshop</h1>
-  <p>Advanced Mechanical Engineering & Auto Care</p>
-</section>
-
-<!-- ABOUT -->
-<section id="about">
-  <h2>About Us</h2>
-  <p>
-    Oboye Autoshop represents modern automotive engineering inspired by the evolution of combustion engines,
-    gearbox systems, and digital vehicle diagnostics used in today’s automotive industry.
-  </p>
-</section>
-
-<!-- SERVICES -->
-<section id="services">
-  <h2>Services</h2>
-  <div class="cards">
-    <div class="card">Engine Diagnostics</div>
-    <div class="card">Gear System Repair</div>
-    <div class="card">Electrical Fixing</div>
-    <div class="card">Full Servicing</div>
-  </div>
-</section>
-
-<!-- GALLERY -->
-<section id="gallery">
-  <h2>Gallery</h2>
-  <img class="slide" src="https://images.unsplash.com/photo-1619642751034-765dfdf7c58e">
-  <img class="slide" src="https://images.unsplash.com/photo-1616422285623-13ff0162193c">
-  <button onclick="prev()">Prev</button>
-  <button onclick="next()">Next</button>
-</section>
-
-<!-- CONTACT -->
-<section id="contact">
-  <h2>Contact</h2>
-  <p>📍 Accra, Ghana</p>
-</section>
-
-<a href="https://wa.me/233XXXXXXXXX" class="float whatsapp">WhatsApp</a>
-<a href="tel:+233XXXXXXXXX" class="float call">Call</a>
-
-<script>
-
-/* NAV */
-function toggleMenu(){
-  document.getElementById("navLinks").classList.toggle("show");
+// TEXT TO SPEECH
+function speakText(text){
+let speech=new SpeechSynthesisUtterance(text);
+speech.rate=1;
+speech.pitch=1;
+window.speechSynthesis.speak(speech);
 }
 
-/* GALLERY */
-let i=0;
-const slides=document.getElementsByClassName("slide");
-
-function show(n){
-  for(let s of slides)s.style.display="none";
-  slides[n].style.display="block";
+function readPage(){
+let text=document.body.innerText;
+speakText(text);
 }
-function next(){i=(i+1)%slides.length;show(i);}
-function prev(){i=(i-1+slides.length)%slides.length;show(i);}
-show(i);
 
-/* ================= 3D ENGINE SCENE ================= */
-const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(75,window.innerWidth/window.innerHeight,0.1,1000);
-
-const renderer = new THREE.WebGLRenderer({alpha:true});
-renderer.setSize(window.innerWidth,window
+// AUTO SOUND (simple beep)
+let audioEnabled=false;
+let ctx;
+function toggleSound(){
+audioEnabled=!audioEnabled;
+if(audioEnabled){
+ctx=new (window.AudioContext||window.webkitAudioContext)();
+beep();
+}
+}
+function beep(){
+if(!audioEnabled)return;
+let osc=ctx.createOscillator();
+osc.frequency.value=200;
+osc.connect(ctx.destination);
+osc.start();
+setTimeout(()=>osc.stop(),200);
+setTimeout(beep,5000);
+}
+</script></body>
+</html>
