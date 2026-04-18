@@ -122,9 +122,9 @@ iframe {width:100%;height:300px;border:none;}
 <!-- WHY -->
 <section id="why">
   <h2>Why Choose Us</h2>
-  <p>✔ Experienced Mechanics</p>
-  <p>✔ Fast Service</p>
-  <p>✔ Affordable Prices</p>
+  <p>Experienced Mechanics</p>
+  <p>Fast Service</p>
+  <p>Affordable Prices</p>
 </section>
 
 <!-- CONTACT -->
@@ -211,6 +211,23 @@ async function sendMessage(){
   let reply=await getAIReply(msg);
   addMessage(reply,"bot");
 }
+  async function getAIReply(message) {
+  try {
+    const res = await fetch("/api/chat", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ message })
+    });
+
+    const data = await res.json();
+    return data.choices[0].message.content;
+
+  } catch (error) {
+    return "AI server not responding. Please try again.";
+  }
+  }
 
 function addMessage(text,type){
   let div=document.createElement("div");
@@ -219,28 +236,6 @@ function addMessage(text,type){
   document.getElementById("chatMessages").appendChild(div);
 }
 
-async function getAIReply(message){
-  try{
-    const res=await fetch("https://api.openai.com/v1/chat/completions",{
-      method:"POST",
-      headers:{
-        "Content-Type":"application/json",
-        "Authorization":"Bearer "+API_KEY
-      },
-      body:JSON.stringify({
-        model:"gpt-4o-mini",
-        messages:[
-          {role:"system",content:"You are a professional mechanic in Ghana."},
-          {role:"user",content:message}
-        ]
-      })
-    });
-    const data=await res.json();
-    return data.choices[0].message.content;
-  }catch{
-    return "Error connecting to AI.";
-  }
-}
 
 </script>
 
