@@ -82,51 +82,34 @@ animation:slideUp 2s ease;
 
 .section{padding:40px;text-align:center;}
 
-.cards{
-display:flex;
-flex-wrap:wrap;
-justify-content:center;
-gap:20px;
-}
-.card{
-background:#11182b;
-padding:20px;
-border-radius:10px;
-width:250px;
-transition:0.3s;
-}
+.cards{display:flex;flex-wrap:wrap;justify-content:center;gap:20px;}
+.card{background:#11182b;padding:20px;border-radius:10px;width:250px;transition:0.3s;}
 .card:hover{transform:scale(1.05);}
 
-.panel{
-background:#11182b;
-padding:20px;
-border-radius:10px;
-margin-top:15px;
-min-height:80px;
-}
+.panel{background:#11182b;padding:20px;border-radius:10px;margin-top:15px;min-height:80px;}
 
-/* SLIDER */
-.project-slider{
-position:relative;
-max-width:500px;
-margin:auto;
-overflow:hidden;
-border-radius:10px;
-}
-.project-slider img{
-width:100%;
-display:none;
-}
-.project-slider img.active{
-display:block;
-animation:fade 1s ease;
-}
+.project-slider{position:relative;max-width:500px;margin:auto;overflow:hidden;border-radius:10px;}
+.project-slider img{width:100%;display:none;}
+.project-slider img.active{display:block;animation:fade 1s ease;}
 @keyframes fade{from{opacity:0;}to{opacity:1;}}
 
-/* TYPING */
-.typing{
-border-right:2px solid #00ffcc;
-white-space:normal;
+.typing{border-right:2px solid #00ffcc;white-space:normal;}
+
+/* ⭐ STAR EFFECT */
+.star{
+position:fixed;
+top:-10px;
+width:6px;
+height:6px;
+background:white;
+border-radius:50%;
+opacity:0.8;
+animation:fall linear forwards;
+z-index:9998;
+}
+@keyframes fall{
+0%{transform:translateY(0) translateX(0);opacity:1;}
+100%{transform:translateY(110vh) translateX(40px);opacity:0;}
 }
 
 </style></head>
@@ -134,6 +117,8 @@ white-space:normal;
 <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_8c8b1b1e5b.mp3?filename=car-engine-start-11366.mp3" type="audio/mpeg">
 </audio><audio id="welcomeMusic" loop>
 <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+</audio><!-- LAUNCH MUSIC --><audio id="launchMusic">
+<source src="https://cdn.pixabay.com/download/audio/2022/03/16/audio_3b1c6f1b2d.mp3?filename=corporate-inspire-11018.mp3" type="audio/mpeg">
 </audio><div id="preloader">
 <div class="loader"></div>
 <p>Loading Oboye Autoshop...</p>
@@ -158,17 +143,36 @@ white-space:normal;
 <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70" class="active">
 <img src="https://images.unsplash.com/photo-1487754180451-c456f719a1fc">
 </div><div class="panel">
-<p id="typingText" class="typing"></p>
+<p id="typingText"></p>
 </div></section><section class="section" id="contact">
 <h2>Contact Us</h2>
 <p>Call or WhatsApp: +233 546 330 886</p>
 </section><script>
 window.addEventListener("load",()=>{
+
 document.getElementById("preloader").style.display="none";
 
 let engine=document.getElementById("engineStart");
 engine.volume=0.7;
 engine.play().catch(()=>{});
+
+// LAUNCH MUSIC (FIXED AUTO + USER GESTURE)
+let launch=document.getElementById("launchMusic");
+launch.volume=0.6;
+launch.play().catch(()=>{
+window.addEventListener("click",()=>launch.play(),{once:true});
+});
+
+// ⭐ STAR FALL
+for(let i=0;i<50;i++){
+let star=document.createElement("div");
+star.classList.add("star");
+star.style.left=Math.random()*100+"vw";
+star.style.animationDuration=(Math.random()*3+2)+"s";
+document.body.appendChild(star);
+setTimeout(()=>star.remove(),6000);
+}
+
 });
 
 let music=document.getElementById("welcomeMusic");
@@ -177,18 +181,15 @@ function toggleMusic(){
 if(!musicOn){music.play();musicOn=true;}else{music.pause();musicOn=false;}
 }
 
-// TYPING EFFECT
 const text="We recently completed engine overhaul for Toyota Corolla, BMW diagnostics upgrade and ECU tuning systems.";
 let i=0;
 function typeWriter(){
 if(i<text.length){
 document.getElementById("typingText").innerHTML += text.charAt(i);
-i++;
-setTimeout(typeWriter,40);
+i++;setTimeout(typeWriter,40);
 }
 }
 
-// SLIDER
 let index=0;
 function slider(){
 let imgs=document.querySelectorAll(".project-slider img");
