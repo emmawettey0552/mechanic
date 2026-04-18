@@ -4,7 +4,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Oboye Autoshop</title><style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial, sans-serif;}
-body{background:#0b0f1a;color:#fff;overflow-x:hidden;}
+body{background:#0b0f1a;color:#fff;overflow-x:hidden;max-width:100vw;}
 
 #preloader{
 position:fixed;
@@ -26,21 +26,39 @@ animation:spin 1s linear infinite;
 @keyframes spin{100%{transform:rotate(360deg);}}
 
 header{
-padding:20px;
+padding:15px;
 background:#11182b;
 display:flex;
 justify-content:space-between;
 align-items:center;
+flex-wrap:wrap;
 position:sticky;
 top:0;
 z-index:1000;
 }
+
+nav{
+display:flex;
+flex-wrap:wrap;
+align-items:center;
+gap:10px;
+}
+
 nav a{
-margin:0 10px;
 color:#fff;
 text-decoration:none;
+padding:6px 8px;
 }
 nav a:hover{color:#00ffcc;}
+
+nav button{
+background:#00ffcc;
+border:none;
+padding:6px 10px;
+border-radius:5px;
+cursor:pointer;
+font-size:12px;
+}
 
 .hero{
 height:90vh;
@@ -50,24 +68,24 @@ justify-content:center;
 align-items:center;
 text-align:center;
 background:linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1503376780353-7e6692767b70') center/cover;
-animation:fadeIn 2s ease;
 }
-.hero h1{font-size:50px;}
-.hero p{margin-top:10px;font-size:18px;color:#ccc;}
+
+.hero h1{
+font-size:45px;
+animation:slideUp 2s ease;
+}
+
+.hero p{margin-top:10px;font-size:18px;color:#ccc;animation:fadeIn 3s ease;}
 
 @keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+@keyframes slideUp{from{transform:translateY(40px);opacity:0;}to{transform:translateY(0);opacity:1;}}
 
 button{
-padding:10px 15px;
-margin-top:15px;
-border:none;
 cursor:pointer;
-background:#00ffcc;
-color:#000;
-border-radius:5px;
 }
 
-.section{padding:50px;text-align:center;}
+.section{padding:40px;text-align:center;}
+
 .cards{
 display:flex;
 flex-wrap:wrap;
@@ -90,22 +108,12 @@ border-radius:10px;
 margin-top:20px;
 }
 
-.float-btn{
-position:fixed;
-bottom:20px;
-right:20px;
-display:flex;
-flex-direction:column;
-gap:10px;
-}
-.float-btn button{border-radius:50px;}
-
 </style></head>
-<body><!-- ENGINE START SOUND --><audio id="engineStart">
+<body><audio id="engineStart">
 <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_8c8b1b1e5b.mp3?filename=car-engine-start-11366.mp3" type="audio/mpeg">
-</audio><!-- BACKGROUND MUSIC --><audio id="welcomeMusic" loop>
+</audio><audio id="welcomeMusic" loop>
 <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-</audio><!-- PRELOADER --><div id="preloader">
+</audio><div id="preloader">
 <div class="loader"></div>
 <p>Loading Oboye Autoshop...</p>
 </div><header>
@@ -114,12 +122,12 @@ gap:10px;
 <a href="#home">Home</a>
 <a href="#about">About</a>
 <a href="#projects">Projects</a>
-<a href="#contact">Contact</a>
+<a href="#contact">Contact</a><button onclick="toggleMusic()">🔊 Music</button> <button onclick="readPage()">🔊 Read</button>
+
 </nav>
 </header><section class="hero" id="home">
 <h1>Welcome to Oboye Autoshop</h1>
 <p>Your trusted car repair & diagnostics center</p>
-<button onclick="speakText('Welcome to Oboye Autoshop, your trusted mechanic service center')">🔊 Listen</button>
 </section><section class="section" id="about">
 <h2>About Us</h2>
 <p>We provide high-quality automobile repair, diagnostics, engine tuning and mechanical services.</p>
@@ -131,45 +139,40 @@ gap:10px;
 <div class="card">Oil Change Service</div>
 <div class="card">Electrical Fixing</div>
 </div>
-</section><section class="section">
-<h2>Project Panel</h2>
-<div class="panel">
-We recently completed a full engine overhaul for Toyota Corolla and BMW diagnostics upgrade.
-</div>
 </section><section class="section" id="contact">
 <h2>Contact Us</h2>
-<p>Call or WhatsApp: +233 546 330 886</p>
-</section><div class="float-btn">
-<button onclick="toggleSound()">🔔 Sound</button>
-<button onclick="readPage()">🔊 Read</button>
-</div><script>
+<p>Call or WhatsApp: +233 000 000 000</p>
+</section><script>
 window.addEventListener("load",()=>{
 document.getElementById("preloader").style.display="none";
 
-// ENGINE START SOUND ON OPEN
 let engine=document.getElementById("engineStart");
 engine.volume=0.7;
 engine.play().catch(()=>{});
-
 });
 
-// MUSIC
 let music=document.getElementById("welcomeMusic");
-let musicStarted=false;
+let musicOn=false;
 
-function startMusic(){
-if(!musicStarted){
+function toggleMusic(){
+if(!musicOn){
 music.volume=0.5;
 music.play().catch(()=>{});
-musicStarted=true;
+musicOn=true;
+}else{
+music.pause();
+musicOn=false;
 }
 }
 
-window.addEventListener("click",startMusic);
-window.addEventListener("scroll",startMusic);
+// TEXT TO SPEECH FIX (numbers + 0 -> zero)
+function formatSpeech(text){
+const map={0:"zero",1:"one",2:"two",3:"three",4:"four",5:"five",6:"six",7:"seven",8:"eight",9:"nine"};
+return text.replace(/\d/g,d=>map[d]);
+}
 
 function speakText(text){
-let speech=new SpeechSynthesisUtterance(text);
+let speech=new SpeechSynthesisUtterance(formatSpeech(text));
 speech.rate=1;
 speech.pitch=1;
 window.speechSynthesis.speak(speech);
@@ -177,26 +180,6 @@ window.speechSynthesis.speak(speech);
 
 function readPage(){
 speakText(document.body.innerText);
-}
-
-let audioEnabled=false;
-let ctx;
-function toggleSound(){
-audioEnabled=!audioEnabled;
-if(audioEnabled){
-ctx=new (window.AudioContext||window.webkitAudioContext)();
-beep();
-}
-}
-
-function beep(){
-if(!audioEnabled)return;
-let osc=ctx.createOscillator();
-osc.frequency.value=220;
-osc.connect(ctx.destination);
-osc.start();
-setTimeout(()=>osc.stop(),200);
-setTimeout(beep,6000);
 }
 </script></body>
   </html>
