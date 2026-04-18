@@ -6,104 +6,230 @@
 <title>Oboye Autoshop</title>
 
 <style>
-body {margin:0;font-family:Arial;background:#0b1220;color:white;}
 
-/* NAVBAR */
-nav {
-  display:flex;justify-content:space-between;align-items:center;
-  background:#020617;padding:12px 18px;position:sticky;top:0;z-index:1000;
-}
-.logo {color:#38bdf8;font-weight:bold;}
-.nav-links {display:flex;gap:10px;}
-.nav-links a {color:white;text-decoration:none;position:relative;}
-.nav-links a::after {
-  content:"";position:absolute;width:0;height:2px;background:#38bdf8;bottom:0;left:0;transition:.3s;
-}
-.nav-links a:hover::after {width:100%;}
-.menu-btn {display:none;}
+/* RESET */
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial;}
 
-@media(max-width:768px){
-  .nav-links {display:none;flex-direction:column;position:absolute;top:50px;right:0;background:#020617;}
-  .nav-links.show {display:flex;}
-  .menu-btn {display:block;}
+/* BODY */
+body{
+  background:linear-gradient(135deg,#0f172a,#1e1b4b,#0b1220);
+  color:white;
+  overflow-x:hidden;
 }
 
-/* SECTIONS */
-section {padding:60px 20px;text-align:center;opacity:0;transform:translateY(40px);transition:.8s;}
-section.show {opacity:1;transform:translateY(0);}
+/* ================= PRELOADER ================= */
+#preloader{
+  position:fixed;
+  top:0;left:0;
+  width:100%;height:100%;
+  background:linear-gradient(135deg,#0f172a,#1e40af,#7c3aed);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  z-index:9999;
+  animation:fadeOut 1s ease 3s forwards;
+}
 
-.hero {padding:80px;background:linear-gradient(#020617,#0f172a);}
+.loader-text{
+  font-size:28px;
+  font-weight:bold;
+  letter-spacing:2px;
+  animation:floatText 1.5s infinite ease-in-out;
+}
 
-/* CARDS */
-.cards {display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:15px;}
-.card {background:#1e293b;padding:20px;border-radius:10px;}
-.card:hover {transform:translateY(-8px);}
+@keyframes floatText{
+  0%{transform:translateY(0);opacity:0.6}
+  50%{transform:translateY(-10px);opacity:1}
+  100%{transform:translateY(0);opacity:0.6}
+}
 
-/* GALLERY */
-.gallery img {width:100%;display:none;border-radius:10px;}
+@keyframes fadeOut{
+  to{opacity:0;visibility:hidden;}
+}
+
+/* ================= NAVBAR ================= */
+nav{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:15px 20px;
+  position:sticky;
+  top:0;
+  z-index:1000;
+  background:rgba(0,0,0,0.4);
+  backdrop-filter:blur(10px);
+}
+
+.logo{
+  font-size:20px;
+  font-weight:bold;
+  color:#38bdf8;
+  animation:slideIn 1s ease;
+}
+
+.nav-links{
+  display:flex;
+  gap:15px;
+}
+
+.nav-links a{
+  color:white;
+  text-decoration:none;
+  position:relative;
+}
+
+.nav-links a::after{
+  content:"";
+  position:absolute;
+  width:0;
+  height:2px;
+  background:#38bdf8;
+  bottom:-3px;
+  left:0;
+  transition:.3s;
+}
+
+.nav-links a:hover::after{width:100%;}
+
+/* ================= HERO ================= */
+.hero{
+  height:90vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  text-align:center;
+  background:radial-gradient(circle,#1e3a8a,#0f172a);
+  animation:fadeUp 1s ease;
+}
+
+.hero h1{
+  font-size:40px;
+  animation:floatText 3s infinite;
+}
+
+.hero p{opacity:0.8;margin-top:10px;}
+
+/* ================= SECTIONS ================= */
+section{
+  padding:70px 20px;
+  text-align:center;
+  opacity:0;
+  transform:translateY(50px);
+  transition:1s;
+}
+
+section.show{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* ================= CARDS ================= */
+.cards{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:15px;
+  margin-top:20px;
+}
+
+.card{
+  background:linear-gradient(135deg,#1e293b,#334155);
+  padding:20px;
+  border-radius:15px;
+  transition:.4s;
+}
+
+.card:hover{
+  transform:translateY(-10px) scale(1.03);
+  background:linear-gradient(135deg,#2563eb,#7c3aed);
+}
+
+/* ================= GALLERY ================= */
+.gallery img{
+  width:100%;
+  border-radius:12px;
+  display:none;
+}
 
 /* BUTTONS */
-button {padding:10px;background:#38bdf8;border:none;border-radius:6px;cursor:pointer;}
+button{
+  padding:10px 15px;
+  border:none;
+  border-radius:8px;
+  background:linear-gradient(135deg,#38bdf8,#6366f1);
+  color:white;
+  cursor:pointer;
+  margin-top:10px;
+}
 
 /* FLOAT BUTTONS */
-.float {position:fixed;right:20px;padding:12px;border-radius:50px;color:black;}
-.whatsapp {bottom:80px;background:#25D366;}
-.call {bottom:20px;background:#38bdf8;}
-.speech {bottom:140px;background:#facc15;}
-
-/* CHAT */
-#chatBtn {position:fixed;bottom:20px;left:20px;background:#38bdf8;padding:12px;border-radius:50%;cursor:pointer;}
-#chatBox {
-  position:fixed;bottom:80px;left:20px;width:320px;background:#1e293b;border-radius:10px;
-  display:none;flex-direction:column;
+.float{
+  position:fixed;
+  right:20px;
+  padding:12px;
+  border-radius:50px;
+  color:white;
+  text-decoration:none;
 }
-#chatHeader {background:#38bdf8;padding:10px;font-weight:bold;}
-#chatMessages {height:250px;overflow-y:auto;padding:10px;}
-#chatInputArea {display:flex;}
-#chatInput {flex:1;padding:8px;border:none;}
-.msg-user{text-align:right;margin:5px;}
-.msg-bot{text-align:left;margin:5px;}
 
-iframe {width:100%;height:300px;border:none;}
+.whatsapp{bottom:80px;background:#25D366;}
+.call{bottom:20px;background:#38bdf8;}
+.speech{bottom:140px;background:#facc15;color:black;cursor:pointer;}
+
+/* ANIMATIONS */
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(40px);}
+  to{opacity:1;transform:translateY(0);}
+}
+
+@keyframes slideIn{
+  from{transform:translateX(-30px);opacity:0;}
+  to{transform:translateX(0);opacity:1;}
+}
+
 </style>
 </head>
 
 <body>
 
-<!-- NAVBAR -->
+<!-- PRELOADER -->
+<div id="preloader">
+  <div class="loader-text">🚗 Oboye Autoshop</div>
+</div>
+
+<!-- NAV -->
 <nav>
   <div class="logo">Oboye Autoshop</div>
-  <div class="menu-btn" onclick="toggleMenu()">☰</div>
-  <div class="nav-links" id="navLinks">
+  <div class="nav-links">
     <a href="#home">Home</a>
     <a href="#about">About</a>
     <a href="#services">Services</a>
     <a href="#gallery">Gallery</a>
-    <a href="#why">Why Us</a>
     <a href="#contact">Contact</a>
   </div>
 </nav>
 
 <!-- HERO -->
-<section id="home" class="hero">
+<section id="home" class="hero show">
   <h1>Reliable Auto Repairs You Can Trust</h1>
-  <p>Experts in 4x4, Pickup & Engine Diagnostics</p>
+  <p>Modern 4x4 • Diagnostics • Engine Care</p>
 </section>
 
 <!-- ABOUT -->
 <section id="about">
   <h2>About Us</h2>
-  <p>Oboye Autoshop is a trusted mechanic workshop in Accra providing reliable repairs using modern tools and experienced technicians.</p>
+  <p>We are a modern auto repair workshop delivering fast, reliable, and affordable services in Accra.</p>
 </section>
 
 <!-- SERVICES -->
 <section id="services">
   <h2>Our Services</h2>
   <div class="cards">
-    <div class="card">Engine Diagnostics – detect faults quickly</div>
-    <div class="card">4x4 Upgrade – suspension tuning</div>
-    <div class="card">Electrical Repairs – fix wiring issues</div>
-    <div class="card">Maintenance – oil & servicing</div>
+    <div class="card">Engine Diagnostics</div>
+    <div class="card">4x4 Suspension Upgrade</div>
+    <div class="card">Electrical Repairs</div>
+    <div class="card">Full Vehicle Service</div>
   </div>
 </section>
 
@@ -119,48 +245,29 @@ iframe {width:100%;height:300px;border:none;}
   <button onclick="nextSlide()">Next</button>
 </section>
 
-<!-- WHY -->
-<section id="why">
-  <h2>Why Choose Us</h2>
-  <p>Experienced Mechanics</p>
-  <p>Fast Service</p>
-  <p>Affordable Prices</p>
-</section>
-
 <!-- CONTACT -->
 <section id="contact">
   <h2>Contact</h2>
   <p>📞 +233 XXX XXX XXX</p>
   <p>📍 Accra, Ghana</p>
-  <iframe src="https://maps.google.com/maps?q=accra&t=&z=13&ie=UTF8&iwloc=&output=embed"></iframe>
 </section>
 
-<!-- FLOAT BUTTONS -->
+<!-- FLOAT -->
 <a href="https://wa.me/233XXXXXXXXX" class="float whatsapp">WhatsApp</a>
 <a href="tel:+233XXXXXXXXX" class="float call">Call</a>
 <div class="float speech" onclick="toggleSpeech()">🔊</div>
 
-<!-- CHATBOT -->
-<div id="chatBtn" onclick="toggleChat()">🤖</div>
-
-<div id="chatBox">
-  <div id="chatHeader">Oboye AI Mechanic</div>
-  <div id="chatMessages"></div>
-  <div id="chatInputArea">
-    <input id="chatInput">
-    <button onclick="sendMessage()">Send</button>
-  </div>
-</div>
-
 <script>
 
-/* NAV */
-function toggleMenu(){
-  document.getElementById("navLinks").classList.toggle("show");
-}
+/* PRELOADER */
+window.addEventListener("load",()=>{
+  setTimeout(()=>{
+    document.getElementById("preloader").style.display="none";
+  },3000);
+});
 
-/* SCROLL */
-document.addEventListener("scroll",()=>{
+/* SCROLL ANIMATION */
+window.addEventListener("scroll",()=>{
   document.querySelectorAll("section").forEach(sec=>{
     if(sec.getBoundingClientRect().top < window.innerHeight-100){
       sec.classList.add("show");
@@ -171,73 +278,44 @@ document.addEventListener("scroll",()=>{
 /* GALLERY */
 let i=0;
 const slides=document.getElementsByClassName("slide");
-function showSlide(n){
+
+function show(n){
   for(let s of slides)s.style.display="none";
   slides[n].style.display="block";
 }
-function nextSlide(){i=(i+1)%slides.length;showSlide(i);}
-function prevSlide(){i=(i-1+slides.length)%slides.length;showSlide(i);}
-showSlide(i);
 
-/* AUTO READER */
+function nextSlide(){
+  i=(i+1)%slides.length;
+  show(i);
+}
+
+function prevSlide(){
+  i=(i-1+slides.length)%slides.length;
+  show(i);
+}
+
+show(i);
+
+/* SPEECH */
 let speaking=false;
+
 function readSections(index=0){
+  if(!speaking) return;
   const secs=document.querySelectorAll("section");
   if(index>=secs.length){speaking=false;return;}
+
   let msg=new SpeechSynthesisUtterance(secs[index].innerText);
   msg.onend=()=>readSections(index+1);
   speechSynthesis.speak(msg);
 }
+
 function toggleSpeech(){
   speaking=!speaking;
   speechSynthesis.cancel();
   if(speaking) readSections();
 }
 
-/* CHAT */
-const API_KEY="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";
-
-function toggleChat(){
-  let box=document.getElementById("chatBox");
-  box.style.display=box.style.display==="flex"?"none":"flex";
-}
-
-async function sendMessage(){
-  let input=document.getElementById("chatInput");
-  let msg=input.value;
-  if(!msg) return;
-  addMessage(msg,"user");
-  input.value="";
-  let reply=await getAIReply(msg);
-  addMessage(reply,"bot");
-}
-  async function getAIReply(message) {
-  try {
-    const res = await fetch("/api/chat", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ message })
-    });
-
-    const data = await res.json();
-    return data.choices[0].message.content;
-
-  } catch (error) {
-    return "AI server not responding. Please try again.";
-  }
-  }
-
-function addMessage(text,type){
-  let div=document.createElement("div");
-  div.className=type==="user"?"msg-user":"msg-bot";
-  div.innerText=text;
-  document.getElementById("chatMessages").appendChild(div);
-}
-
-
 </script>
 
 </body>
-    </html>
+  </html>
