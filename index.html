@@ -3,222 +3,253 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Oboye Autoshop | Modern Mechanics</title>
+<title>Oboye Autoshop</title>
 
 <style>
-:root {
-  --neon-blue: #38bdf8;
-  --dark-bg: #020617;
-  --glass: rgba(30, 41, 59, 0.7);
-}
-
 body {
   margin: 0;
-  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  font-family: Arial, sans-serif;
   background: #0b1220;
   color: white;
-  overflow-x: hidden;
+  scroll-behavior: smooth;
 }
 
-/* ================= MODERN NAVBAR ================= */
+/* NAVBAR */
 nav {
   position: sticky;
   top: 0;
-  z-index: 1000;
-  background: var(--glass);
-  backdrop-filter: blur(15px);
+  background: #020617;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px 20px;
-  border-bottom: 1px solid rgba(255,255,255,0.1);
+  padding: 12px 18px;
+  z-index: 1000;
 }
 
-.logo {
-  color: var(--neon-blue);
-  font-weight: 900;
-  letter-spacing: 1px;
-  text-transform: uppercase;
+.logo { color: #38bdf8; font-weight: bold; }
+
+.nav-links {
+  display: flex;
+  gap: 8px;
 }
 
 .nav-links a {
+  color: white;
   text-decoration: none;
-  color: #94a3b8;
-  padding: 8px 12px;
-  font-size: 13px;
+  padding: 7px 10px;
+  border-radius: 6px;
   transition: 0.3s;
 }
 
 .nav-links a:hover {
-  color: var(--neon-blue);
+  background: #38bdf8;
+  color: black;
 }
 
-/* ================= HERO WITH GLOW ================= */
+/* HERO */
 .hero {
   text-align: center;
-  padding: 100px 20px;
-  background: radial-gradient(circle at center, #1e293b 0%, #020617 100%);
-  border-bottom: 2px solid var(--neon-blue);
+  padding: 80px 20px;
+  background: linear-gradient(to right, #020617, #0f172a);
+  animation: fadeIn 1.2s ease;
 }
 
 .hero h1 {
-  font-size: clamp(32px, 8vw, 54px);
-  margin-bottom: 10px;
-  text-transform: uppercase;
-  text-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
+  font-size: 42px;
+  animation: slideUp 1s ease;
 }
 
-/* ================= ANIMATION CLASSES ================= */
-.reveal {
+/* SECTIONS */
+section {
+  padding: 60px 20px;
+  text-align: center;
   opacity: 0;
   transform: translateY(40px);
-  transition: all 0.9s ease-out;
+  transition: 0.8s;
 }
 
-.reveal.active {
+section.show {
   opacity: 1;
   transform: translateY(0);
 }
 
-/* ================= MODERN CARDS ================= */
+/* CARDS */
 .cards {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 20px;
-  padding: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(240px,1fr));
+  gap: 15px;
 }
 
 .card {
-  background: var(--glass);
-  padding: 30px;
-  border-radius: 15px;
-  border: 1px solid rgba(255,255,255,0.05);
+  background: #1e293b;
+  padding: 20px;
+  border-radius: 10px;
   transition: 0.4s;
-  position: relative;
-  overflow: hidden;
 }
 
 .card:hover {
-  border-color: var(--neon-blue);
   transform: translateY(-10px);
-  box-shadow: 0 10px 30px rgba(56, 189, 248, 0.2);
 }
 
-/* ================= BUTTONS ================= */
-button {
-  background: linear-gradient(135deg, #38bdf8, #0ea5e9);
-  color: #020617;
-  font-weight: bold;
-  padding: 12px 25px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-button:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 20px rgba(56, 189, 248, 0.5);
-}
-
-/* ================= GALLERY ================= */
+/* GALLERY */
 .gallery img {
   width: 100%;
-  height: 300px;
-  object-fit: cover;
-  border-radius: 15px;
+  border-radius: 10px;
   display: none;
-  animation: fadeIn 0.5s;
+  transition: opacity 1s;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+/* BUTTONS */
+button {
+  padding: 10px 20px;
+  background: #38bdf8;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
 }
 
+/* FLOAT BUTTON */
 .speech-btn {
   position: fixed;
-  bottom: 25px;
-  right: 25px;
-  z-index: 2000;
+  bottom: 20px;
+  right: 20px;
+  background: #38bdf8;
+  padding: 12px;
+  border-radius: 50px;
+}
+
+/* ANIMATIONS */
+@keyframes fadeIn {
+  from {opacity:0;}
+  to {opacity:1;}
+}
+
+@keyframes slideUp {
+  from {transform:translateY(50px); opacity:0;}
+  to {transform:translateY(0); opacity:1;}
 }
 </style>
 </head>
+
 <body>
 
 <nav>
   <div class="logo">Oboye Autoshop</div>
   <div class="nav-links">
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
     <a href="#services">Services</a>
-    <a href="#book">Book</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#clients">Clients</a>
     <a href="#contact">Contact</a>
   </div>
 </nav>
 
 <section id="home" class="hero">
-  <h1 class="reveal">Next-Gen Auto Care</h1>
-  <p class="reveal">Premium Diagnostics & Repair in Accra</p>
+  <h1>Oboye Autoshop</h1>
+  <p>Driving Excellence • Precision Repairs • Trusted Mechanics</p>
 </section>
 
-<section id="services" class="reveal">
-  <h2 style="text-align: center; margin-bottom: 40px;">Specialized Services</h2>
+<section id="about">
+  <h2>About Us</h2>
+  <p>
+    Oboye Autoshop is a professional automotive repair center based in Accra, Ghana.
+    We specialize in 4x4 vehicles, pickup trucks, and modern car diagnostics.
+    Our workshop is equipped with advanced tools and experienced technicians
+    dedicated to delivering reliable and efficient services.
+  </p>
+</section>
+
+<section id="services">
+  <h2>Our Services</h2>
   <div class="cards">
-    <div class="card"><h3>Engine Rebuilds</h3><p>Complete overhauls with precision tools.</p></div>
-    <div class="card"><h3>4x4 Tuning</h3><p>Suspension and off-road optimization.</p></div>
-    <div class="card"><h3>Mobile Scanning</h3><p>We come to you with advanced diagnostics.</p></div>
+    <div class="card">Engine Diagnostics & Full Repairs</div>
+    <div class="card">4x4 Suspension & Off-road Upgrades</div>
+    <div class="card">Vehicle Electrical Repairs</div>
+    <div class="card">Routine Maintenance & Servicing</div>
   </div>
 </section>
 
-<section id="book" class="reveal" style="max-width: 600px; margin: auto; text-align: center;">
-  <h2>Reserve Your Slot</h2>
-  <form onsubmit="book(event)">
-    <input type="text" placeholder="Name" style="width:100%; padding:12px; margin:10px 0; background:#1e293b; border:1px solid #334155; color:white; border-radius:8px;">
-    <button type="submit">Send Request</button>
-  </form>
+<section id="gallery">
+  <h2>Workshop Gallery</h2>
+
+  <div class="gallery">
+    <img class="slide" src="https://images.unsplash.com/photo-1619642751034-765dfdf7c58e">
+    <img class="slide" src="https://images.unsplash.com/photo-1616422285623-13ff0162193c">
+    <img class="slide" src="https://images.unsplash.com/photo-1600703065013-0a0c6a5b6a4d">
+  </div>
+
+  <button onclick="prevSlide()">Prev</button>
+  <button onclick="nextSlide()">Next</button>
 </section>
 
-<div class="speech-btn" onclick="toggleSpeech()">
-  <button id="voice-txt">🔊 Read Page</button>
-</div>
+<section id="clients">
+  <h2>Client Testimonials</h2>
+  <p>“Reliable and trustworthy service!” — Kofi</p>
+  <p>“My car runs like new again.” — Ama</p>
+</section>
+
+<section id="contact">
+  <h2>Contact</h2>
+  <p>📞 +233 XXX XXX XXX</p>
+  <p>📍 Accra, Ghana</p>
+</section>
+
+<div class="speech-btn" onclick="toggleSpeech()">🔊</div>
 
 <script>
-/* SCROLL REVEAL LOGIC */
-const reveal = () => {
-  const reveals = document.querySelectorAll(".reveal");
-  reveals.forEach(el => {
-    let windowHeight = window.innerHeight;
-    let revealTop = el.getBoundingClientRect().top;
-    if (revealTop < windowHeight - 100) {
-      el.classList.add("active");
+
+/* SCROLL ANIMATION */
+const sections = document.querySelectorAll("section");
+window.addEventListener("scroll", () => {
+  sections.forEach(sec => {
+    const top = sec.getBoundingClientRect().top;
+    if (top < window.innerHeight - 100) {
+      sec.classList.add("show");
     }
   });
-};
+});
 
-window.addEventListener("scroll", reveal);
-window.onload = reveal;
+/* GALLERY */
+let i = 0;
+const slides = document.getElementsByClassName("slide");
 
-/* VOICE LOGIC */
+function showSlide(n) {
+  for (let s of slides) s.style.display = "none";
+  slides[n].style.display = "block";
+}
+
+function nextSlide() {
+  i = (i + 1) % slides.length;
+  showSlide(i);
+}
+
+function prevSlide() {
+  i = (i - 1 + slides.length) % slides.length;
+  showSlide(i);
+}
+
+showSlide(i);
+
+/* AUTO READER */
 let speaking = false;
-function toggleSpeech() {
-  const btn = document.getElementById("voice-txt");
-  if (!speaking) {
-    let text = document.body.innerText;
-    let msg = new SpeechSynthesisUtterance(text);
-    msg.onend = () => { speaking = false; btn.innerText = "🔊 Read Page"; };
-    speechSynthesis.speak(msg);
-    btn.innerText = "🚫 Stop";
-    speaking = true;
-  } else {
-    speechSynthesis.cancel();
-    btn.innerText = "🔊 Read Page";
-    speaking = false;
-  }
+
+function readSite() {
+  speechSynthesis.cancel();
+  let text = "";
+  document.querySelectorAll("section").forEach(sec => {
+    text += sec.innerText + ". ";
+  });
+  let msg = new SpeechSynthesisUtterance(text);
+  speechSynthesis.speak(msg);
 }
 
-function book(e) {
-  e.preventDefault();
-  alert("Booking received!");
+function toggleSpeech() {
+  speaking = !speaking;
+  if (speaking) readSite();
+  else speechSynthesis.cancel();
 }
+
 </script>
 
 </body>
