@@ -6,7 +6,6 @@
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial, sans-serif;}
 body{background:#0b0f1a;color:#fff;overflow-x:hidden;}
 
-/* PRELOADER */
 #preloader{
 position:fixed;
 width:100%;height:100%;
@@ -26,7 +25,6 @@ animation:spin 1s linear infinite;
 }
 @keyframes spin{100%{transform:rotate(360deg);}}
 
-/* HEADER */
 header{
 padding:20px;
 background:#11182b;
@@ -44,7 +42,6 @@ text-decoration:none;
 }
 nav a:hover{color:#00ffcc;}
 
-/* HERO */
 .hero{
 height:90vh;
 display:flex;
@@ -70,7 +67,6 @@ color:#000;
 border-radius:5px;
 }
 
-/* SECTIONS */
 .section{padding:50px;text-align:center;}
 .cards{
 display:flex;
@@ -87,7 +83,6 @@ transition:0.3s;
 }
 .card:hover{transform:scale(1.05);}
 
-/* AUTO PANEL */
 .panel{
 background:#11182b;
 padding:20px;
@@ -95,7 +90,6 @@ border-radius:10px;
 margin-top:20px;
 }
 
-/* FLOAT BUTTONS */
 .float-btn{
 position:fixed;
 bottom:20px;
@@ -107,10 +101,14 @@ gap:10px;
 .float-btn button{border-radius:50px;}
 
 </style></head>
-<body><!-- PRELOADER --><div id="preloader">
+<body><!-- ENGINE START SOUND --><audio id="engineStart">
+<source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_8c8b1b1e5b.mp3?filename=car-engine-start-11366.mp3" type="audio/mpeg">
+</audio><!-- BACKGROUND MUSIC --><audio id="welcomeMusic" loop>
+<source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+</audio><!-- PRELOADER --><div id="preloader">
 <div class="loader"></div>
 <p>Loading Oboye Autoshop...</p>
-</div><!-- HEADER --><header>
+</div><header>
 <h2>Oboye Autoshop</h2>
 <nav>
 <a href="#home">Home</a>
@@ -118,14 +116,14 @@ gap:10px;
 <a href="#projects">Projects</a>
 <a href="#contact">Contact</a>
 </nav>
-</header><!-- HERO --><section class="hero" id="home">
+</header><section class="hero" id="home">
 <h1>Welcome to Oboye Autoshop</h1>
 <p>Your trusted car repair & diagnostics center</p>
 <button onclick="speakText('Welcome to Oboye Autoshop, your trusted mechanic service center')">🔊 Listen</button>
-</section><!-- ABOUT --><section class="section" id="about">
+</section><section class="section" id="about">
 <h2>About Us</h2>
 <p>We provide high-quality automobile repair, diagnostics, engine tuning and mechanical services.</p>
-</section><!-- PROJECTS --><section class="section" id="projects">
+</section><section class="section" id="projects">
 <h2>Our Projects</h2>
 <div class="cards">
 <div class="card">Engine Repair</div>
@@ -133,24 +131,43 @@ gap:10px;
 <div class="card">Oil Change Service</div>
 <div class="card">Electrical Fixing</div>
 </div>
-</section><!-- PANEL --><section class="section">
+</section><section class="section">
 <h2>Project Panel</h2>
-<div class="panel" id="panelText">
+<div class="panel">
 We recently completed a full engine overhaul for Toyota Corolla and BMW diagnostics upgrade.
 </div>
-</section><!-- CONTACT --><section class="section" id="contact">
+</section><section class="section" id="contact">
 <h2>Contact Us</h2>
 <p>Call or WhatsApp: +233 000 000 000</p>
-</section><!-- FLOAT BUTTONS --><div class="float-btn">
+</section><div class="float-btn">
 <button onclick="toggleSound()">🔔 Sound</button>
 <button onclick="readPage()">🔊 Read</button>
 </div><script>
-// PRELOADER
 window.addEventListener("load",()=>{
 document.getElementById("preloader").style.display="none";
+
+// ENGINE START SOUND ON OPEN
+let engine=document.getElementById("engineStart");
+engine.volume=0.7;
+engine.play().catch(()=>{});
+
 });
 
-// TEXT TO SPEECH
+// MUSIC
+let music=document.getElementById("welcomeMusic");
+let musicStarted=false;
+
+function startMusic(){
+if(!musicStarted){
+music.volume=0.5;
+music.play().catch(()=>{});
+musicStarted=true;
+}
+}
+
+window.addEventListener("click",startMusic);
+window.addEventListener("scroll",startMusic);
+
 function speakText(text){
 let speech=new SpeechSynthesisUtterance(text);
 speech.rate=1;
@@ -159,11 +176,9 @@ window.speechSynthesis.speak(speech);
 }
 
 function readPage(){
-let text=document.body.innerText;
-speakText(text);
+speakText(document.body.innerText);
 }
 
-// AUTO SOUND (simple beep)
 let audioEnabled=false;
 let ctx;
 function toggleSound(){
@@ -173,14 +188,15 @@ ctx=new (window.AudioContext||window.webkitAudioContext)();
 beep();
 }
 }
+
 function beep(){
 if(!audioEnabled)return;
 let osc=ctx.createOscillator();
-osc.frequency.value=200;
+osc.frequency.value=220;
 osc.connect(ctx.destination);
 osc.start();
 setTimeout(()=>osc.stop(),200);
-setTimeout(beep,5000);
+setTimeout(beep,6000);
 }
 </script></body>
-</html>
+  </html>
