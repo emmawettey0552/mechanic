@@ -14,30 +14,37 @@ body {
   scroll-behavior: smooth;
 }
 
-/* NAVBAR */
+/* ================= NAVBAR ================= */
 nav {
   position: sticky;
   top: 0;
+  z-index: 1000;
   background: #020617;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 12px 18px;
-  z-index: 1000;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.4);
 }
 
-.logo { color: #38bdf8; font-weight: bold; }
+.logo {
+  color: #38bdf8;
+  font-weight: bold;
+  font-size: 18px;
+}
 
 .nav-links {
   display: flex;
+  flex-wrap: wrap;
   gap: 8px;
 }
 
 .nav-links a {
-  color: white;
   text-decoration: none;
+  color: white;
   padding: 7px 10px;
   border-radius: 6px;
+  font-size: 13px;
   transition: 0.3s;
 }
 
@@ -46,34 +53,24 @@ nav {
   color: black;
 }
 
-/* HERO */
+/* ================= HERO ================= */
 .hero {
   text-align: center;
-  padding: 80px 20px;
+  padding: 70px 20px;
   background: linear-gradient(to right, #020617, #0f172a);
-  animation: fadeIn 1.2s ease;
 }
 
 .hero h1 {
-  font-size: 42px;
-  animation: slideUp 1s ease;
+  font-size: 40px;
 }
 
-/* SECTIONS */
+/* ================= SECTIONS ================= */
 section {
   padding: 60px 20px;
   text-align: center;
-  opacity: 0;
-  transform: translateY(40px);
-  transition: 0.8s;
 }
 
-section.show {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* CARDS */
+/* ================= SERVICES ================= */
 .cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px,1fr));
@@ -84,22 +81,51 @@ section.show {
   background: #1e293b;
   padding: 20px;
   border-radius: 10px;
-  transition: 0.4s;
 }
 
-.card:hover {
-  transform: translateY(-10px);
+/* ================= GALLERY ================= */
+.gallery {
+  max-width: 700px;
+  margin: auto;
+  position: relative;
 }
 
-/* GALLERY */
 .gallery img {
   width: 100%;
   border-radius: 10px;
   display: none;
-  transition: opacity 1s;
 }
 
-/* BUTTONS */
+/* NAV BUTTONS */
+.gallery-controls {
+  margin-top: 10px;
+}
+
+.gallery-controls button {
+  padding: 10px 15px;
+  margin: 5px;
+  border: none;
+  border-radius: 6px;
+  background: #38bdf8;
+  cursor: pointer;
+}
+
+/* ================= CLIENTS ================= */
+.client {
+  background: #1e293b;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+/* ================= BOOKING ================= */
+input, textarea {
+  width: 90%;
+  padding: 10px;
+  margin: 8px 0;
+  border-radius: 6px;
+  border: none;
+}
+
 button {
   padding: 10px 20px;
   background: #38bdf8;
@@ -108,139 +134,147 @@ button {
   cursor: pointer;
 }
 
-/* FLOAT BUTTON */
+/* ================= FLOAT BUTTON ================= */
 .speech-btn {
   position: fixed;
   bottom: 20px;
   right: 20px;
   background: #38bdf8;
-  padding: 12px;
+  padding: 12px 15px;
   border-radius: 50px;
-}
-
-/* ANIMATIONS */
-@keyframes fadeIn {
-  from {opacity:0;}
-  to {opacity:1;}
-}
-
-@keyframes slideUp {
-  from {transform:translateY(50px); opacity:0;}
-  to {transform:translateY(0); opacity:1;}
+  cursor: pointer;
+  font-weight: bold;
 }
 </style>
 </head>
 
 <body>
 
+<!-- ================= NAVBAR ================= -->
 <nav>
   <div class="logo">Oboye Autoshop</div>
+
   <div class="nav-links">
     <a href="#home">Home</a>
-    <a href="#about">About</a>
     <a href="#services">Services</a>
     <a href="#gallery">Gallery</a>
     <a href="#clients">Clients</a>
+    <a href="#book">Book</a>
     <a href="#contact">Contact</a>
   </div>
 </nav>
 
+<!-- ================= HERO ================= -->
 <section id="home" class="hero">
   <h1>Oboye Autoshop</h1>
-  <p>Driving Excellence • Precision Repairs • Trusted Mechanics</p>
+  <p>Certified Mechanics • Engine Experts • 4x4 Specialists • Mobile Repairs</p>
 </section>
 
-<section id="about">
-  <h2>About Us</h2>
-  <p>
-    Oboye Autoshop is a professional automotive repair center based in Accra, Ghana.
-    We specialize in 4x4 vehicles, pickup trucks, and modern car diagnostics.
-    Our workshop is equipped with advanced tools and experienced technicians
-    dedicated to delivering reliable and efficient services.
-  </p>
-</section>
-
+<!-- ================= SERVICES ================= -->
 <section id="services">
-  <h2>Our Services</h2>
+  <h2>Our Professional Services</h2>
+
   <div class="cards">
-    <div class="card">Engine Diagnostics & Full Repairs</div>
-    <div class="card">4x4 Suspension & Off-road Upgrades</div>
-    <div class="card">Vehicle Electrical Repairs</div>
-    <div class="card">Routine Maintenance & Servicing</div>
+    <div class="card">Full Engine Diagnostics & Repair</div>
+    <div class="card">4x4 Suspension & Off-road Tuning</div>
+    <div class="card">Pickup Truck Maintenance</div>
+    <div class="card">Electrical System Repair</div>
+    <div class="card">Computerized Vehicle Scanning</div>
+    <div class="card">Mobile Roadside Assistance</div>
   </div>
 </section>
 
+<!-- ================= GALLERY ================= -->
 <section id="gallery">
   <h2>Workshop Gallery</h2>
 
   <div class="gallery">
-    <img class="slide" src="https://images.unsplash.com/photo-1619642751034-765dfdf7c58e">
+    <img class="slide" src="https://images.unsplash.com/photo-1619642751034-765dfdf7c58
     <img class="slide" src="https://images.unsplash.com/photo-1616422285623-13ff0162193c">
-    <img class="slide" src="https://images.unsplash.com/photo-1600703065013-0a0c6a5b6a4d">
+    
   </div>
 
-  <button onclick="prevSlide()">Prev</button>
-  <button onclick="nextSlide()">Next</button>
+  <div class="gallery-controls">
+    <button onclick="prevSlide()">⬅ Prev</button>
+    <button onclick="nextSlide()">Next ➡</button>
+  </div>
 </section>
 
+<!-- ================= CLIENTS ================= -->
 <section id="clients">
-  <h2>Client Testimonials</h2>
-  <p>“Reliable and trustworthy service!” — Kofi</p>
-  <p>“My car runs like new again.” — Ama</p>
+  <h2>Customer Reviews</h2>
+
+  <div class="cards">
+    <div class="client">Kofi Mensah — “Very professional engine repair service.”</div>
+    <div class="client">Ama Serwaa — “My Toyota 4x4 feels brand new.”</div>
+    <div class="client">John Doe — “Fast mobile repair saved my trip.”</div>
+  </div>
 </section>
 
+<!-- ================= BOOKING ================= -->
+<section id="book">
+  <h2>Book a Service</h2>
+
+  <form onsubmit="book(event)">
+    <input type="text" placeholder="Full Name" required><br>
+    <input type="tel" placeholder="Phone Number" required><br>
+    <textarea placeholder="Describe your vehicle problem..." required></textarea><br>
+    <button>Submit Request</button>
+  </form>
+</section>
+
+<!-- ================= CONTACT ================= -->
 <section id="contact">
-  <h2>Contact</h2>
+  <h2>Contact Oboye Autoshop</h2>
   <p>📞 +233 XXX XXX XXX</p>
   <p>📍 Accra, Ghana</p>
+  <p>📧 oboyeautoshop@email.com</p>
 </section>
 
-<div class="speech-btn" onclick="toggleSpeech()">🔊</div>
+<!-- ================= VOICE ================= -->
+<div class="speech-btn" onclick="toggleSpeech()">🔊 Read</div>
 
 <script>
 
-/* SCROLL ANIMATION */
-const sections = document.querySelectorAll("section");
-window.addEventListener("scroll", () => {
-  sections.forEach(sec => {
-    const top = sec.getBoundingClientRect().top;
-    if (top < window.innerHeight - 100) {
-      sec.classList.add("show");
-    }
-  });
-});
-
-/* GALLERY */
-let i = 0;
+/* ================= MANUAL GALLERY CONTROL ================= */
+let index = 0;
 const slides = document.getElementsByClassName("slide");
 
-function showSlide(n) {
+function showSlide(i) {
   for (let s of slides) s.style.display = "none";
-  slides[n].style.display = "block";
+  slides[i].style.display = "block";
 }
 
 function nextSlide() {
-  i = (i + 1) % slides.length;
-  showSlide(i);
+  index++;
+  if (index >= slides.length) index = 0;
+  showSlide(index);
 }
 
 function prevSlide() {
-  i = (i - 1 + slides.length) % slides.length;
-  showSlide(i);
+  index--;
+  if (index < 0) index = slides.length - 1;
+  showSlide(index);
 }
 
-showSlide(i);
+// start first image
+showSlide(index);
 
-/* AUTO READER */
+/* ================= AUTO READER ================= */
 let speaking = false;
 
 function readSite() {
   speechSynthesis.cancel();
+
   let text = "";
   document.querySelectorAll("section").forEach(sec => {
     text += sec.innerText + ". ";
   });
+
   let msg = new SpeechSynthesisUtterance(text);
+  msg.rate = 1;
+  msg.pitch = 1;
+
   speechSynthesis.speak(msg);
 }
 
@@ -248,6 +282,12 @@ function toggleSpeech() {
   speaking = !speaking;
   if (speaking) readSite();
   else speechSynthesis.cancel();
+}
+
+/* ================= BOOKING ================= */
+function book(e) {
+  e.preventDefault();
+  alert("Request sent to Oboye Autoshop. We will contact you soon!");
 }
 
 </script>
