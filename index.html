@@ -5,68 +5,67 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Oboye Autoshop</title>
 
-<style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
-/* RESET */
+<style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial;}
 
-/* BODY */
 body{
-  background:linear-gradient(135deg,#0f172a,#1e1b4b,#0b1220);
+  background:#0b1220;
   color:white;
   overflow-x:hidden;
 }
 
-/* ================= PRELOADER ================= */
-#preloader{
-  position:fixed;
-  top:0;left:0;
-  width:100%;height:100%;
-  background:linear-gradient(135deg,#0f172a,#1e40af,#7c3aed);
+/* ================= 3D BACKGROUND ================= */
+#hero3d{
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100vh;
+  z-index:-1;
+}
+
+/* HERO */
+.hero{
+  position:relative;
+  height:100vh;
   display:flex;
   justify-content:center;
   align-items:center;
   flex-direction:column;
-  z-index:9999;
-  animation:fadeOut 1s ease 3s forwards;
+  text-align:center;
+  background:rgba(0,0,0,0.4);
+  backdrop-filter:blur(2px);
 }
 
-.loader-text{
-  font-size:28px;
-  font-weight:bold;
-  letter-spacing:2px;
-  animation:floatText 1.5s infinite ease-in-out;
+.hero h1{
+  font-size:42px;
+  animation:float 3s infinite ease-in-out;
 }
 
-@keyframes floatText{
-  0%{transform:translateY(0);opacity:0.6}
-  50%{transform:translateY(-10px);opacity:1}
-  100%{transform:translateY(0);opacity:0.6}
+.hero p{opacity:0.8;margin-top:10px;}
+
+@keyframes float{
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-10px);}
 }
 
-@keyframes fadeOut{
-  to{opacity:0;visibility:hidden;}
-}
-
-/* ================= NAVBAR ================= */
+/* NAV */
 nav{
+  position:fixed;
+  top:0;
+  width:100%;
+  z-index:1000;
   display:flex;
   justify-content:space-between;
   align-items:center;
-  padding:15px 20px;
-  position:sticky;
-  top:0;
-  z-index:1000;
-  background:rgba(0,0,0,0.4);
+  padding:15px;
+  background:rgba(0,0,0,0.6);
   backdrop-filter:blur(10px);
 }
 
-.logo{
-  font-size:20px;
-  font-weight:bold;
-  color:#38bdf8;
-  animation:slideIn 1s ease;
-}
+.logo{color:#38bdf8;font-weight:bold;}
 
 .nav-links{
   display:flex;
@@ -76,132 +75,88 @@ nav{
 .nav-links a{
   color:white;
   text-decoration:none;
-  position:relative;
 }
 
-.nav-links a::after{
-  content:"";
-  position:absolute;
-  width:0;
-  height:2px;
-  background:#38bdf8;
-  bottom:-3px;
-  left:0;
-  transition:.3s;
+.menu{display:none;cursor:pointer;}
+
+@media(max-width:768px){
+  .menu{display:block;}
+  .nav-links{
+    display:none;
+    position:absolute;
+    top:60px;
+    right:0;
+    flex-direction:column;
+    background:#111827;
+    padding:10px;
+  }
+  .nav-links.show{display:flex;}
 }
 
-.nav-links a:hover::after{width:100%;}
-
-/* ================= HERO ================= */
-.hero{
-  height:90vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  flex-direction:column;
-  text-align:center;
-  background:radial-gradient(circle,#1e3a8a,#0f172a);
-  animation:fadeUp 1s ease;
-}
-
-.hero h1{
-  font-size:40px;
-  animation:floatText 3s infinite;
-}
-
-.hero p{opacity:0.8;margin-top:10px;}
-
-/* ================= SECTIONS ================= */
+/* SECTIONS */
 section{
   padding:70px 20px;
   text-align:center;
-  opacity:0;
-  transform:translateY(50px);
-  transition:1s;
 }
 
-section.show{
-  opacity:1;
-  transform:translateY(0);
-}
-
-/* ================= CARDS ================= */
+/* CARDS */
 .cards{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
   gap:15px;
-  margin-top:20px;
 }
 
 .card{
-  background:linear-gradient(135deg,#1e293b,#334155);
+  background:#1f2937;
   padding:20px;
-  border-radius:15px;
-  transition:.4s;
+  border-radius:12px;
+  transition:.3s;
 }
 
 .card:hover{
-  transform:translateY(-10px) scale(1.03);
-  background:linear-gradient(135deg,#2563eb,#7c3aed);
+  transform:scale(1.05);
+  background:#2563eb;
 }
 
-/* ================= GALLERY ================= */
+/* GALLERY */
 .gallery img{
   width:100%;
-  border-radius:12px;
   display:none;
+  border-radius:10px;
 }
 
-/* BUTTONS */
 button{
-  padding:10px 15px;
-  border:none;
-  border-radius:8px;
-  background:linear-gradient(135deg,#38bdf8,#6366f1);
-  color:white;
-  cursor:pointer;
+  padding:10px;
   margin-top:10px;
+  border:none;
+  background:#38bdf8;
+  border-radius:8px;
 }
 
-/* FLOAT BUTTONS */
+/* FLOAT */
 .float{
   position:fixed;
   right:20px;
   padding:12px;
   border-radius:50px;
-  color:white;
   text-decoration:none;
 }
 
 .whatsapp{bottom:80px;background:#25D366;}
 .call{bottom:20px;background:#38bdf8;}
-.speech{bottom:140px;background:#facc15;color:black;cursor:pointer;}
-
-/* ANIMATIONS */
-@keyframes fadeUp{
-  from{opacity:0;transform:translateY(40px);}
-  to{opacity:1;transform:translateY(0);}
-}
-
-@keyframes slideIn{
-  from{transform:translateX(-30px);opacity:0;}
-  to{transform:translateX(0);opacity:1;}
-}
-
 </style>
 </head>
 
 <body>
 
-<!-- PRELOADER -->
-<div id="preloader">
-  <div class="loader-text">🚗 Oboye Autoshop</div>
-</div>
+<!-- 3D ENGINE BACKGROUND -->
+<div id="hero3d"></div>
 
 <!-- NAV -->
 <nav>
   <div class="logo">Oboye Autoshop</div>
-  <div class="nav-links">
+  <div class="menu" onclick="toggleMenu()">☰</div>
+  <div class="nav-links" id="navLinks">
     <a href="#home">Home</a>
     <a href="#about">About</a>
     <a href="#services">Services</a>
@@ -211,69 +166,55 @@ button{
 </nav>
 
 <!-- HERO -->
-<section id="home" class="hero show">
-  <h1>Reliable Auto Repairs You Can Trust</h1>
-  <p>Modern 4x4 • Diagnostics • Engine Care</p>
+<section class="hero" id="home">
+  <h1>Oboye Autoshop</h1>
+  <p>Advanced Mechanical Engineering & Auto Care</p>
 </section>
 
 <!-- ABOUT -->
 <section id="about">
   <h2>About Us</h2>
-  <p>We are a modern auto repair workshop delivering fast, reliable, and affordable services in Accra.</p>
+  <p>
+    Oboye Autoshop represents modern automotive engineering inspired by the evolution of combustion engines,
+    gearbox systems, and digital vehicle diagnostics used in today’s automotive industry.
+  </p>
 </section>
 
 <!-- SERVICES -->
 <section id="services">
-  <h2>Our Services</h2>
+  <h2>Services</h2>
   <div class="cards">
     <div class="card">Engine Diagnostics</div>
-    <div class="card">4x4 Suspension Upgrade</div>
-    <div class="card">Electrical Repairs</div>
-    <div class="card">Full Vehicle Service</div>
+    <div class="card">Gear System Repair</div>
+    <div class="card">Electrical Fixing</div>
+    <div class="card">Full Servicing</div>
   </div>
 </section>
 
 <!-- GALLERY -->
 <section id="gallery">
   <h2>Gallery</h2>
-  <div class="gallery">
-    <img class="slide" src="https://images.unsplash.com/photo-1619642751034-765dfdf7c58e">
-    <img class="slide" src="https://images.unsplash.com/photo-1616422285623-13ff0162193c">
-    <img class="slide" src="https://images.unsplash.com/photo-1600703065013-0a0c6a5b6a4d">
-  </div>
-  <button onclick="prevSlide()">Prev</button>
-  <button onclick="nextSlide()">Next</button>
+  <img class="slide" src="https://images.unsplash.com/photo-1619642751034-765dfdf7c58e">
+  <img class="slide" src="https://images.unsplash.com/photo-1616422285623-13ff0162193c">
+  <button onclick="prev()">Prev</button>
+  <button onclick="next()">Next</button>
 </section>
 
 <!-- CONTACT -->
 <section id="contact">
   <h2>Contact</h2>
-  <p>📞 +233 XXX XXX XXX</p>
   <p>📍 Accra, Ghana</p>
 </section>
 
-<!-- FLOAT -->
 <a href="https://wa.me/233XXXXXXXXX" class="float whatsapp">WhatsApp</a>
 <a href="tel:+233XXXXXXXXX" class="float call">Call</a>
-<div class="float speech" onclick="toggleSpeech()">🔊</div>
 
 <script>
 
-/* PRELOADER */
-window.addEventListener("load",()=>{
-  setTimeout(()=>{
-    document.getElementById("preloader").style.display="none";
-  },3000);
-});
-
-/* SCROLL ANIMATION */
-window.addEventListener("scroll",()=>{
-  document.querySelectorAll("section").forEach(sec=>{
-    if(sec.getBoundingClientRect().top < window.innerHeight-100){
-      sec.classList.add("show");
-    }
-  });
-});
+/* NAV */
+function toggleMenu(){
+  document.getElementById("navLinks").classList.toggle("show");
+}
 
 /* GALLERY */
 let i=0;
@@ -283,39 +224,13 @@ function show(n){
   for(let s of slides)s.style.display="none";
   slides[n].style.display="block";
 }
-
-function nextSlide(){
-  i=(i+1)%slides.length;
-  show(i);
-}
-
-function prevSlide(){
-  i=(i-1+slides.length)%slides.length;
-  show(i);
-}
-
+function next(){i=(i+1)%slides.length;show(i);}
+function prev(){i=(i-1+slides.length)%slides.length;show(i);}
 show(i);
 
-/* SPEECH */
-let speaking=false;
+/* ================= 3D ENGINE SCENE ================= */
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(75,window.innerWidth/window.innerHeight,0.1,1000);
 
-function readSections(index=0){
-  if(!speaking) return;
-  const secs=document.querySelectorAll("section");
-  if(index>=secs.length){speaking=false;return;}
-
-  let msg=new SpeechSynthesisUtterance(secs[index].innerText);
-  msg.onend=()=>readSections(index+1);
-  speechSynthesis.speak(msg);
-}
-
-function toggleSpeech(){
-  speaking=!speaking;
-  speechSynthesis.cancel();
-  if(speaking) readSections();
-}
-
-</script>
-
-</body>
-  </html>
+const renderer = new THREE.WebGLRenderer({alpha:true});
+renderer.setSize(window.innerWidth,window
