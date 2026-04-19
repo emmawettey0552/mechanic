@@ -1,4 +1,4 @@
- <!DOCTYPE html><html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -25,6 +25,62 @@ animation:spin 1s linear infinite;
 }
 @keyframes spin{100%{transform:rotate(360deg);}}
 
+/* 🚪 GARAGE INTRO (IMPROVED 3D CINEMATIC) */
+#garageIntro{
+position:fixed;
+inset:0;
+z-index:10000;
+display:flex;
+perspective:1600px;
+background:radial-gradient(circle at center,#0f172a,#000);
+overflow:hidden;
+}
+
+#garageIntro::after{
+content:"";
+position:absolute;
+inset:0;
+background:radial-gradient(circle at center,rgba(0,255,204,0.08),transparent 60%);
+animation:pulseGlow 2.5s infinite;
+}
+
+@keyframes pulseGlow{
+0%,100%{opacity:0.4;}
+50%{opacity:1;}
+}
+
+.door{
+width:50%;
+height:100%;
+background:linear-gradient(145deg,#0b0f1a,#1f2937,#0b0f1a);
+box-shadow:inset 0 0 60px rgba(0,255,204,0.25), 0 0 40px rgba(0,0,0,0.6);
+transition:transform 2.2s cubic-bezier(.77,0,.18,1);
+transform-style:preserve-3d;
+position:relative;
+}
+
+.door::before{
+content:"";
+position:absolute;
+inset:0;
+background:linear-gradient(90deg,transparent,rgba(0,255,204,0.15),transparent);
+animation:scan 3s linear infinite;
+}
+
+@keyframes scan{
+0%{transform:translateX(-100%);}
+100%{transform:translateX(100%);}
+}
+
+.leftDoor{transform-origin:left center;}
+.rightDoor{transform-origin:right center;}
+
+#garageIntro.open .leftDoor{transform:rotateY(-120deg) translateZ(40px);}
+#garageIntro.open .rightDoor{transform:rotateY(120deg) translateZ(40px);}
+
+#garageIntro.open{animation:zoomIn 2.2s ease forwards;}
+@keyframes zoomIn{0%{transform:scale(1);}100%{transform:scale(1.05);}}
+
 header{
 padding:15px;
 background:#11182b;
@@ -37,28 +93,10 @@ top:0;
 z-index:1000;
 }
 
-nav{
-display:flex;
-flex-wrap:wrap;
-align-items:center;
-gap:10px;
-}
-
-nav a{
-color:#fff;
-text-decoration:none;
-padding:6px 8px;
-}
+nav{display:flex;flex-wrap:wrap;align-items:center;gap:10px;}
+nav a{color:#fff;text-decoration:none;padding:6px 8px;}
 nav a:hover{color:#00ffcc;}
-
-nav button{
-background:#00ffcc;
-border:none;
-padding:6px 10px;
-border-radius:5px;
-cursor:pointer;
-font-size:12px;
-}
+nav button{background:#00ffcc;border:none;padding:6px 10px;border-radius:5px;cursor:pointer;font-size:12px;}
 
 .hero{
 height:90vh;
@@ -70,11 +108,7 @@ text-align:center;
 background:linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1503376780353-7e6692767b70') center/cover;
 }
 
-.hero h1{
-font-size:45px;
-animation:slideUp 2s ease;
-}
-
+.hero h1{font-size:45px;animation:slideUp 2s ease;}
 .hero p{margin-top:10px;font-size:18px;color:#ccc;animation:fadeIn 3s ease;}
 
 @keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
@@ -95,7 +129,7 @@ animation:slideUp 2s ease;
 
 .typing{border-right:2px solid #00ffcc;white-space:normal;}
 
-/* ⭐ STAR EFFECT */
+/* ⭐ REALISTIC REPEATING STAR SYSTEM */
 .star{
 position:fixed;
 top:-10px;
@@ -104,20 +138,29 @@ height:6px;
 background:white;
 border-radius:50%;
 opacity:0.8;
-animation:fall linear forwards;
+animation:fall linear forwards, twinkle 1.5s infinite;
 z-index:9998;
 }
+
 @keyframes fall{
 0%{transform:translateY(0) translateX(0);opacity:1;}
 100%{transform:translateY(110vh) translateX(40px);opacity:0;}
 }
 
+@keyframes twinkle{
+0%,100%{opacity:0.3;transform:scale(0.8);}
+50%{opacity:1;transform:scale(1.3);}
+}
+
 </style></head>
-<body><audio id="engineStart">
+<body><!-- 🚪 GARAGE INTRO --><div id="garageIntro">
+<div class="door leftDoor"></div>
+<div class="door rightDoor"></div>
+</div><audio id="engineStart">
 <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_8c8b1b1e5b.mp3?filename=car-engine-start-11366.mp3" type="audio/mpeg">
 </audio><audio id="welcomeMusic" loop>
 <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-</audio><!-- LAUNCH MUSIC --><audio id="launchMusic">
+</audio><audio id="launchMusic">
 <source src="https://cdn.pixabay.com/download/audio/2022/03/16/audio_3b1c6f1b2d.mp3?filename=corporate-inspire-11018.mp3" type="audio/mpeg">
 </audio><div id="preloader">
 <div class="loader"></div>
@@ -139,39 +182,50 @@ z-index:9998;
 <h2>About Us</h2>
 <p>We provide high-quality automobile repair, diagnostics, engine tuning and mechanical services.</p>
 </section><section class="section" id="projects">
-<h2>Our Projects</h2><div class="project-slider">
+<h2>Our Projects</h2>
+<div class="project-slider">
 <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70" class="active">
 <img src="https://images.unsplash.com/photo-1487754180451-c456f719a1fc">
-</div><div class="panel">
+</div>
+<div class="panel">
 <p id="typingText"></p>
-</div></section><section class="section" id="contact">
+</div>
+</section><section class="section" id="contact">
 <h2>Contact Us</h2>
 <p>Call or WhatsApp: +233 546 330 886</p>
 </section><script>
 window.addEventListener("load",()=>{
 
+setTimeout(()=>{
+document.getElementById("garageIntro").classList.add("open");
+},300);
+
+setTimeout(()=>{
+document.getElementById("garageIntro").style.display="none";
 document.getElementById("preloader").style.display="none";
+},2500);
 
 let engine=document.getElementById("engineStart");
 engine.volume=0.7;
 engine.play().catch(()=>{});
 
-// LAUNCH MUSIC (FIXED AUTO + USER GESTURE)
 let launch=document.getElementById("launchMusic");
 launch.volume=0.6;
-launch.play().catch(()=>{
-window.addEventListener("click",()=>launch.play(),{once:true});
-});
+launch.play().catch(()=>{window.addEventListener("click",()=>launch.play(),{once:true});});
 
-// ⭐ STAR FALL
-for(let i=0;i<50;i++){
+// ⭐ CONTINUOUS REAL STAR RAIN (REPEAT 🔁)
+setInterval(()=>{
+for(let i=0;i<5;i++){
 let star=document.createElement("div");
 star.classList.add("star");
 star.style.left=Math.random()*100+"vw";
 star.style.animationDuration=(Math.random()*3+2)+"s";
+star.style.width=(Math.random()*4+3)+"px";
+star.style.height=star.style.width;
 document.body.appendChild(star);
 setTimeout(()=>star.remove(),6000);
 }
+},500);
 
 });
 
@@ -185,7 +239,7 @@ const text="We recently completed engine overhaul for Toyota Corolla, BMW diagno
 let i=0;
 function typeWriter(){
 if(i<text.length){
-document.getElementById("typingText").innerHTML += text.charAt(i);
+document.getElementById("typingText").innerHTML+=text.charAt(i);
 i++;setTimeout(typeWriter,40);
 }
 }
@@ -212,4 +266,4 @@ typeWriter();
 setInterval(slider,3000);
 });
 </script></body>
-          </html>
+</html>
