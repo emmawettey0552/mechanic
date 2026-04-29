@@ -33,75 +33,104 @@ display:flex;
 justify-content:center;
 align-items:center;
 z-index:999999;
-transition:opacity 1s ease;
+transition:opacity 0.8s ease;
+overflow:hidden;
 }
 
 #preloader .overlay{
 position:absolute;
 inset:0;
 background:
-linear-gradient(rgba(0,0,0,0.85),rgba(0,0,0,0.9)),
-url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1400&q=80');
+linear-gradient(rgba(0,0,0,0.88),rgba(0,0,0,0.92)),
+url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1600&q=80');
 background-size:cover;
 background-position:center;
-filter:blur(4px) brightness(0.4);
+filter:blur(5px) brightness(0.35);
 transform:scale(1.1);
 }
 
-.loader-content{
+.loader-box{
 position:relative;
 z-index:2;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+gap:15px;
+
+padding:28px 30px;
+border-radius:18px;
+
+background:rgba(17,24,43,0.55);
+backdrop-filter:blur(12px);
+box-shadow:0 0 40px rgba(0,255,204,0.15);
 text-align:center;
 }
+
+/* CAR */
 
 .car-loader{
 width:160px;
 height:70px;
-margin:auto;
 position:relative;
-animation:bounce 1.5s infinite;
+animation:bounce 1.4s infinite ease-in-out;
 }
 
 .car-body{
 width:160px;
 height:40px;
-background:#00ffcc;
-border-radius:20px;
+background:linear-gradient(135deg,#00ffcc,#007a66);
+border-radius:18px;
 position:absolute;
 top:10px;
-box-shadow:0 0 25px #00ffcc;
+box-shadow:0 0 25px rgba(0,255,204,0.7);
+}
+
+.car-body::before{
+content:"";
+position:absolute;
+width:70px;
+height:22px;
+background:#0b0f1a;
+top:-14px;
+left:45px;
+border-radius:10px;
 }
 
 .wheel{
-width:30px;
-height:30px;
-background:#111;
-border:5px solid #777;
-border-radius:50%;
 position:absolute;
 bottom:0;
-animation:spin 0.8s linear infinite;
+width:28px;
+height:28px;
+background:#111;
+border:4px solid #666;
+border-radius:50%;
+animation:spin 0.7s linear infinite;
 }
 
-.wheel1{left:20px;}
-.wheel2{right:20px;}
+.wheel1{left:25px;}
+.wheel2{right:25px;}
+
+/* TEXT */
 
 .logo-text{
-margin-top:20px;
-font-size:38px;
-color:#00ffcc;
+font-size:34px;
 letter-spacing:4px;
+color:#00ffcc;
+text-shadow:0 0 18px #00ffcc;
 animation:glow 2s infinite alternate;
 }
 
-.loading-text{color:#ccc;margin-top:10px;}
+.loading-text{
+font-size:14px;
+color:#ccc;
+}
 
 .loading-bar{
-width:250px;
+width:260px;
 height:6px;
 background:#1b2236;
 border-radius:20px;
-margin:20px auto;
 overflow:hidden;
 }
 
@@ -110,6 +139,7 @@ width:0%;
 height:100%;
 background:#00ffcc;
 animation:load 2.5s forwards;
+box-shadow:0 0 20px #00ffcc;
 }
 
 /* ================= HERO ================= */
@@ -134,7 +164,7 @@ z-index:5;
 }
 
 .hero h1{
-font-size:50px;
+font-size:48px;
 color:#00ffcc;
 text-shadow:0 0 20px #00ffcc;
 }
@@ -155,7 +185,7 @@ animation:spinCar 6s linear infinite;
 margin-top:120px;
 }
 
-.car-body{
+.car-body-main{
 position:absolute;
 width:260px;
 height:60px;
@@ -165,7 +195,7 @@ top:30px;
 box-shadow:0 0 30px rgba(0,255,204,0.6);
 }
 
-.car-body::before{
+.car-body-main::before{
 content:"";
 position:absolute;
 width:140px;
@@ -176,7 +206,7 @@ left:60px;
 border-radius:10px;
 }
 
-.wheel{
+.wheel-main{
 position:absolute;
 width:45px;
 height:45px;
@@ -282,10 +312,10 @@ to{width:100%;}
 50%{transform:translateY(-6px);}
 }
 
-/* ================= RESPONSIVE ================= */
+/* MOBILE */
 
 @media(max-width:768px){
-.hero h1{font-size:32px;}
+.hero h1{font-size:30px;}
 .car-3d{transform:scale(0.8);}
 }
 
@@ -294,12 +324,13 @@ to{width:100%;}
 
 <body>
 
-<!-- PRELOADER -->
+<!-- ================= PRELOADER ================= -->
+
 <div id="preloader">
 
 <div class="overlay"></div>
 
-<div class="loader-content">
+<div class="loader-box">
 
 <div class="car-loader">
 <div class="car-body"></div>
@@ -307,8 +338,8 @@ to{width:100%;}
 <div class="wheel wheel2"></div>
 </div>
 
-<div class="logo-text">OBOYE AUTOSHOP</div>
-<p class="loading-text">Loading Premium Auto Experience...</p>
+<h1 class="logo-text">OBOYE AUTOSHOP</h1>
+<p class="loading-text">Initializing Automotive System...</p>
 
 <div class="loading-bar">
 <div class="loading-progress"></div>
@@ -322,7 +353,8 @@ to{width:100%;}
 <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_8c8b1b1e5b.mp3?filename=car-engine-start-11366.mp3">
 </audio>
 
-<!-- HERO -->
+<!-- ================= HERO ================= -->
+
 <section class="hero">
 
 <div class="hero-content">
@@ -333,10 +365,10 @@ to{width:100%;}
 <!-- 3D CAR -->
 <div class="car-3d">
 
-<div class="car-body"></div>
+<div class="car-body-main"></div>
 
-<div class="wheel w1"></div>
-<div class="wheel w2"></div>
+<div class="wheel-main w1"></div>
+<div class="wheel-main w2"></div>
 
 <div class="shadow"></div>
 
@@ -382,10 +414,8 @@ document.getElementById("preloader").remove();
 
 /* ENGINE SOUND */
 
-const engine = document.getElementById("engineSound");
-const car = document.querySelector(".car-3d");
-
-let started = false;
+const engine=document.getElementById("engineSound");
+let started=false;
 
 document.body.addEventListener("click",()=>{
 
@@ -397,31 +427,33 @@ started=true;
 
 },{once:true});
 
-/* SPEEDOMETER LOGIC */
+/* SPEEDOMETER */
 
-const needle = document.getElementById("needle");
-const speedText = document.getElementById("speedValue");
+const needle=document.getElementById("needle");
+const speedValue=document.getElementById("speedValue");
+
+const car=document.querySelector(".car-3d");
 
 function updateSpeed(){
 
-let speed = 90;
+let speed=90;
 
 if(car.classList.contains("fast")){
-speed = 180;
+speed=180;
 needle.style.transform="rotate(60deg)";
 }
 
 else if(car.classList.contains("slow")){
-speed = 30;
+speed=30;
 needle.style.transform="rotate(-60deg)";
 }
 
 else{
-speed = 90;
+speed=90;
 needle.style.transform="rotate(0deg)";
 }
 
-speedText.textContent = speed;
+speedValue.textContent=speed;
 
 }
 
