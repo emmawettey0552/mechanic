@@ -1,90 +1,232 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Oboye Autoshop</title><style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial, sans-serif;}
-body{background:#0b0f1a;color:#fff;overflow-x:hidden;max-width:100vw;}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Oboye Autoshop</title>
+
+<meta name="description" content="Oboye Autoshop - Professional automobile repair and diagnostics services in Ghana.">
+
+<style>
+
+/* ===== GLOBAL ===== */
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+html{
+scroll-behavior:smooth;
+}
+
+body{
+background:#0b0f1a;
+color:#fff;
+overflow-x:hidden;
+}
+
+/* ===== MODERN PRELOADER ===== */
 
 #preloader{
 position:fixed;
-width:100%;height:100%;
-background:#0b0f1a;
+inset:0;
+background:#05070d;
 display:flex;
 justify-content:center;
 align-items:center;
-z-index:9999;
-flex-direction:column;
-}
-.loader{
-width:60px;height:60px;
-border:6px solid #333;
-border-top:6px solid #00ffcc;
-border-radius:50%;
-animation:spin 1s linear infinite;
-}
-@keyframes spin{100%{transform:rotate(360deg);}}
-
-/* 🚪 GARAGE INTRO (3D + GARAGE IMAGES) */
-#garageIntro{
-position:fixed;
-inset:0;
-z-index:10000;
-display:flex;
-perspective:1600px;
-background:#000;
 overflow:hidden;
+z-index:999999;
+transition:opacity 1s ease;
 }
 
-/* 3D GARAGE BACKGROUND SLIDES */
-.garage-bg{
+/* PRELOADER BACKGROUND */
+
+#preloader .overlay{
 position:absolute;
 inset:0;
+
+background:
+linear-gradient(rgba(0,0,0,0.82),rgba(0,0,0,0.9)),
+url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1400&q=80');
+
 background-size:cover;
 background-position:center;
-opacity:0;
-animation:garageSlide 12s infinite;
-filter:brightness(0.5);
+
+filter:blur(4px) brightness(0.45);
+
+transform:scale(1.1);
 }
 
-.g1{background-image:url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7');}
-.g2{background-image:url('https://images.unsplash.com/photo-1503376780353-7e6692767b70');}
-.g3{background-image:url('https://images.unsplash.com/photo-1487754180451-c456f719a1fc');}
+/* CENTER CONTENT */
 
-.g1{animation-delay:0s;}
-.g2{animation-delay:4s;}
-.g3{animation-delay:8s;}
-
-@keyframes garageSlide{
-0%{opacity:0;transform:scale(1.1);}
-10%{opacity:1;}
-30%{opacity:1;}
-40%{opacity:0;}
-100%{opacity:0;}
+.loader-content{
+position:relative;
+z-index:2;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+text-align:center;
+padding:20px;
 }
 
-#garageIntro::after{
+/* CAR */
+
+.car-loader{
+position:relative;
+width:160px;
+height:70px;
+margin-bottom:30px;
+animation:carBounce 1.5s infinite ease-in-out;
+}
+
+.car-body{
+position:absolute;
+width:160px;
+height:40px;
+background:#00ffcc;
+border-radius:20px 30px 10px 10px;
+top:10px;
+
+box-shadow:
+0 0 20px rgba(0,255,204,0.7),
+0 0 40px rgba(0,255,204,0.3);
+}
+
+.car-body::before{
 content:"";
 position:absolute;
-inset:0;
-background:radial-gradient(circle at center,rgba(0,255,204,0.1),transparent 60%);
+width:70px;
+height:22px;
+background:#11182b;
+top:-15px;
+left:40px;
+border-radius:15px 15px 0 0;
 }
 
-.door{
-width:50%;
+/* WHEELS */
+
+.wheel{
+position:absolute;
+bottom:0;
+width:30px;
+height:30px;
+background:#111;
+border:5px solid #777;
+border-radius:50%;
+animation:spin 0.8s linear infinite;
+}
+
+.wheel1{
+left:20px;
+}
+
+.wheel2{
+right:20px;
+}
+
+/* TEXT */
+
+.logo-text{
+font-size:42px;
+font-weight:bold;
+letter-spacing:5px;
+color:#00ffcc;
+
+text-shadow:
+0 0 10px #00ffcc,
+0 0 30px #00ffcc;
+
+animation:glow 2s infinite alternate;
+}
+
+.loading-text{
+margin-top:12px;
+color:#ccc;
+font-size:17px;
+letter-spacing:2px;
+animation:fadePulse 1.5s infinite;
+}
+
+/* LOADING BAR */
+
+.loading-bar{
+width:280px;
+height:8px;
+background:#1b2236;
+border-radius:20px;
+margin-top:25px;
+overflow:hidden;
+box-shadow:0 0 10px rgba(0,255,204,0.2);
+}
+
+.loading-progress{
 height:100%;
-background:url('sen.jpg');
-transition:transform 2.2s cubic-bezier(.77,0,.18,1);
-transform-style:preserve-3d;
-position:relative;
-box-shadow:inset 0 0 60px rgba(0,255,204,0.25);
+width:0%;
+background:#00ffcc;
+border-radius:20px;
+animation:loading 2.5s linear forwards;
+box-shadow:0 0 20px #00ffcc;
 }
 
-.leftDoor{transform-origin:left center;}
-.rightDoor{transform-origin:right center;}
+/* ===== ANIMATIONS ===== */
 
-#garageIntro.open .leftDoor{transform:rotateY(-120deg) translateZ(40px);}
-#garageIntro.open .rightDoor{transform:rotateY(120deg) translateZ(40px);}
+@keyframes loading{
+0%{width:0%;}
+100%{width:100%;}
+}
+
+@keyframes glow{
+from{
+text-shadow:0 0 10px #00ffcc;
+}
+to{
+text-shadow:
+0 0 20px #00ffcc,
+0 0 40px #00ffcc,
+0 0 60px #00ffcc;
+}
+}
+
+@keyframes fadePulse{
+0%{opacity:0.4;}
+50%{opacity:1;}
+100%{opacity:0.4;}
+}
+
+@keyframes spin{
+100%{
+transform:rotate(360deg);
+}
+}
+
+@keyframes carBounce{
+0%{transform:translateY(0);}
+50%{transform:translateY(-6px);}
+100%{transform:translateY(0);}
+}
+
+@keyframes slideUp{
+from{
+transform:translateY(40px);
+opacity:0;
+}
+to{
+transform:translateY(0);
+opacity:1;
+}
+}
+
+@keyframes fadeIn{
+from{opacity:0;}
+to{opacity:1;}
+}
+
+/* ===== HEADER ===== */
 
 header{
 padding:15px;
@@ -98,10 +240,37 @@ top:0;
 z-index:1000;
 }
 
-nav{display:flex;flex-wrap:wrap;align-items:center;gap:10px;}
-nav a{color:#fff;text-decoration:none;padding:6px 8px;}
-nav a:hover{color:#00ffcc;}
-nav button{background:#00ffcc;border:none;padding:6px 10px;border-radius:5px;cursor:pointer;font-size:12px;}
+header h2{
+color:#00ffcc;
+}
+
+nav{
+display:flex;
+gap:10px;
+flex-wrap:wrap;
+}
+
+nav a{
+color:#fff;
+text-decoration:none;
+padding:6px 8px;
+transition:0.3s;
+}
+
+nav a:hover{
+color:#00ffcc;
+}
+
+nav button{
+background:#00ffcc;
+border:none;
+padding:7px 12px;
+border-radius:5px;
+cursor:pointer;
+font-weight:bold;
+}
+
+/* ===== HERO ===== */
 
 .hero{
 height:90vh;
@@ -110,132 +279,437 @@ flex-direction:column;
 justify-content:center;
 align-items:center;
 text-align:center;
-background:linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1503376780353-7e6692767b70') center/cover;
+padding:20px;
+
+background:
+linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.7)),
+url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=80');
+
+background-size:cover;
+background-position:center;
 }
 
-.hero h1{font-size:45px;animation:slideUp 2s ease;}
-.hero p{margin-top:10px;font-size:18px;color:#ccc;animation:fadeIn 3s ease;}
+.hero h1{
+font-size:55px;
+animation:slideUp 2s ease;
+}
 
-@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
-@keyframes slideUp{from{transform:translateY(40px);opacity:0;}to{transform:translateY(0);opacity:1;}}
+.hero p{
+margin-top:15px;
+font-size:20px;
+color:#ddd;
+animation:fadeIn 3s ease;
+}
 
-.section{padding:40px;text-align:center;}
+/* ===== SECTIONS ===== */
 
-.cards{display:flex;flex-wrap:wrap;justify-content:center;gap:20px;}
-.card{background:#11182b;padding:20px;border-radius:10px;width:250px;transition:0.3s;}
-.card:hover{transform:scale(1.05);}
+.section{
+padding:60px 20px;
+text-align:center;
+}
 
-.panel{background:#11182b;padding:20px;border-radius:10px;margin-top:15px;min-height:80px;}
+.section h2{
+margin-bottom:20px;
+font-size:35px;
+color:#00ffcc;
+}
 
-.project-slider{position:relative;max-width:500px;margin:auto;overflow:hidden;border-radius:10px;}
-.project-slider img{width:100%;display:none;}
-.project-slider img.active{display:block;animation:fade 1s ease;}
-@keyframes fade{from{opacity:0;}to{opacity:1;}}
+/* ===== CARDS ===== */
 
-.typing{border-right:2px solid #00ffcc;white-space:normal;}
+.cards{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:20px;
+margin-top:20px;
+}
 
-.star{
+.card{
+background:#11182b;
+padding:25px;
+border-radius:12px;
+width:260px;
+transition:0.4s;
+box-shadow:0 0 15px rgba(0,0,0,0.3);
+}
+
+.card:hover{
+transform:translateY(-10px);
+}
+
+.card h3{
+margin-bottom:10px;
+color:#00ffcc;
+}
+
+/* ===== PROJECT SLIDER ===== */
+
+.project-slider{
+position:relative;
+max-width:700px;
+margin:auto;
+overflow:hidden;
+border-radius:10px;
+}
+
+.project-slider img{
+width:100%;
+display:none;
+}
+
+.project-slider img.active{
+display:block;
+animation:fadeIn 1s ease;
+}
+
+/* ===== PANEL ===== */
+
+.panel{
+background:#11182b;
+padding:20px;
+border-radius:10px;
+margin-top:20px;
+max-width:700px;
+margin-left:auto;
+margin-right:auto;
+}
+
+/* ===== WHATSAPP ===== */
+
+.whatsapp{
 position:fixed;
-top:-10px;
-width:6px;
-height:6px;
-background:white;
+bottom:20px;
+right:20px;
+background:#25d366;
+color:white;
+width:60px;
+height:60px;
+display:flex;
+justify-content:center;
+align-items:center;
 border-radius:50%;
-animation:fall linear forwards;
-z-index:9998;
+font-size:28px;
+text-decoration:none;
+z-index:9999;
+box-shadow:0 0 15px rgba(0,0,0,0.4);
+animation:pulse 2s infinite;
 }
 
-@keyframes fall{
-0%{transform:translateY(0);opacity:1;}
-100%{transform:translateY(110vh);opacity:0;}
+@keyframes pulse{
+0%{transform:scale(1);}
+50%{transform:scale(1.1);}
+100%{transform:scale(1);}
 }
 
-</style></head>
-<body><!-- 🚪 GARAGE INTRO --><div id="garageIntro">
-<div class="garage-bg g1"></div>
-<div class="garage-bg g2"></div>
-<div class="garage-bg g3"></div>
-<div class="door leftDoor"></div>
-<div class="door rightDoor"></div>
-</div><audio id="engineStart">
-<source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_8c8b1b1e5b.mp3?filename=car-engine-start-11366.mp3" type="audio/mpeg">
-</audio><audio id="welcomeMusic" loop>
+/* ===== FOOTER ===== */
+
+footer{
+background:#11182b;
+padding:20px;
+text-align:center;
+color:#aaa;
+}
+
+/* ===== MOBILE ===== */
+
+@media(max-width:768px){
+
+.hero h1{
+font-size:34px;
+}
+
+.hero p{
+font-size:16px;
+}
+
+header{
+flex-direction:column;
+gap:10px;
+}
+
+nav{
+justify-content:center;
+}
+
+.logo-text{
+font-size:28px;
+letter-spacing:3px;
+}
+
+.loading-bar{
+width:220px;
+}
+
+.car-loader{
+transform:scale(0.85);
+}
+
+.card{
+width:100%;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- ===== PRELOADER ===== -->
+
+<div id="preloader">
+
+<div class="overlay"></div>
+
+<div class="loader-content">
+
+<div class="car-loader">
+<div class="car-body"></div>
+<div class="wheel wheel1"></div>
+<div class="wheel wheel2"></div>
+</div>
+
+<h1 class="logo-text">
+OBOYE AUTOSHOP
+</h1>
+
+<p class="loading-text">
+Loading Premium Auto Experience...
+</p>
+
+<div class="loading-bar">
+<div class="loading-progress"></div>
+</div>
+
+</div>
+
+</div>
+
+<!-- ===== AUDIO ===== -->
+
+<audio id="welcomeMusic" loop>
 <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-</audio><audio id="launchMusic">
-<source src="https://cdn.pixabay.com/download/audio/2022/03/16/audio_3b1c6f1b2d.mp3?filename=corporate-inspire-11018.mp3" type="audio/mpeg">
-</audio><div id="preloader">
-<div class="loader"></div>
-<p>Loading Oboye Autoshop...</p>
-</div><header>
+</audio>
+
+<!-- ===== HEADER ===== -->
+
+<header>
+
 <h2>Oboye Autoshop</h2>
+
 <nav>
 <a href="#home">Home</a>
 <a href="#about">About</a>
+<a href="#services">Services</a>
 <a href="#projects">Projects</a>
 <a href="#contact">Contact</a>
+
 <button onclick="toggleMusic()">🔊 Music</button>
 <button onclick="readPage()">🔊 Read</button>
 </nav>
-</header><section class="hero" id="home">
+
+</header>
+
+<!-- ===== HERO ===== -->
+
+<section class="hero" id="home">
+
 <h1>Welcome to Oboye Autoshop</h1>
-<p>Your trusted car repair & diagnostics center</p>
-</section><section class="section" id="about">
+
+<p>
+Your trusted automobile repair & diagnostics center
+</p>
+
+</section>
+
+<!-- ===== ABOUT ===== -->
+
+<section class="section" id="about">
+
 <h2>About Us</h2>
-<p>We provide high-quality automobile repair, diagnostics, engine tuning and mechanical services.</p>
-</section><section class="section" id="projects">
-<h2>Our Projects</h2>
-<div class="project-slider">
-<img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70" class="active">
-<img src="https://images.unsplash.com/photo-1487754180451-c456f719a1fc">
+
+<p>
+We provide high-quality automobile repair,
+diagnostics, engine tuning and professional mechanical services.
+</p>
+
+</section>
+
+<!-- ===== SERVICES ===== -->
+
+<section class="section" id="services">
+
+<h2>Our Services</h2>
+
+<div class="cards">
+
+<div class="card">
+<h3>Engine Repair</h3>
+<p>Professional engine diagnostics and repairs.</p>
 </div>
+
+<div class="card">
+<h3>ECU Tuning</h3>
+<p>Advanced electronic tuning and optimization.</p>
+</div>
+
+<div class="card">
+<h3>Oil Change</h3>
+<p>Premium oil servicing and maintenance.</p>
+</div>
+
+</div>
+
+</section>
+
+<!-- ===== PROJECTS ===== -->
+
+<section class="section" id="projects">
+
+<h2>Our Projects</h2>
+
+<div class="project-slider">
+
+<img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=80" class="active">
+
+<img src="https://images.unsplash.com/photo-1487754180451-c456f719a1fc?auto=format&fit=crop&w=1200&q=80">
+
+</div>
+
 <div class="panel">
 <p id="typingText"></p>
 </div>
-</section><section class="section" id="contact">
+
+</section>
+
+<!-- ===== CONTACT ===== -->
+
+<section class="section" id="contact">
+
 <h2>Contact Us</h2>
-<p>Call or WhatsApp: +233 546 330 886</p>
-</section><script>
+
+<p>
+Call or WhatsApp: +233 546 330 886
+</p>
+
+</section>
+
+<!-- ===== WHATSAPP ===== -->
+
+<a href="https://wa.me/233546330886" class="whatsapp" target="_blank">
+💬
+</a>
+
+<!-- ===== FOOTER ===== -->
+
+<footer>
+<p>
+© 2026 Oboye Autoshop | Designed by E & D TECHNOLOGY
+</p>
+</footer>
+
+<script>
+
+/* ===== FIXED PRELOADER ===== */
+
 window.addEventListener("load",()=>{
-setTimeout(()=>document.getElementById("garageIntro").classList.add("open"),300);
+
+const preloader=document.getElementById("preloader");
+
 setTimeout(()=>{
-document.getElementById("garageIntro").style.display="none";
-document.getElementById("preloader").style.display="none";
-},3000);
 
-let engine=document.getElementById("engineStart");
-engine.volume=0.7;
-engine.play().catch(()=>{});
+preloader.style.opacity="0";
 
-let launch=document.getElementById("launchMusic");
-launch.volume=0.6;
-launch.play().catch(()=>{window.addEventListener("click",()=>launch.play(),{once:true});});
+setTimeout(()=>{
 
-setInterval(()=>{
-for(let i=0;i<5;i++){
-let star=document.createElement("div");
-star.classList.add("star");
-star.style.left=Math.random()*100+"vw";
-star.style.animationDuration=(Math.random()*3+2)+"s";
-document.body.appendChild(star);
-setTimeout(()=>star.remove(),6000);
-}
-},500);
+preloader.remove();
+
+},1000);
+
+},2500);
+
 });
+
+/* ===== MUSIC ===== */
 
 let music=document.getElementById("welcomeMusic");
 let musicOn=false;
-function toggleMusic(){if(!musicOn){music.play();musicOn=true;}else{music.pause();musicOn=false;}}
+
+function toggleMusic(){
+
+if(!musicOn){
+music.play();
+musicOn=true;
+}else{
+music.pause();
+musicOn=false;
+}
+
+}
+
+/* ===== TYPEWRITER ===== */
 
 const text="We recently completed engine overhaul for Toyota Corolla, BMW diagnostics upgrade and ECU tuning systems.";
+
 let i=0;
-function typeWriter(){if(i<text.length){document.getElementById("typingText").innerHTML+=text.charAt(i);i++;setTimeout(typeWriter,40);}}
+
+function typeWriter(){
+
+if(i<text.length){
+
+document.getElementById("typingText").innerHTML+=text.charAt(i);
+
+i++;
+
+setTimeout(typeWriter,40);
+
+}
+
+}
+
+/* ===== PROJECT SLIDER ===== */
 
 let index=0;
-function slider(){let imgs=document.querySelectorAll(".project-slider img");imgs.forEach(img=>img.classList.remove("active"));index=(index+1)%imgs.length;imgs[index].classList.add("active");}
 
-function speakText(text){let speech=new SpeechSynthesisUtterance(text.replace(/\d/g,d=>["zero","one","two","three","four","five","six","seven","eight","nine"][d]));window.speechSynthesis.speak(speech);}
-function readPage(){speakText(document.body.innerText);}
+function slider(){
 
-window.addEventListener("load",()=>{typeWriter();setInterval(slider,3000);});
-</script></body>
+let imgs=document.querySelectorAll(".project-slider img");
+
+imgs.forEach(img=>img.classList.remove("active"));
+
+index=(index+1)%imgs.length;
+
+imgs[index].classList.add("active");
+
+}
+
+/* ===== SPEECH ===== */
+
+function speakText(text){
+
+let speech=new SpeechSynthesisUtterance(text);
+
+window.speechSynthesis.speak(speech);
+
+}
+
+function readPage(){
+
+speakText(document.body.innerText);
+
+}
+
+/* ===== START FUNCTIONS ===== */
+
+window.addEventListener("load",()=>{
+
+typeWriter();
+
+setInterval(slider,3000);
+
+});
+
+</script>
+
+</body>
 </html>
