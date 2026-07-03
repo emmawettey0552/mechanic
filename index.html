@@ -4,17 +4,20 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Oboye Autoshop</title>
+<title>Oboye Autoshop | Professional Auto Repair & Diagnostics</title>
+
+<meta name="description" content="Oboye Autoshop - Professional car repair, diagnostics, engine tuning, and automotive services in Ghana. Trusted mechanics you can rely on.">
+<meta name="keywords" content="mechanic, car repair, auto shop, diagnostics, engine repair, Ghana mechanic, Oboye Autoshop">
+<meta name="author" content="Oboye Autoshop">
 
 <style>
 
-/* ===== GLOBAL ===== */
-
+/* ================= GLOBAL RESET ================= */
 *{
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:Arial,sans-serif;
+font-family: 'Segoe UI', Arial, sans-serif;
 }
 
 html{
@@ -27,8 +30,7 @@ color:#fff;
 overflow-x:hidden;
 }
 
-/* ===== PREMIUM PRELOADER ===== */
-
+/* ================= PRELOADER ================= */
 #preloader{
 position:fixed;
 inset:0;
@@ -36,262 +38,94 @@ background:#05070d;
 display:flex;
 justify-content:center;
 align-items:center;
-z-index:999999;
-transition:opacity 1s ease;
-overflow:hidden;
+z-index:99999;
+flex-direction:column;
 }
 
-#preloader .overlay{
-position:absolute;
-inset:0;
-background:
-linear-gradient(rgba(0,0,0,0.85),rgba(0,0,0,0.9)),
-url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1400&q=80');
-background-size:cover;
-background-position:center;
-filter:blur(4px) brightness(0.4);
-transform:scale(1.1);
-animation:bgZoom 8s infinite alternate ease-in-out;
-}
-
-.loader-content{
-position:relative;
-z-index:2;
+#preloader .loader-box{
 text-align:center;
 }
 
-/* ===== CAR ===== */
-
-.car-loader{
-width:170px;
-height:75px;
-margin:auto;
-position:relative;
-animation:bounce 1.5s infinite;
-}
-
-.car-body{
-width:170px;
-height:42px;
+.car{
+width:120px;
+height:60px;
 background:linear-gradient(90deg,#00ffcc,#00aaff);
-border-radius:22px;
-position:absolute;
-top:10px;
-box-shadow:0 0 30px #00ffcc;
+border-radius:15px;
+position:relative;
+animation:float 1.5s infinite ease-in-out;
+box-shadow:0 0 20px #00ffcc;
 }
 
 .wheel{
-width:32px;
-height:32px;
+width:25px;
+height:25px;
 background:#111;
-border:5px solid #777;
+border:3px solid #555;
 border-radius:50%;
 position:absolute;
-bottom:0;
+bottom:-10px;
 animation:spin 0.8s linear infinite;
 }
 
-.wheel1{left:20px;}
-.wheel2{right:20px;}
-
-/* ===== TEXT ===== */
-
-.logo-text{
-margin-top:22px;
-font-size:38px;
-color:#00ffcc;
-letter-spacing:4px;
-font-weight:bold;
-animation:glow 2s infinite alternate;
-}
+.wheel.left{left:15px;}
+.wheel.right{right:15px;}
 
 .loading-text{
-margin-top:12px;
-color:#ccc;
-font-size:15px;
+margin-top:15px;
+color:#aaa;
+font-size:14px;
 }
 
-/* ===== LOADING BAR ===== */
-
-.loading-bar{
-width:260px;
-height:6px;
-background:#1b2236;
-border-radius:20px;
-margin:22px auto;
-overflow:hidden;
-box-shadow:0 0 10px rgba(0,255,204,0.2);
-}
-
-.loading-progress{
-width:0%;
-height:100%;
-background:linear-gradient(90deg,#00ffcc,#00aaff);
-animation:load 2.8s forwards;
-}
-
-/* ===== GARAGE INTRO ===== */
-
-#garageIntro{
-position:fixed;
-inset:0;
-z-index:10000;
-display:flex;
-perspective:1600px;
-background:#000;
-overflow:hidden;
-}
-
-.garage-bg{
-position:absolute;
-inset:0;
-background-size:cover;
-background-position:center;
-opacity:0;
-animation:garageSlide 12s infinite;
-filter:brightness(0.5);
-}
-
-.g1{
-background-image:url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1400&q=80');
-}
-
-.g2{
-background-image:url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1400&q=80');
-}
-
-.g3{
-background-image:url('https://images.unsplash.com/photo-1487754180451-c456f719a1fc?auto=format&fit=crop&w=1400&q=80');
-}
-
-.g2{animation-delay:4s;}
-.g3{animation-delay:8s;}
-
-@keyframes garageSlide{
-0%{opacity:0;transform:scale(1.1);}
-10%{opacity:1;}
-30%{opacity:1;}
-40%{opacity:0;}
-100%{opacity:0;}
-}
-
-.door{
-width:50%;
-height:100%;
-background:#111;
-transition:transform 2.2s cubic-bezier(.77,0,.18,1);
-box-shadow:inset 0 0 60px rgba(0,255,204,0.25);
-}
-
-.leftDoor{transform-origin:left center;}
-.rightDoor{transform-origin:right center;}
-
-#garageIntro.open .leftDoor{
-transform:rotateY(-120deg);
-}
-
-#garageIntro.open .rightDoor{
-transform:rotateY(120deg);
-}
-
-/* ===== HEADER ===== */
-
+/* ================= HEADER ================= */
 header{
-padding:15px 20px;
-display:flex;
-justify-content:space-between;
-align-items:center;
-flex-wrap:wrap;
 position:sticky;
 top:0;
 z-index:1000;
-background:rgba(17,24,43,0.9);
-backdrop-filter:blur(12px);
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:15px 20px;
+background:rgba(10,15,30,0.85);
+backdrop-filter:blur(10px);
 border-bottom:1px solid rgba(255,255,255,0.08);
 }
 
-/* ===== LOGO ===== */
-
 .logo{
-display:flex;
-flex-wrap:wrap;
-align-items:center;
-gap:2px;
-font-size:28px;
+font-size:24px;
 font-weight:bold;
 color:#00ffcc;
 }
 
-.logo span{
-display:inline-block;
-animation:floatLetter 2s infinite ease-in-out;
-}
-
-.logo span:nth-child(2){animation-delay:0.1s;}
-.logo span:nth-child(3){animation-delay:0.2s;}
-.logo span:nth-child(4){animation-delay:0.3s;}
-.logo span:nth-child(5){animation-delay:0.4s;}
-.logo span:nth-child(7){animation-delay:0.5s;}
-.logo span:nth-child(8){animation-delay:0.6s;}
-.logo span:nth-child(9){animation-delay:0.7s;}
-.logo span:nth-child(10){animation-delay:0.8s;}
-.logo span:nth-child(11){animation-delay:0.9s;}
-.logo span:nth-child(12){animation-delay:1s;}
-.logo span:nth-child(13){animation-delay:1.1s;}
-.logo span:nth-child(14){animation-delay:1.2s;}
-
-.space{
-width:10px;
-}
-
-/* ===== NAVIGATION ===== */
-
+/* NAV */
 nav{
 display:flex;
-flex-wrap:wrap;
 gap:12px;
 align-items:center;
+flex-wrap:wrap;
 }
 
-nav a,
-nav button{
-padding:10px 16px;
-border:none;
-border-radius:50px;
-background:rgba(255,255,255,0.08);
-color:#fff;
+nav a{
 text-decoration:none;
+color:#fff;
+padding:8px 14px;
+border-radius:20px;
+background:rgba(255,255,255,0.08);
+transition:0.3s;
 font-size:14px;
-font-weight:bold;
-cursor:pointer;
-transition:0.35s;
-backdrop-filter:blur(10px);
-box-shadow:0 0 12px rgba(0,0,0,0.2);
 }
 
-nav a:hover,
-nav button:hover{
-transform:translateY(-4px) scale(1.05);
+nav a:hover{
 background:#00ffcc;
 color:#000;
-box-shadow:0 0 18px #00ffcc;
 }
 
-/* ===== WHATSAPP ===== */
-
-.whatsapp-btn{
+/* WhatsApp button */
+.whatsapp{
 background:#25d366 !important;
-color:white !important;
-animation:pulseWhatsApp 2s infinite;
+font-weight:bold;
 }
 
-.whatsapp-btn:hover{
-background:#1ebe5d !important;
-color:white !important;
-}
-
-/* ===== HERO ===== */
-
+/* ================= HERO ================= */
 .hero{
 height:90vh;
 display:flex;
@@ -299,264 +133,60 @@ flex-direction:column;
 justify-content:center;
 align-items:center;
 text-align:center;
+padding:20px;
 position:relative;
-overflow:hidden;
 }
 
 .hero::before{
 content:"";
 position:absolute;
 inset:0;
-background-size:cover;
-background-position:center;
-animation:heroSlide 18s infinite;
-filter:brightness(0.45);
-transform:scale(1.1);
-}
-
-.hero h1,
-.hero p{
-position:relative;
-z-index:2;
+background:url('images/hero.jpg') center/cover no-repeat;
+filter:brightness(0.4);
+z-index:-1;
 }
 
 .hero h1{
-font-size:55px;
-animation:slideUp 2s ease;
+font-size:48px;
+color:#fff;
 }
 
 .hero p{
 margin-top:10px;
 color:#ddd;
 font-size:18px;
-animation:fadeIn 3s ease;
 }
 
-/* ===== SECTIONS ===== */
-
-.section{
-padding:60px 20px;
-text-align:center;
-}
-
-.section h2{
-color:#00ffcc;
-margin-bottom:20px;
-font-size:35px;
-}
-
-/* ===== CARDS ===== */
-
-.cards{
-display:flex;
-flex-wrap:wrap;
-justify-content:center;
-gap:20px;
-}
-
-.card{
-background:#11182b;
-padding:20px;
-border-radius:12px;
-width:250px;
-transition:0.3s;
-box-shadow:0 0 20px rgba(0,0,0,0.3);
-}
-
-.card:hover{
-transform:translateY(-10px) scale(1.05);
-box-shadow:0 0 20px #00ffcc;
-}
-
-/* ===== PROJECT SLIDER ===== */
-
-.project-slider{
-max-width:700px;
-margin:auto;
-overflow:hidden;
-border-radius:15px;
-box-shadow:0 0 25px rgba(0,0,0,0.5);
-}
-
-.project-slider img{
-width:100%;
-display:none;
-}
-
-.project-slider img.active{
-display:block;
-animation:fade 1s ease;
-}
-
-/* ===== PANEL ===== */
-
-.panel{
-background:#11182b;
-padding:20px;
-border-radius:12px;
+.hero button{
 margin-top:20px;
+padding:12px 20px;
+border:none;
+border-radius:25px;
+cursor:pointer;
+background:#00ffcc;
+color:#000;
+font-weight:bold;
+transition:0.3s;
 }
 
-/* ===== TYPING ===== */
-
-.typing{
-border-right:2px solid #00ffcc;
-display:inline;
+.hero button:hover{
+transform:scale(1.05);
 }
 
-/* ===== STARS ===== */
-
-.star{
-position:fixed;
-top:-10px;
-width:5px;
-height:5px;
-background:white;
-border-radius:50%;
-animation:fall linear forwards;
-z-index:9998;
-}
-
-/* ===== FOOTER ===== */
-
-footer{
-background:#11182b;
-padding:20px;
-text-align:center;
-color:#aaa;
-margin-top:40px;
-}
-
-/* ===== ANIMATIONS ===== */
-
-@keyframes load{
-to{width:100%;}
-}
-
+/* ================= ANIMATIONS ================= */
 @keyframes spin{
 to{transform:rotate(360deg);}
 }
 
-@keyframes bounce{
-50%{transform:translateY(-8px);}
+@keyframes float{
+50%{transform:translateY(-5px);}
 }
 
-@keyframes glow{
-from{text-shadow:0 0 10px #00ffcc;}
-to{text-shadow:0 0 30px #00ffcc;}
-}
-
-@keyframes bgZoom{
-from{transform:scale(1.1);}
-to{transform:scale(1.2);}
-}
-
-@keyframes slideUp{
-from{
-transform:translateY(40px);
-opacity:0;
-}
-to{
-transform:translateY(0);
-opacity:1;
-}
-}
-
-@keyframes fadeIn{
-from{opacity:0;}
-to{opacity:1;}
-}
-
-@keyframes fade{
-from{opacity:0;}
-to{opacity:1;}
-}
-
-@keyframes floatLetter{
-0%,100%{
-transform:translateY(0);
-text-shadow:0 0 8px #00ffcc;
-}
-
-50%{
-transform:translateY(-8px);
-text-shadow:0 0 20px #00ffcc;
-}
-}
-
-@keyframes pulseWhatsApp{
-0%{
-box-shadow:0 0 0 0 rgba(37,211,102,0.7);
-}
-
-70%{
-box-shadow:0 0 0 15px rgba(37,211,102,0);
-}
-
-100%{
-box-shadow:0 0 0 0 rgba(37,211,102,0);
-}
-}
-
-@keyframes fall{
-to{
-transform:translateY(110vh);
-opacity:0;
-}
-}
-
-@keyframes heroSlide{
-
-0%{
-background-image:url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1400&q=80');
-}
-
-33%{
-background-image:url('https://images.unsplash.com/photo-1487754180451-c456f719a1fc?auto=format&fit=crop&w=1400&q=80');
-}
-
-66%{
-background-image:url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1400&q=80');
-}
-
-100%{
-background-image:url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1400&q=80');
-}
-
-}
-
-/* ===== MOBILE ===== */
-
+/* ================= MOBILE ================= */
 @media(max-width:768px){
-
-.hero h1{
-font-size:35px;
-}
-
-header{
-flex-direction:column;
-gap:15px;
-}
-
-.logo{
-justify-content:center;
-font-size:24px;
-}
-
-nav{
-justify-content:center;
-}
-
-nav a,
-nav button{
-font-size:13px;
-padding:9px 14px;
-}
-
-.card{
-width:100%;
-}
-
+.hero h1{font-size:32px;}
+nav{justify-content:center;}
+header{flex-direction:column;gap:10px;}
 }
 
 </style>
@@ -564,329 +194,657 @@ width:100%;
 
 <body>
 
-<!-- ===== PRELOADER ===== -->
-
+<!-- ================= PRELOADER ================= -->
 <div id="preloader">
-
-<div class="overlay"></div>
-
-<div class="loader-content">
-
-<div class="car-loader">
-<div class="car-body"></div>
-<div class="wheel wheel1"></div>
-<div class="wheel wheel2"></div>
+<div class="loader-box">
+<div class="car">
+<div class="wheel left"></div>
+<div class="wheel right"></div>
+</div>
+<p class="loading-text">Loading Oboye Autoshop...</p>
+</div>
 </div>
 
-<div class="logo-text">
-OBOYE AUTOSHOP
-</div>
-
-<p class="loading-text">
-Loading Premium Auto Experience...
-</p>
-
-<div class="loading-bar">
-<div class="loading-progress"></div>
-</div>
-
-</div>
-
-</div>
-
-<!-- ===== GARAGE INTRO ===== -->
-
-<div id="garageIntro">
-
-<div class="garage-bg g1"></div>
-<div class="garage-bg g2"></div>
-<div class="garage-bg g3"></div>
-
-<div class="door leftDoor"></div>
-<div class="door rightDoor"></div>
-
-</div>
-
-<!-- ===== AUDIO ===== -->
-
-<audio id="engineStart">
-<source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_8c8b1b1e5b.mp3?filename=car-engine-start-11366.mp3" type="audio/mpeg">
-</audio>
-
-<audio id="welcomeMusic" loop>
-<source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-</audio>
-
-<!-- ===== HEADER ===== -->
-
+<!-- ================= HEADER ================= -->
 <header>
-
-<h2 class="logo">
-
-<span>O</span>
-<span>b</span>
-<span>o</span>
-<span>y</span>
-<span>e</span>
-
-<span class="space"></span>
-
-<span>A</span>
-<span>u</span>
-<span>t</span>
-<span>o</span>
-<span>s</span>
-<span>h</span>
-<span>o</span>
-<span>p</span>
-
-</h2>
+<div class="logo">Oboye Autoshop</div>
 
 <nav>
-
-<a href="#home">🏠 Home</a>
-
-<a href="#about">📖 About</a>
-
-<a href="#projects">🚗 Projects</a>
-
-<a href="#contact">📞 Contact</a>
-
-<button onclick="toggleMusic()">🎵 Music</button>
-
-<button onclick="readPage()">🔊 Read</button>
-
-<a
-class="whatsapp-btn"
-href="https://wa.me/233546330886?text=Hello%20Oboye%20Autoshop%2C%20I%20need%20your%20services."
-target="_blank">
-
-💬 WhatsApp
-
-</a>
-
+<a href="#home">Home</a>
+<a href="#about">About</a>
+<a href="#services">Services</a>
+<a href="#contact">Contact</a>
+<a class="whatsapp" href="https://wa.me/233546330886" target="_blank">WhatsApp</a>
 </nav>
-
 </header>
 
-<!-- ===== HERO ===== -->
-
+<!-- ================= HERO ================= -->
 <section class="hero" id="home">
-
-<h1>Welcome to Oboye Autoshop</h1>
-
-<p>Your trusted automobile repair & diagnostics center</p>
-
+<h1>Professional Auto Repair & Diagnostics</h1>
+<p>Your trusted mechanic workshop in Ghana</p>
+<button onclick="document.getElementById('services').scrollIntoView()">Explore Services</button>
 </section>
 
-<!-- ===== ABOUT ===== -->
+<script>
+// PRELOADER REMOVE
+window.addEventListener("load",()=>{
+setTimeout(()=>{
+document.getElementById("preloader").style.display="none";
+},2000);
+});
+</script>
+<!-- ================= ABOUT ================= -->
+<section id="about" class="section">
+<div class="container">
 
-<section class="section" id="about">
+<h2>About Oboye Autoshop</h2>
 
-<h2>About Us</h2>
-
-<p>
-We provide high-quality automobile repair,
-diagnostics, engine tuning and mechanical services.
+<p class="section-text">
+Oboye Autoshop is a professional automobile repair and diagnostics center dedicated to providing high-quality mechanical services.
+We specialize in engine repair, ECU diagnostics, vehicle maintenance, and performance tuning using modern tools and expert technicians.
 </p>
 
+<div class="about-grid">
+
+<div class="about-box">
+<h3>Our Mission</h3>
+<p>To deliver reliable, affordable, and professional automotive solutions to every customer.</p>
+</div>
+
+<div class="about-box">
+<h3>Our Vision</h3>
+<p>To become one of the most trusted auto repair centers in Ghana and beyond.</p>
+</div>
+
+<div class="about-box">
+<h3>Experience</h3>
+<p>Over 5+ years of hands-on mechanical and diagnostic expertise.</p>
+</div>
+
+</div>
+
+</div>
 </section>
 
-<!-- ===== SERVICES ===== -->
+<!-- ================= SERVICES ================= -->
+<section id="services" class="section dark">
+<div class="container">
 
+<h2>Our Services</h2>
+
+<div class="grid">
+
+<div class="card">
+<h3>Engine Repair</h3>
+<p>Full engine diagnostics, repair, and replacement services.</p>
+</div>
+
+<div class="card">
+<h3>ECU Diagnostics</h3>
+<p>Advanced computer diagnostics for modern vehicles.</p>
+</div>
+
+<div class="card">
+<h3>Oil & Maintenance</h3>
+<p>Regular servicing to keep your vehicle in top condition.</p>
+</div>
+
+<div class="card">
+<h3>Brake System</h3>
+<p>Brake inspection, repair, and replacement services.</p>
+</div>
+
+</div>
+
+</div>
+</section>
+
+<!-- ================= WHY CHOOSE US ================= -->
 <section class="section">
+<div class="container">
 
-<h2>Services</h2>
+<h2>Why Choose Us</h2>
 
-<div class="cards">
+<div class="grid">
 
-<div class="card">Engine Repair</div>
+<div class="card highlight">
+<h3>✔ Certified Mechanics</h3>
+<p>Highly trained professionals with real experience.</p>
+</div>
 
-<div class="card">ECU Diagnostics</div>
+<div class="card highlight">
+<h3>✔ Modern Tools</h3>
+<p>We use advanced diagnostic and repair equipment.</p>
+</div>
 
-<div class="card">Oil Change</div>
+<div class="card highlight">
+<h3>✔ Affordable Pricing</h3>
+<p>Quality service at reasonable and transparent prices.</p>
+</div>
+
+<div class="card highlight">
+<h3>✔ Fast Service</h3>
+<p>Quick turnaround time without compromising quality.</p>
+</div>
 
 </div>
 
+</div>
 </section>
 
-<!-- ===== PROJECTS ===== -->
+<!-- ================= STATS ================= -->
+<section class="stats">
+<div class="container stats-grid">
 
-<section class="section" id="projects">
-
-<h2>Projects</h2>
-
-<div class="project-slider">
-
-<img class="active" src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=80">
-
-<img src="https://images.unsplash.com/photo-1487754180451-c456f719a1fc?auto=format&fit=crop&w=1200&q=80">
-
-<img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1200&q=80">
-
+<div>
+<h3>500+</h3>
+<p>Vehicles Repaired</p>
 </div>
 
-<div class="panel">
-
-<p id="typingText" class="typing"></p>
-
+<div>
+<h3>5+</h3>
+<p>Years Experience</p>
 </div>
 
+<div>
+<h3>300+</h3>
+<p>Happy Clients</p>
+</div>
+
+<div>
+<h3>100%</h3>
+<p>Customer Satisfaction</p>
+</div>
+
+</div>
 </section>
 
-<!-- ===== CONTACT ===== -->
+<!-- ================= BRANDS ================= -->
+<section class="section dark">
+<div class="container">
 
-<section class="section" id="contact">
+<h2>Brands We Service</h2>
+
+<div class="brands">
+
+<div class="brand">Toyota</div>
+<div class="brand">Honda</div>
+<div class="brand">BMW</div>
+<div class="brand">Mercedes</div>
+<div class="brand">Ford</div>
+
+</div>
+
+</div>
+</section>
+
+<!-- ================= EXTRA CSS (PART 2 STYLES) ================= -->
+<style>
+
+/* SECTION LAYOUT */
+.section{
+padding:70px 20px;
+text-align:center;
+}
+
+.section.dark{
+background:#0f1628;
+}
+
+.container{
+max-width:1100px;
+margin:auto;
+}
+
+/* TEXT */
+.section h2{
+font-size:32px;
+margin-bottom:20px;
+color:#00ffcc;
+}
+
+.section-text{
+max-width:700px;
+margin:auto;
+color:#ccc;
+line-height:1.6;
+}
+
+/* ABOUT */
+.about-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
+margin-top:30px;
+}
+
+.about-box{
+background:#111a2e;
+padding:20px;
+border-radius:12px;
+}
+
+/* SERVICES + WHY */
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+margin-top:30px;
+}
+
+.card{
+background:#111a2e;
+padding:20px;
+border-radius:12px;
+transition:0.3s;
+}
+
+.card:hover{
+transform:translateY(-8px);
+box-shadow:0 0 15px #00ffcc;
+}
+
+.highlight{
+border-left:4px solid #00ffcc;
+}
+
+/* STATS */
+.stats{
+background:#0b0f1a;
+padding:60px 20px;
+text-align:center;
+}
+
+.stats-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:20px;
+}
+
+.stats h3{
+font-size:30px;
+color:#00ffcc;
+}
+
+/* BRANDS */
+.brands{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:15px;
+margin-top:20px;
+}
+
+.brand{
+padding:10px 18px;
+background:#111a2e;
+border-radius:20px;
+color:#fff;
+}
+
+  </style>
+  <!-- ================= TEAM ================= -->
+<section class="section">
+<div class="container">
+
+<h2>Meet Our Experts</h2>
+
+<div class="grid">
+
+<div class="card">
+<h3>Senior Mechanic</h3>
+<p>Engine specialist with advanced diagnostic skills.</p>
+</div>
+
+<div class="card">
+<h3>Electrical Technician</h3>
+<p>Expert in ECU and vehicle electrical systems.</p>
+</div>
+
+<div class="card">
+<h3>Service Advisor</h3>
+<p>Helps customers understand repairs and costs clearly.</p>
+</div>
+
+</div>
+
+</div>
+</section>
+
+<!-- ================= GALLERY ================= -->
+<section class="section dark">
+<div class="container">
+
+<h2>Our Projects</h2>
+
+<div class="gallery">
+
+<img src="images/project1.jpg" alt="Project 1">
+<img src="images/project2.jpg" alt="Project 2">
+<img src="images/project3.jpg" alt="Project 3">
+
+</div>
+
+</div>
+</section>
+
+<!-- ================= TESTIMONIALS ================= -->
+<section class="section">
+<div class="container">
+
+<h2>What Clients Say</h2>
+
+<div class="grid">
+
+<div class="card">
+<p>"Excellent service! My car runs like new again."</p>
+<h4>- Kwame A.</h4>
+</div>
+
+<div class="card">
+<p>"Very professional and affordable workshop."</p>
+<h4>- Ama B.</h4>
+</div>
+
+<div class="card">
+<p>"Fast diagnostics and honest pricing. Highly recommend."</p>
+<h4>- Joseph K.</h4>
+</div>
+
+</div>
+
+</div>
+</section>
+
+<!-- ================= FAQ ================= -->
+<section class="section dark">
+<div class="container">
+
+<h2>Frequently Asked Questions</h2>
+
+<div class="faq">
+
+<div class="faq-item">
+<h3 onclick="toggleFAQ(this)">How long does repair take?</h3>
+<p class="faq-answer">It depends on the issue, but most repairs are completed within 1–3 days.</p>
+</div>
+
+<div class="faq-item">
+<h3 onclick="toggleFAQ(this)">Do you offer diagnostics?</h3>
+<p class="faq-answer">Yes, we provide full computerized vehicle diagnostics.</p>
+</div>
+
+<div class="faq-item">
+<h3 onclick="toggleFAQ(this)">Do I need an appointment?</h3>
+<p class="faq-answer">Walk-ins are welcome, but booking is recommended.</p>
+</div>
+
+</div>
+
+</div>
+</section>
+
+<!-- ================= BOOKING FORM ================= -->
+<section class="section">
+<div class="container">
+
+<h2>Book an Appointment</h2>
+
+<form class="form">
+
+<input type="text" placeholder="Your Name" required>
+<input type="tel" placeholder="Phone Number" required>
+<input type="text" placeholder="Car Model" required>
+
+<select>
+<option>Select Service</option>
+<option>Engine Repair</option>
+<option>Diagnostics</option>
+<option>Oil Change</option>
+<option>Brake Service</option>
+</select>
+
+<textarea placeholder="Describe your issue"></textarea>
+
+<button type="submit">Submit Booking</button>
+
+</form>
+
+</div>
+</section>
+
+<!-- ================= EXTRA CSS (PART 3) ================= -->
+<style>
+
+/* GALLERY */
+.gallery{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:15px;
+margin-top:20px;
+}
+
+.gallery img{
+width:100%;
+border-radius:10px;
+transition:0.3s;
+}
+
+.gallery img:hover{
+transform:scale(1.05);
+}
+
+/* TESTIMONIALS */
+h4{
+margin-top:10px;
+color:#00ffcc;
+}
+
+/* FAQ */
+.faq-item{
+background:#111a2e;
+margin-bottom:10px;
+padding:15px;
+border-radius:10px;
+cursor:pointer;
+}
+
+.faq-answer{
+display:none;
+margin-top:10px;
+color:#ccc;
+}
+
+/* FORM */
+.form{
+display:grid;
+gap:12px;
+max-width:500px;
+margin:auto;
+}
+
+.form input,
+.form select,
+.form textarea{
+padding:12px;
+border:none;
+border-radius:8px;
+background:#111a2e;
+color:#fff;
+}
+
+.form button{
+padding:12px;
+background:#00ffcc;
+border:none;
+border-radius:8px;
+cursor:pointer;
+font-weight:bold;
+}
+
+.form button:hover{
+background:#00ddb3;
+}
+
+</style>
+
+<!-- ================= JS (PART 3) ================= -->
+<script>
+
+/* FAQ TOGGLE */
+function toggleFAQ(el){
+let answer = el.nextElementSibling;
+answer.style.display = (answer.style.display === "block") ? "none" : "block";
+}
+
+                                              </script>
+  <!-- ================= CONTACT ================= -->
+<section class="section dark" id="contact">
+<div class="container">
 
 <h2>Contact Us</h2>
 
-<p>Call or WhatsApp: +233 546 330 886</p>
+<div class="contact-grid">
 
+<div class="contact-info">
+<p><strong>Phone:</strong> +233 546 330 886</p>
+<p><strong>Email:</strong> oboyeautoshop@gmail.com</p>
+<p><strong>Location:</strong> Ghana</p>
+<p><strong>Hours:</strong> Mon - Sat | 8AM - 6PM</p>
+</div>
+
+<div class="map">
+<iframe
+src="https://www.google.com/maps/embed?pb=!1m18..."
+width="100%"
+height="250"
+style="border:0;"
+allowfullscreen=""
+loading="lazy">
+</iframe>
+</div>
+
+</div>
+
+</div>
 </section>
 
-<!-- ===== FOOTER ===== -->
-
+<!-- ================= FOOTER ================= -->
 <footer>
+<div class="container">
 
-© 2026 Oboye Autoshop
+<p>© 2026 Oboye Autoshop. All Rights Reserved.</p>
 
+</div>
 </footer>
 
+<!-- ================= FLOATING BUTTONS ================= -->
+
+<a class="whatsapp-float" href="https://wa.me/233546330886" target="_blank">
+💬
+</a>
+
+<button onclick="scrollToTop()" id="topBtn">⬆</button>
+
+<!-- ================= FINAL CSS ================= -->
+<style>
+
+/* CONTACT */
+.contact-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
+margin-top:20px;
+}
+
+.contact-info{
+background:#111a2e;
+padding:20px;
+border-radius:10px;
+text-align:left;
+}
+
+/* FOOTER */
+footer{
+background:#05070d;
+padding:20px;
+text-align:center;
+color:#aaa;
+}
+
+/* WHATSAPP FLOAT */
+.whatsapp-float{
+position:fixed;
+bottom:20px;
+right:20px;
+background:#25d366;
+color:#fff;
+font-size:24px;
+padding:12px 15px;
+border-radius:50%;
+text-decoration:none;
+box-shadow:0 0 10px rgba(0,0,0,0.3);
+}
+
+/* TOP BUTTON */
+#topBtn{
+position:fixed;
+bottom:80px;
+right:20px;
+display:none;
+padding:10px 12px;
+border:none;
+border-radius:50%;
+background:#00ffcc;
+cursor:pointer;
+}
+
+/* SMOOTH UI */
+html{
+scroll-behavior:smooth;
+}
+
+</style>
+
+<!-- ================= FINAL JAVASCRIPT ================= -->
 <script>
 
-/* ===== PRELOADER + GARAGE ===== */
-
+/* PRELOADER FINAL FIX */
 window.addEventListener("load",()=>{
-
 setTimeout(()=>{
-document.getElementById("garageIntro").classList.add("open");
-},400);
-
-setTimeout(()=>{
-document.getElementById("garageIntro").style.display="none";
-
-document.getElementById("preloader").style.opacity="0";
-
-setTimeout(()=>{
-document.getElementById("preloader").remove();
-},1000);
-
-},3000);
-
-/* ===== ENGINE SOUND ===== */
-
-let engine=document.getElementById("engineStart");
-
-engine.volume=0.7;
-
-engine.play().catch(()=>{});
-
-/* ===== STARS ===== */
-
-setInterval(()=>{
-
-for(let i=0;i<3;i++){
-
-let star=document.createElement("div");
-
-star.classList.add("star");
-
-star.style.left=Math.random()*100+"vw";
-
-star.style.animationDuration=(Math.random()*3+2)+"s";
-
-document.body.appendChild(star);
-
-setTimeout(()=>star.remove(),6000);
-
-}
-
-},900);
-
+document.getElementById("preloader").style.display="none";
+},2000);
 });
 
-/* ===== MUSIC ===== */
+/* SCROLL TO TOP */
+function scrollToTop(){
+window.scrollTo({top:0,behavior:"smooth"});
+}
 
-let music=document.getElementById("welcomeMusic");
-
-let musicOn=false;
-
-function toggleMusic(){
-
-if(!musicOn){
-
-music.play();
-
-musicOn=true;
-
+/* SHOW TOP BUTTON */
+window.addEventListener("scroll",()=>{
+let btn=document.getElementById("topBtn");
+if(window.scrollY > 300){
+btn.style.display="block";
 }else{
-
-music.pause();
-
-musicOn=false;
-
+btn.style.display="none";
 }
+});
 
-}
+/* SIMPLE AUTO HIGHLIGHT NAV */
+let links=document.querySelectorAll("nav a");
 
-/* ===== READ PAGE ===== */
-
-function speakText(text){
-
-let speech=new SpeechSynthesisUtterance(text);
-
-window.speechSynthesis.speak(speech);
-
-}
-
-function readPage(){
-
-speakText(document.body.innerText);
-
-}
-
-/* ===== TYPING EFFECT ===== */
-
-const text=
-"We recently completed Toyota Corolla engine overhaul, BMW diagnostics upgrades and ECU tuning systems.";
-
-let t=0;
-
-function typeWriter(){
-
-if(t<text.length){
-
-document.getElementById("typingText").innerHTML+=text.charAt(t);
-
-t++;
-
-setTimeout(typeWriter,40);
-
-}
-
-}
-
-typeWriter();
-
-/* ===== PROJECT SLIDER ===== */
-
-let i=0;
-
-function slider(){
-
-let slides=document.querySelectorAll(".project-slider img");
-
-slides.forEach(s=>s.classList.remove("active"));
-
-i=(i+1)%slides.length;
-
-slides[i].classList.add("active");
-
-}
-
-setInterval(slider,3000);
+links.forEach(link=>{
+link.addEventListener("click",()=>{
+links.forEach(l=>l.style.background="rgba(255,255,255,0.08)");
+link.style.background="#00ffcc";
+link.style.color="#000";
+});
+});
 
 </script>
 
 </body>
-</html>
+  </html>
+</body>
+  </html>
