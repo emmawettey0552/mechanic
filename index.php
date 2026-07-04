@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Oboye Autoshop | Professional Auto Repair & Diagnostics</title><meta name="description" content="Oboye Autoshop - Professional car repair, diagnostics, engine tuning, and automotive services in Ghana. Trusted mechanics you can rely on."><meta name="keywords" content="mechanic, car repair, auto shop, diagnostics, engine repair, Ghana mechanic, Oboye Autoshop"><meta name="author" content="Oboye Autoshop"><style>
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Oboye Autoshop | Professional Auto Repair & Diagnostics</title><meta name="description" content="Oboye Autoshop - Professional car repair, diagnostics, engine tuning, and automotive services in Ghana. Trusted mechanics you can rely on."><meta name="keywords" content="mechanic, car repair, auto shop, diagnostics, engine repair, Ghana mechanic, Oboye Autoshop"><meta name="author" content="Oboye Autoshop"><style>
   
 
   
